@@ -5,14 +5,40 @@ using UnityEngine.Tilemaps;
 
 public class BlockPlacer : InterfaceBlockPlacer
 {
+    Tilemap tileMap;
+
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
-        throw new System.NotImplementedException();
+        tileMap.SetTile(new Vector3Int(-1, 0, 0), tile);
+        return true;
     }
 
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles)
     {
-        throw new System.NotImplementedException();
+        if (positions.Length == 0)
+        {
+            Debug.LogError("At AddBlocks, positions vector is empty.");
+            return false;
+        }
+        else if (tiles.Length == 0)
+        {
+            Debug.LogError("At AddBlocks, tiles vector is empty.");
+            return false;
+        }
+        else if (positions.Length != tiles.Length)
+        {
+            Debug.LogError("At AddBlocks, positions vector does not have the same size as tiles vector: " + positions.Length + " != " + tiles.Length + ".");
+            return false;
+        }
+
+        int amountOfBlocksToAdd = positions.Length;
+
+        for (int i = 0; i < amountOfBlocksToAdd; i++)
+        {
+            AddBlock(positions[i], tiles[i]);
+        }
+
+        return true;
     }
 
     // Start is called before the first frame update
