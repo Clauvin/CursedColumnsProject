@@ -14,20 +14,32 @@ public class TestsBlockPlacer
         SceneManager.LoadScene("TestScene");
     }
 
-    // A Test behaves as an ordinary method
-    [Test]
-    public void TestsBlockPlacerSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
-
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator TestsBlockPlacerWithEnumeratorPasses()
+    public IEnumerator TestsBlockPlacerPlacingABlock()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        Scene currentScene = SceneManager.GetActiveScene();
+        GameObject[] gameObjects = currentScene.GetRootGameObjects();
+        GameObject grid = null;
+
+        yield return new WaitForFixedUpdate();
+
+        Debug.Log(gameObjects.Length);
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            Debug.Log(gameObjects[i].name);
+            if (gameObjects[i].name == "Grid")
+            {
+                grid = gameObjects[i];
+            }
+        }
+
+        if (grid == null)
+        {
+            Assert.Fail();
+        }
+
+        Assert.Pass();
     }
 }
