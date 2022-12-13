@@ -41,6 +41,28 @@ public class BlockPlacer : InterfaceBlockPlacer
         return true;
     }
 
+    public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile)
+    {
+        if (positions.Length == 0)
+        {
+            Debug.LogError("At AddSameBlockMultiplesTimes, positions vector is empty.");
+            return false;
+        }
+        else if (positions.Length == 1)
+        {
+            Debug.LogWarning("At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call");
+        }
+
+        int amountOfBlocksToAdd = positions.Length;
+
+        for (int i = 0; i < amountOfBlocksToAdd; i++)
+        {
+            AddBlock(positions[i], tile);
+        }
+
+        return true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
