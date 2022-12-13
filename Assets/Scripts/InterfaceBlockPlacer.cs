@@ -9,5 +9,7 @@ public interface InterfaceBlockPlacer
 
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles);
 
+    public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile);
+
 
 }
