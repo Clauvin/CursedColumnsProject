@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Interfaces;
 using NUnit.Framework;
 using UnityEngine;
@@ -8,7 +7,7 @@ using UnityEngine.TestTools;
 using UnityEngine.Tilemaps;
 
 [TestFixture]
-public class TestsBlockPlacer
+public class TestBlockPlacer
 {
     [OneTimeSetUp]
     public void NewTestSetUp()
@@ -24,7 +23,7 @@ public class TestsBlockPlacer
         Scene currentScene = SceneManager.GetActiveScene();
         GameObject[] gameObjects = currentScene.GetRootGameObjects();
         GameObject gridGameObject = null;
-        
+
         yield return new WaitForFixedUpdate();
 
         for (int i = 0; i < gameObjects.Length; i++)
