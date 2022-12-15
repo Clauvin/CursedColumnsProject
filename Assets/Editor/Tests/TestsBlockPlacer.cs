@@ -25,7 +25,6 @@ public class TestsBlockPlacer
 
         yield return new WaitForFixedUpdate();
 
-        Debug.Log(gameObjects.Length);
         for (int i = 0; i < gameObjects.Length; i++)
         {
             Debug.Log(gameObjects[i].name);
