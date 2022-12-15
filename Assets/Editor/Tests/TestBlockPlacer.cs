@@ -28,10 +28,10 @@ public class TestBlockPlacer
 
         for (int i = 0; i < gameObjects.Length; i++)
         {
-            Debug.Log(gameObjects[i].name);
             if (gameObjects[i].name == "Grid")
             {
                 gridGameObject = gameObjects[i];
+                break;
             }
         }
 
@@ -40,8 +40,8 @@ public class TestBlockPlacer
             Assert.Fail();
         }
 
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<InterfaceBlockPlacer>();
-        TileBase tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
