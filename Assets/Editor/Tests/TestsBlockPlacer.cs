@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,7 @@ public class TestsBlockPlacer
         Scene currentScene = SceneManager.GetActiveScene();
         GameObject[] gameObjects = currentScene.GetRootGameObjects();
         GameObject grid = null;
-
+        
         yield return new WaitForFixedUpdate();
 
         for (int i = 0; i < gameObjects.Length; i++)
@@ -38,6 +39,8 @@ public class TestsBlockPlacer
         {
             Assert.Fail();
         }
+
+        InterfaceBlockPlacer interfaceBlockPlacer = grid.GetComponent<InterfaceBlockPlacer>();
 
         Assert.Pass();
     }

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Interfaces;
 
-public class BlockPlacer : InterfaceBlockPlacer
+
+public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
 
