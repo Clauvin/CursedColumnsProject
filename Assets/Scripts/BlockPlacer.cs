@@ -11,7 +11,7 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
-        tileMap.SetTile(new Vector3Int(-1, 0, 0), tile);
+        tileMap.SetTile(position, tile);
         return true;
     }
 
