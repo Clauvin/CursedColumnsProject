@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Interfaces
+namespace ColumnsInterfaces
 {
     public interface InterfaceBlockPlacer
     {
@@ -12,8 +12,6 @@ namespace Interfaces
         public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles);
 
         public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile);
-
-
     }
 }
 
