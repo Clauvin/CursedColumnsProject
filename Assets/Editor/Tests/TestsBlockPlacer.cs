@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.Tilemaps;
 
 [TestFixture]
 public class TestsBlockPlacer
@@ -22,7 +23,7 @@ public class TestsBlockPlacer
     {
         Scene currentScene = SceneManager.GetActiveScene();
         GameObject[] gameObjects = currentScene.GetRootGameObjects();
-        GameObject grid = null;
+        GameObject gridGameObject = null;
         
         yield return new WaitForFixedUpdate();
 
@@ -31,17 +32,28 @@ public class TestsBlockPlacer
             Debug.Log(gameObjects[i].name);
             if (gameObjects[i].name == "Grid")
             {
-                grid = gameObjects[i];
+                gridGameObject = gameObjects[i];
             }
         }
 
-        if (grid == null)
+        if (gridGameObject == null)
         {
             Assert.Fail();
         }
 
-        InterfaceBlockPlacer interfaceBlockPlacer = grid.GetComponent<InterfaceBlockPlacer>();
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<InterfaceBlockPlacer>();
+        TileBase tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
-        Assert.Pass();
+        interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
+
+        if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == tileTest)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 }
