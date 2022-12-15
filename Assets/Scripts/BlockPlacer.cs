@@ -9,6 +9,11 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
 
+    void Start()
+    {
+        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+    }
+
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
         tileMap.SetTile(position, tile);
@@ -64,14 +69,6 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
         return true;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-
 
     // Update is called once per frame
     void Update()
