@@ -78,6 +78,7 @@ public class TestBlockPlacer
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
         bool result = interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), null);
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockPlacer.GetAddBlockErrorMessageString());
 
         if (result == false)
         {
