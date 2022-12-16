@@ -45,8 +45,6 @@ public class TestBlockPlacer
         yield return new EnterPlayMode();
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingABlock()
     {
@@ -68,8 +66,6 @@ public class TestBlockPlacer
         yield return new WaitForFixedUpdate();
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingANullBlock()
     {
@@ -90,6 +86,40 @@ public class TestBlockPlacer
         }
         yield return new WaitForFixedUpdate();
     }
+
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerPlacingBlocks()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = new [] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
+        Tile[] tiles = new[] { tileTest, tileTest, tileTest };
+
+        var succeeded = true;
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            if (tilemap.GetTile(positions[i]) != tiles[i])
+            {
+                succeeded = false;
+                break;
+            }
+        }
+
+        if (succeeded == true)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
 
     [UnityTearDown]
     public IEnumerator TearDown()
