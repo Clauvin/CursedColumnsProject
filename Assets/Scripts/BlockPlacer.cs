@@ -8,17 +8,23 @@ using ColumnsInterfaces;
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
+    private static string addBlockErrorMessage = "At AddBlock, tile is null.";
 
     void Start()
     {
         tileMap = gameObject.GetComponentInChildren<Tilemap>();
     }
 
+    public string GetAddBlockErrorMessageString()
+    {
+        return addBlockErrorMessage;
+    }
+
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
         if (tile == null)
         {
-            Debug.LogError("At AddBlock, tile is null.");
+            Debug.LogError(GetAddBlockErrorMessageString());
             return false;
         }
 
