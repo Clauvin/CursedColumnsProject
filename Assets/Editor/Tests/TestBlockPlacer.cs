@@ -97,6 +97,8 @@ public class TestBlockPlacer
         Vector3Int[] positions = new [] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
         Tile[] tiles = new[] { tileTest, tileTest, tileTest };
 
+        interfaceBlockPlacer.AddBlocks(positions, tiles);
+
         var succeeded = true;
 
         for (int i = 0; i < positions.Length; i++)
