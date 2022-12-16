@@ -9,6 +9,9 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
     private static string addBlockErrorMessage = "At AddBlock, tile is null.";
+    private static string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
+    private static string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
+    private static string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
 
     void Start()
     {
@@ -32,21 +35,36 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
+    public string GetAddBlocksZeroPositionsErrorMessage()
+    {
+        return addBlocksZeroPositionsErrorMessage;
+    }
+
+    public string GetAddBlocksZeroTilesErrorMessage()
+    {
+        return addBlocksZeroTilesErrorMessage;
+    }
+
+    public string GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage()
+    {
+        return addBlocksPositionsAmountDifferentFromTilesErrorMessage;
+}
+
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles)
     {
         if (positions.Length == 0)
         {
-            Debug.LogError("At AddBlocks, positions vector is empty.");
+            Debug.LogError(GetAddBlocksZeroPositionsErrorMessage());
             return false;
         }
         else if (tiles.Length == 0)
         {
-            Debug.LogError("At AddBlocks, tiles vector is empty.");
+            Debug.LogError(GetAddBlocksZeroTilesErrorMessage());
             return false;
         }
         else if (positions.Length != tiles.Length)
         {
-            Debug.LogError("At AddBlocks, positions vector does not have the same size as tiles vector: " + positions.Length + " != " + tiles.Length + ".");
+            Debug.LogError(GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage());
             return false;
         }
 
