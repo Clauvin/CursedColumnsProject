@@ -16,6 +16,12 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
+        if (tile == null)
+        {
+            Debug.LogError("At AddBlock, tile is null.");
+            return false;
+        }
+
         tileMap.SetTile(position, tile);
         return true;
     }
