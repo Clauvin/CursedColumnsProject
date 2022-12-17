@@ -197,6 +197,88 @@ public class TestBlockPlacer
 
     }
 
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerAddingSameBlockMultiplesTimes()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = new[] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
+
+        interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
+
+        var succeeded = true;
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            if (tilemap.GetTile(positions[i]) != tileTest)
+            {
+                succeeded = false;
+                break;
+            }
+        }
+
+        if (succeeded == true)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerAddingSameBlockMultiplesTimesWithZeroPositions()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = Array.Empty<Vector3Int>();
+
+        bool result = interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockPlacer.GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerAddingSameBlockMultiplesTimesWithOnePosition()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = new[] { new Vector3Int(0, 1, 0) };
+
+        bool result = interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Warning, interfaceBlockPlacer.GetAddSameBlockMultiplesTimesOnePositionWarningMessage());
+
+        if (result == true)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
 
     [UnityTearDown]
     public IEnumerator TearDown()
