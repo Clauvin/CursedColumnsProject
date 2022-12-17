@@ -8,10 +8,14 @@ using ColumnsInterfaces;
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
+    
     private static string addBlockErrorMessage = "At AddBlock, tile is null.";
     private static string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
     private static string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
     private static string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
+    private static string addSameBlockMultiplesTimesZeroPositionsErrorMessage = "At AddSameBlockMultiplesTimes, positions vector is empty.";
+    
+    private static string addSameBlockMultiplesTimesOnePositionWarningMessage = "At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call.";
 
     void Start()
     {
@@ -78,16 +82,26 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
+    public string GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage()
+    {
+        return addSameBlockMultiplesTimesZeroPositionsErrorMessage;
+    }
+
+    public string GetAddSameBlockMultiplesTimesOnePositionWarningMessage()
+    {
+        return addSameBlockMultiplesTimesOnePositionWarningMessage;
+    }
+
     public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile)
     {
         if (positions.Length == 0)
         {
-            Debug.LogError("At AddSameBlockMultiplesTimes, positions vector is empty.");
+            Debug.LogError(GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage());
             return false;
         }
         else if (positions.Length == 1)
         {
-            Debug.LogWarning("At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call");
+            Debug.LogWarning(GetAddSameBlockMultiplesTimesOnePositionWarningMessage());
         }
 
         int amountOfBlocksToAdd = positions.Length;

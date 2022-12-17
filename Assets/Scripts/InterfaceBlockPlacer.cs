@@ -19,6 +19,10 @@ namespace ColumnsInterfaces
 
         public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles);
 
+        public string GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage();
+
+        public string GetAddSameBlockMultiplesTimesOnePositionWarningMessage();
+
         public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile);
     }
 }
