@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ColumnsInterfaces;
 using NUnit.Framework;
@@ -120,6 +121,80 @@ public class TestBlockPlacer
         }
         Assert.Fail();
         yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerPlacingZeroBlocks()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = Array.Empty<Vector3Int>();
+        Tile[] tiles = new[] { tileTest, tileTest, tileTest };
+
+        bool result = interfaceBlockPlacer.AddBlocks(positions, tiles);
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockPlacer.GetAddBlocksZeroPositionsErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerPlacingZeroTiles()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = new[] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
+        Tile[] tiles = Array.Empty<Tile>();
+
+        bool result = interfaceBlockPlacer.AddBlocks(positions, tiles);
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockPlacer.GetAddBlocksZeroTilesErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        yield return new WaitForFixedUpdate();
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestsBlockPlacerWithMismatchBetweenPositionsAndTilesAmounts()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = new[] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
+        Tile[] tiles = new[] { tileTest, tileTest };
+
+        bool result = interfaceBlockPlacer.AddBlocks(positions, tiles);
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockPlacer.GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        yield return new WaitForFixedUpdate();
+
     }
 
 
