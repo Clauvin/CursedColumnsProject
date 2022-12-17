@@ -48,7 +48,7 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
     public string GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage()
     {
         return addBlocksPositionsAmountDifferentFromTilesErrorMessage;
-}
+    }
 
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles)
     {
