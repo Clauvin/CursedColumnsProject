@@ -39,7 +39,13 @@ public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
 
     public bool RemoveBlock(Vector3Int position)
     {
-        throw new System.NotImplementedException();
+        if (tileMap.GetTile(position) == null)
+        {
+            return false;
+        }
+
+        tileMap.SetTile(position, null);
+        return true;
     }
 
     public bool RemoveBlocks(Vector3Int[] positions)
