@@ -2,17 +2,39 @@ using ColumnsInterfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
 {
+    Tilemap tileMap;
+
+    void Start()
+    {
+        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+    }
+
     public bool EraseBlock(Vector3Int position)
     {
-        throw new System.NotImplementedException();
+        if (position == null)
+        {
+            return false;
+        }
+
+        tileMap.SetTile(position, null);
+        return true;
     }
 
     public bool EraseBlocks(Vector3Int[] positions)
     {
-        throw new System.NotImplementedException();
+        for (int i = 0; i < positions.Length; i++)
+        {
+            if (positions[i] == null)
+            {
+                return false;
+            }
+            tileMap.SetTile(positions[i], null);
+        }
+        return true;
     }
 
     public bool RemoveBlock(Vector3Int position)
@@ -23,12 +45,6 @@ public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
     public bool RemoveBlocks(Vector3Int[] positions)
     {
         throw new System.NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
