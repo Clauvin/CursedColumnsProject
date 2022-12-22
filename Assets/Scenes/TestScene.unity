@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 147131452}
   - component: {fileID: 147131451}
   - component: {fileID: 147131453}
+  - component: {fileID: 147131454}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -255,6 +256,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileTest: {fileID: 11400000, guid: f4d589bc87a9ead4596a5060a357a16f, type: 2}
+--- !u!114 &147131454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147131449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f3cb6a8206140449ace7a736ccb8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +455,7 @@ GameObject:
   - component: {fileID: 1404005173}
   - component: {fileID: 1404005172}
   - component: {fileID: 1404005174}
+  - component: {fileID: 1404005175}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -486,5 +500,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f871b9e4c927ed4193467522ff3d82d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1404005175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404005171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b1a2e315c0e824eaa763b5afbdc7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

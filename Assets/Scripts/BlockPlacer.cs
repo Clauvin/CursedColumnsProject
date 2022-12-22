@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
 
+//BlockPlacer, version 1.0
+
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
@@ -35,6 +37,7 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
+        //position can't be nullable, but just in case
         if (position == null)
         {
             Debug.LogError(GetAddBlockPositionErrorMessageString());
