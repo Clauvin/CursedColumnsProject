@@ -142,6 +142,26 @@ public class TestBlockRemover
     }
 
     [UnityTest]
+    public IEnumerator TestBlockRemoverRemoveBlockFailed()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        if (!interfaceBlockRemover.RemoveBlock(new Vector3Int(0, 0, 0)))
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
     public IEnumerator TestBlockRemoverRemoveBlocks()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
@@ -170,6 +190,26 @@ public class TestBlockRemover
             Assert.Fail();
         }
 
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestBlockRemoverRemoveBlocksFailed()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        if (!interfaceBlockRemover.RemoveBlocks(new Vector3Int[]{ new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0)}))
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
 
         yield return new WaitForFixedUpdate();
     }
