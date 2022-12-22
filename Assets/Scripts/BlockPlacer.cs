@@ -8,8 +8,9 @@ using ColumnsInterfaces;
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
-    
-    private static string addBlockErrorMessage = "At AddBlock, tile is null.";
+
+    private static string addBlockPositionErrorMessage = "At AddBlock, posiiton is null.";
+    private static string addBlockTileErrorMessage = "At AddBlock, tile is null.";
     private static string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
     private static string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
     private static string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
@@ -22,16 +23,26 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         tileMap = gameObject.GetComponentInChildren<Tilemap>();
     }
 
-    public string GetAddBlockErrorMessageString()
+    public string GetAddBlockPositionErrorMessageString()
     {
-        return addBlockErrorMessage;
+        return addBlockPositionErrorMessage;
+    }
+
+    public string GetAddBlockTileErrorMessageString()
+    {
+        return addBlockTileErrorMessage;
     }
 
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
+        if (position == null)
+        {
+            Debug.LogError(GetAddBlockPositionErrorMessageString());
+            return false;
+        }
         if (tile == null)
         {
-            Debug.LogError(GetAddBlockErrorMessageString());
+            Debug.LogError(GetAddBlockTileErrorMessageString());
             return false;
         }
 
