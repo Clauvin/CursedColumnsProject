@@ -28,10 +28,6 @@ public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
     {
         for (int i = 0; i < positions.Length; i++)
         {
-            if (positions[i] == null)
-            {
-                return false;
-            }
             tileMap.SetTile(positions[i], null);
         }
         return true;
@@ -50,7 +46,15 @@ public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
 
     public bool RemoveBlocks(Vector3Int[] positions)
     {
-        throw new System.NotImplementedException();
+        for (int i = 0; i < positions.Length; i++)
+        {
+            if (positions[i] == null)
+            {
+                return false;
+            }
+            tileMap.SetTile(positions[i], null);
+        }
+        return true;
     }
 
     // Update is called once per frame

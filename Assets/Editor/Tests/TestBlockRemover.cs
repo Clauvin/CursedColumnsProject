@@ -141,6 +141,39 @@ public class TestBlockRemover
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTest]
+    public IEnumerator TestBlockRemoverRemoveBlocks()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        Vector3Int[] positions = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
+
+        interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
+
+        if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == tileTest && tilemap.GetTile(new Vector3Int(1, 0, 0)) == tileTest)
+            {
+            interfaceBlockRemover.RemoveBlocks(positions);
+            if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == null && tilemap.GetTile(new Vector3Int(1, 0, 0)) == null)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+
+        yield return new WaitForFixedUpdate();
+    }
+
     [UnityTearDown]
     public IEnumerator TearDown()
     {
