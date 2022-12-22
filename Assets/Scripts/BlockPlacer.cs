@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
 
+//BlockPlacer, version 1.0
+
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
