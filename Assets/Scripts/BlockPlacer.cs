@@ -37,6 +37,7 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
+        //position can't be nullable, but just in case
         if (position == null)
         {
             Debug.LogError(GetAddBlockPositionErrorMessageString());
