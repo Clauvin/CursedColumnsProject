@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+// BlockRemover, v1.0
 public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
 {
     Tilemap tileMap;
@@ -48,7 +50,7 @@ public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
     {
         for (int i = 0; i < positions.Length; i++)
         {
-            if (positions[i] == null)
+            if (tileMap.GetTile(positions[i]) == null)
             {
                 return false;
             }
