@@ -54,8 +54,23 @@ public class TestBlockRemover
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
+        if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == tileTest)
+        {
+            interfaceBlockRemover.EraseBlock(new Vector3Int(0, 0, 0));
+            if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == null)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
+        else
+        {
+            Assert.Fail();
+        }
 
-        
 
         yield return new WaitForFixedUpdate();
     }
