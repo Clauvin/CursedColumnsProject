@@ -10,5 +10,7 @@ namespace ColumnsInterfaces
 
         public void Init(Tilemap tilemap);
         public bool TeleportBlock(Vector3Int startPosition, Vector3Int endPosition);
+
+        public bool MoveBlock(Vector3Int startPosition, Vector3Int direction, int distance);
     }
 }
