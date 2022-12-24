@@ -50,6 +50,45 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         return true;
     }
 
+    public bool MoveBlock(Vector3Int startPosition, Vector3Int direction, int distance)
+    {
+        if (tileMap.GetTile(startPosition) == null)
+        {
+            Debug.LogError("MoveBlock - startPosition does not have a block.");
+            return false;
+        }
+
+        if (direction == new Vector3Int(0, 0, 0))
+        {
+            Debug.LogError("MoveBlock - the direction points to nowhere.");
+            return false;
+        }
+
+        if (distance == 0)
+        {
+            Debug.LogError("MoveBlock - Distance == 0, it should be different of zero.");
+            return false;
+        }
+
+        Vector3Int lastStep = startPosition;
+        Vector3Int nextStep = startPosition + direction;
+
+        for (int i = 0; i < distance; i++)
+        {
+            if (tileMap.GetTile(nextStep) != null)
+            {
+                Debug.Log("MoveBlock - found obstacle, stopping movement.");
+                break;
+            }
+            TeleportBlock(lastStep, nextStep);
+
+            lastStep = nextStep;
+            nextStep += direction;
+        }
+
+        return true;
+    }
+
 
 
     // Update is called once per frame
