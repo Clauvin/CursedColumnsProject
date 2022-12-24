@@ -5,14 +5,19 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-// BlockRemover, v1.0
+// BlockRemover, v1.1 - Added Init function
 public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
 {
     Tilemap tileMap;
 
     void Start()
     {
-        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+        Init(gameObject.GetComponentInChildren<Tilemap>());
+    }
+
+    public void Init(Tilemap tilemap)
+    {
+        this.tileMap = tilemap;
     }
 
     public bool EraseBlock(Vector3Int position)

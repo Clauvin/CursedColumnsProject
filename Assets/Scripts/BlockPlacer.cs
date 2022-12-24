@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
 
-//BlockPlacer, version 1.0
+//BlockPlacer, v1.1 - Added Init function
 
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
@@ -22,7 +22,12 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
     void Start()
     {
-        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+        Init(gameObject.GetComponentInChildren<Tilemap>());
+    }
+
+    public void Init(Tilemap tilemap)
+    {
+        this.tileMap = tilemap;
     }
 
     public string GetAddBlockPositionErrorMessageString()

@@ -7,6 +7,7 @@ namespace ColumnsInterfaces
 {
     public interface InterfaceBlockPlacer
     {
+        public void Init(Tilemap tilemap);
         public string GetAddBlockTileErrorMessageString();
 
         public bool AddBlock(Vector3Int position, TileBase tile);

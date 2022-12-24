@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace ColumnsInterfaces
 {
     public interface InterfaceBlockRemover
     {
+
+        public void Init(Tilemap tilemap);
         public bool EraseBlock(Vector3Int position);
 
         public bool RemoveBlock(Vector3Int position);
