@@ -77,7 +77,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         {
             if (tileMap.GetTile(nextStep) != null)
             {
-                Debug.Log("MoveBlock - found obstacle, stopping movement.");
+                Debug.Log("MoveBlock - found obstacle at " + nextStep + ", stopping movement.");
                 break;
             }
             TeleportBlock(lastStep, nextStep);
