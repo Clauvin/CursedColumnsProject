@@ -89,6 +89,11 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         return true;
     }
 
+    public bool MoveBlockDownwards(Vector3Int startPosition, int distance)
+    {
+        return MoveBlock(startPosition, new Vector3Int(0, -1, 0), distance);
+    }
+
 
 
     // Update is called once per frame
