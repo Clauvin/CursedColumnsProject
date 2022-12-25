@@ -121,4 +121,55 @@ public class TestBlockMovement
         Assert.Fail();
         yield return new WaitForFixedUpdate();
     }
+
+    [UnityTest]
+    public IEnumerator TestBlockMovementMoveBlockDownwards()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        interfaceBlockPlacer.AddBlock(new Vector3Int(0, 3, 0), tileTest);
+        interfaceBlockMover.MoveBlockDownwards(new Vector3Int(0, 3, 0), 3);
+
+        if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == tileTest)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestBlockMovementMoveBlockDownwardsButItCollides()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        interfaceBlockPlacer.AddBlock(new Vector3Int(0, 3, 0), tileTest);
+        interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
+        interfaceBlockMover.MoveBlockDownwards(new Vector3Int(0, 3, 0), 3);
+
+        if (tilemap.GetTile(new Vector3Int(0, 1, 0)) == tileTest)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
 }
