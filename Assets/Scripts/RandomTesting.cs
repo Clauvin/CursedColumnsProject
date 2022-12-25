@@ -8,7 +8,8 @@ public class RandomTesting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(GetComponent<Tilemap>().GetTile(new Vector3Int(0, 0, 0)));
+        GetComponent<Tilemap>().SetTile(new Vector3Int(0, 3, 0), GetComponent<TileTesting>().tileTest);
+        GetComponent<Tilemap>().SetTile(new Vector3Int(0, 0, 0), GetComponent<TileTesting>().tileTest);
     }
 
     // Update is called once per frame
