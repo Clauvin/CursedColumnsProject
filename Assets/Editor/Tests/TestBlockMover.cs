@@ -72,6 +72,35 @@ public class TestBlockMovement
     }
 
     [UnityTest]
+    public IEnumerator TestBlockMovementTeleportBlocks()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
+        Vector3Int[] finalPositions = new Vector3Int[] { new Vector3Int(2,2,0), new Vector3Int(2,3,0) };
+
+        interfaceBlockPlacer.AddBlocks(blocks, new TileBase[] { tileTest, tileTest });
+
+        interfaceBlockMover.TeleportBlocks(blocks, finalPositions);
+
+        if (tilemap.GetTile(new Vector3Int(3, 3, 0)) == tileTest)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
     public IEnumerator TestBlockMovementMoveBlock()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
