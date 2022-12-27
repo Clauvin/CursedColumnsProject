@@ -52,7 +52,43 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
 
     public bool TeleportBlocks(Vector3Int[] startPositions, Vector3Int[] endPositions)
     {
-        return false;
+        if (startPositions.Length != endPositions.Length)
+        {
+            Debug.LogError("TeleportsBlocks - startPositions and endPositions havve different sizes.");
+            return false;
+        }
+
+        if (startPositions.Length == 1 && endPositions.Length == 1)
+        {
+            Debug.LogWarning("TeleportBlocks - TeleportBlock should be used instead.");
+        }
+
+        if (startPositions.Length == 0)
+        {
+            Debug.LogError("TeleportBlocks - startPositions does not have positions.");
+            return false;
+        }
+
+        if (endPositions.Length == 0)
+        {
+            Debug.LogError("TeleportBlocks - endPositions does not have positions.");
+            return false;
+        }
+
+        for (int i = 0; i < startPositions.Length; i++)
+        {
+            if (tileMap.GetTile(startPositions[i]) == null)
+            {
+                Debug.LogError("TeleportBlocks - startPositions[" + i.ToString() + "] does not have a block.");
+                return false;
+            }
+
+            if (tileMap.GetTile(endPositions[i]) != null)
+            {
+                Debug.LogError("TeleportBlocks - endPositions[" + i.ToString() + "] does not have a block.");
+                return false;
+            }
+        }
     }
 
     public bool MoveBlock(Vector3Int startPosition, Vector3Int direction, int distance)
