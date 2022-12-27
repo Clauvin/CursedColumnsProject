@@ -50,6 +50,11 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         return true;
     }
 
+    public bool TeleportBlocks(Vector3Int[] startPositions, Vector3Int[] endPositions)
+    {
+        return false;
+    }
+
     public bool MoveBlock(Vector3Int startPosition, Vector3Int direction, int distance)
     {
         if (tileMap.GetTile(startPosition) == null)
