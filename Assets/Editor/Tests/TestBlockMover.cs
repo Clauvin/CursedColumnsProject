@@ -165,7 +165,7 @@ public class TestBlockMovement
         Vector3Int[] finalPositions = new Vector3Int[] { new Vector3Int(0, 2, 0), new Vector3Int(0, 3, 0) };
 
         interfaceBlockPlacer.AddSameBlockMultiplesTimes(blocks, tileTest);
-        interfaceBlockMover.MoveBlocks(blocks, new Vector3Int(1, 0, 0), 2);
+        interfaceBlockMover.MoveBlocks(blocks, new Vector3Int(0, 1, 0), 2);
 
         if ((tilemap.GetTile(new Vector3Int(0, 2, 0)) == tileTest) && (tilemap.GetTile(new Vector3Int(0, 3, 0)) == tileTest))
         {
