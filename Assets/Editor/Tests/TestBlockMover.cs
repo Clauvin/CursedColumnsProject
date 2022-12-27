@@ -88,7 +88,7 @@ public class TestBlockMovement
 
         interfaceBlockMover.TeleportBlocks(blocks, finalPositions);
 
-        if (tilemap.GetTile(new Vector3Int(3, 3, 0)) == tileTest)
+        if (tilemap.GetTile(new Vector3Int(2, 2, 0)) == tileTest && tilemap.GetTile(new Vector3Int(2, 3, 0)) == tileTest)
         {
             Assert.Pass();
         }
