@@ -194,10 +194,54 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         }
         #endregion ErrorChecks
 
+        List<TileBase> tiles = new List<TileBase>();
+
+        for (int i = 0; i < startPositions.Length; i++)
+        {
+            tiles.Add(tileMap.GetTile(startPositions[i]));
+        }
+
         Vector3Int[] lastSteps = startPositions;
         List<Vector3Int> nextSteps = new List<Vector3Int>();
+        for (int i = 0; i < distance; i++)
+        {
+            for (int j = 0; j < lastSteps.Length; j++)
+            {
+                nextSteps.Add(lastSteps[j] + direction);
+                interfaceBlockRemover.RemoveBlock(lastSteps[j]);
+            }
 
-        return false;
+            bool canMoveOneStep = true;
+
+            for (int j = 0; j < nextSteps.Count; j++)
+            {
+                if (tileMap.GetTile(nextSteps[j]) != null)
+                {
+                    canMoveOneStep = false;
+                    break;
+                }
+            }
+
+            if (canMoveOneStep)
+            {
+                for (int j = 0; j < nextSteps.Count; j++)
+                {
+                    tileMap.SetTile(nextSteps[j], tiles[j]);
+                }
+            }
+            else
+            {
+                for (int j = 0; j < lastSteps.Length; j++)
+                {
+                    tileMap.SetTile(lastSteps[j], tiles[j]);
+                }
+                return false;
+            }
+
+            lastSteps = nextSteps.ToArray();
+            nextSteps = new List<Vector3Int>();
+        }
+        return true;
     }
 
     public bool MoveBlockDownwards(Vector3Int startPosition, int distance)
