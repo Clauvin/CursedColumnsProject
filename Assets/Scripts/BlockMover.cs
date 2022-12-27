@@ -165,6 +165,38 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
 
     public bool MoveBlocks(Vector3Int[] startPositions, Vector3Int direction, int distance)
     {
+        #region ErrorChecks
+        if (startPositions.Length == 0)
+        {
+            Debug.LogError("MoveBlocks - startPositions does not have positions.");
+            return false;
+        }
+
+        if (direction == new Vector3Int(0, 0, 0))
+        {
+            Debug.LogError("MoveBlocks - the direction points to nowhere.");
+            return false;
+        }
+
+        if (distance == 0)
+        {
+            Debug.LogError("MoveBlocks - Distance == 0, it should be different of zero.");
+            return false;
+        }
+
+        for (int i = 0; i < startPositions.Length; i++)
+        {
+            if (tileMap.GetTile(startPositions[i]) == null)
+            {
+                Debug.LogError("MoveBlocks - startPositions[" + i.ToString() + "] does not have a block.");
+                return false;
+            }
+        }
+        #endregion ErrorChecks
+
+        Vector3Int[] lastSteps = startPositions;
+        List<Vector3Int> nextSteps = new List<Vector3Int>();
+
         return false;
     }
 
