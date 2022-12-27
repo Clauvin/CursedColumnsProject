@@ -52,6 +52,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
 
     public bool TeleportBlocks(Vector3Int[] startPositions, Vector3Int[] endPositions)
     {
+        #region ErrorChecks
         if (startPositions.Length != endPositions.Length)
         {
             Debug.LogError("TeleportsBlocks - startPositions and endPositions havve different sizes.");
@@ -82,13 +83,45 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
                 Debug.LogError("TeleportBlocks - startPositions[" + i.ToString() + "] does not have a block.");
                 return false;
             }
+        }
+        #endregion ErrorChecks
 
+        #region TestPositionsAndTeleportBlocksAround
+        List<TileBase> blocks = new List<TileBase>();
+        for (int i = 0; i < startPositions.Length; i++)
+        {
+            blocks.Add(tileMap.GetTile(startPositions[i]));
+            interfaceBlockRemover.RemoveBlock(startPositions[i]);
+        }
+
+        bool canTeleportBlocks = true;
+
+        for (int i = 0; i < endPositions.Length; i++)
+        {
             if (tileMap.GetTile(endPositions[i]) != null)
             {
-                Debug.LogError("TeleportBlocks - endPositions[" + i.ToString() + "] does not have a block.");
-                return false;
+                canTeleportBlocks = false;
+                break;
             }
         }
+
+        if (canTeleportBlocks)
+        {
+            for (int i = 0; i < endPositions.Length; i++)
+            {
+                interfaceBlockPlacer.AddBlock(endPositions[i], blocks[i]);
+            }
+            return true;
+        }
+        else
+        {
+            for (int i = 0; i < startPositions.Length; i++)
+            {
+                interfaceBlockPlacer.AddBlock(startPositions[i], blocks[i]);
+            }
+            return false;
+        }
+        #endregion TestPositionsAndTeleportBlocksAround
     }
 
     public bool MoveBlock(Vector3Int startPosition, Vector3Int direction, int distance)
