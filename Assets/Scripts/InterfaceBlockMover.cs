@@ -16,5 +16,7 @@ namespace ColumnsInterfaces
         public bool MoveBlock(Vector3Int startPosition, Vector3Int direction, int distance);
 
         public bool MoveBlockDownwards(Vector3Int start, int distance);
+
+        public bool MoveBlocks(Vector3Int[] startPositions, Vector3Int direction, int distance);
     }
 }
