@@ -180,6 +180,35 @@ public class TestBlockMovement
     }
 
     [UnityTest]
+    public IEnumerator TestBlockMovementMoveBlocksButItCollides()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
+        Vector3Int[] finalPositions = new Vector3Int[] { new Vector3Int(0, 2, 0), new Vector3Int(0, 3, 0) };
+
+        interfaceBlockPlacer.AddSameBlockMultiplesTimes(blocks, tileTest);
+        interfaceBlockPlacer.AddBlock(new Vector3Int(0, 2, 0), tileTest);
+        
+
+        if (!interfaceBlockMover.MoveBlocks(blocks, new Vector3Int(0, 1, 0), 2))
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+        Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockDownwards()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
