@@ -16,5 +16,15 @@ namespace ColumnsInterfaces
         public bool EraseBlocks(Vector3Int[] positions);
 
         public bool RemoveBlocks(Vector3Int[] positions);
+
+        public string GetEraseBlockNullErrorMessage();
+
+        public string GetEraseBlocksNoPositionsErrorMessage();
+
+        public string GetRemoveBlockNullErrorMessage();
+
+        public string GetRemoveBlocksNullErrorMessage();
+
+        public string GetRemoveBlocksNoPositionsErrorMessage();
     }
 }
