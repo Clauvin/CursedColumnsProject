@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
 #region UpdateLog
-//v1.2 - Improvement of error message functions
+//v1.2 - Removed error message functions and made error string consts
 //v1.1 - Added Init function
 #endregion UpdateLog
 
@@ -13,14 +13,13 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
 
-    private static string addBlockPositionErrorMessage = "At AddBlock, position is null.";
-    private static string addBlockTileErrorMessage = "At AddBlock, tile is null.";
-    private static string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
-    private static string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
-    private static string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
-    private static string addSameBlockMultiplesTimesZeroPositionsErrorMessage = "At AddSameBlockMultiplesTimes, positions vector is empty.";
-    
-    private static string addSameBlockMultiplesTimesOnePositionWarningMessage = "At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call.";
+    private const string addBlockPositionErrorMessage = "At AddBlock, position is null.";
+    private const string addBlockTileErrorMessage = "At AddBlock, tile is null.";
+    private const string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
+    private const string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
+    private const string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
+    private const string addSameBlockMultiplesTimesZeroPositionsErrorMessage = "At AddSameBlockMultiplesTimes, positions vector is empty.";
+    private const string addSameBlockMultiplesTimesOnePositionWarningMessage = "At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call.";
 
     void Start()
     {
