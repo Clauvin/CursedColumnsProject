@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
-
-//BlockPlacer, v1.1 - Added Init function
+#region UpdateLog
+//v1.2 - Improvement of error message functions
+//v1.1 - Added Init function
+#endregion UpdateLog
 
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
 
-    private static string addBlockPositionErrorMessage = "At AddBlock, posiiton is null.";
+    private static string addBlockPositionErrorMessage = "At AddBlock, position is null.";
     private static string addBlockTileErrorMessage = "At AddBlock, tile is null.";
     private static string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
     private static string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
@@ -30,27 +32,17 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         this.tileMap = tilemap;
     }
 
-    public string GetAddBlockPositionErrorMessageString()
-    {
-        return addBlockPositionErrorMessage;
-    }
-
-    public string GetAddBlockTileErrorMessageString()
-    {
-        return addBlockTileErrorMessage;
-    }
-
     public bool AddBlock(Vector3Int position, TileBase tile)
     {
         //position can't be nullable, but just in case
         if (position == null)
         {
-            Debug.LogError(GetAddBlockPositionErrorMessageString());
+            Debug.LogError(addBlockPositionErrorMessage);
             return false;
         }
         if (tile == null)
         {
-            Debug.LogError(GetAddBlockTileErrorMessageString());
+            Debug.LogError(addBlockTileErrorMessage);
             return false;
         }
 
@@ -58,36 +50,21 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
-    public string GetAddBlocksZeroPositionsErrorMessage()
-    {
-        return addBlocksZeroPositionsErrorMessage;
-    }
-
-    public string GetAddBlocksZeroTilesErrorMessage()
-    {
-        return addBlocksZeroTilesErrorMessage;
-    }
-
-    public string GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage()
-    {
-        return addBlocksPositionsAmountDifferentFromTilesErrorMessage;
-    }
-
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles)
     {
         if (positions.Length == 0)
         {
-            Debug.LogError(GetAddBlocksZeroPositionsErrorMessage());
+            Debug.LogError(addBlocksZeroPositionsErrorMessage);
             return false;
         }
         else if (tiles.Length == 0)
         {
-            Debug.LogError(GetAddBlocksZeroTilesErrorMessage());
+            Debug.LogError(addBlocksZeroTilesErrorMessage);
             return false;
         }
         else if (positions.Length != tiles.Length)
         {
-            Debug.LogError(GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage());
+            Debug.LogError(addBlocksPositionsAmountDifferentFromTilesErrorMessage);
             return false;
         }
 
@@ -101,26 +78,16 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
-    public string GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage()
-    {
-        return addSameBlockMultiplesTimesZeroPositionsErrorMessage;
-    }
-
-    public string GetAddSameBlockMultiplesTimesOnePositionWarningMessage()
-    {
-        return addSameBlockMultiplesTimesOnePositionWarningMessage;
-    }
-
     public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile)
     {
         if (positions.Length == 0)
         {
-            Debug.LogError(GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage());
+            Debug.LogError(addSameBlockMultiplesTimesZeroPositionsErrorMessage);
             return false;
         }
         else if (positions.Length == 1)
         {
-            Debug.LogWarning(GetAddSameBlockMultiplesTimesOnePositionWarningMessage());
+            Debug.LogWarning(addSameBlockMultiplesTimesOnePositionWarningMessage);
         }
 
         int amountOfBlocksToAdd = positions.Length;
@@ -131,11 +98,5 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         }
 
         return true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
