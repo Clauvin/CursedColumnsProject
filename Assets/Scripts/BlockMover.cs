@@ -4,12 +4,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+#region UpdateLog
+//v1.1 - Added error strings
+#endregion UpdateLog
+
 public class BlockMover : MonoBehaviour, InterfaceBlockMover
 {
 
     Tilemap tileMap;
     InterfaceBlockPlacer interfaceBlockPlacer;
     InterfaceBlockRemover interfaceBlockRemover;
+
+    private const string teleportBlockNullStartPositionErrorMessage = "TeleportBlock - startPosition does not have a block.";
+    private const string teleportBlockNullEndPositionErrorMessage = "TeleportBlock - endPosition already has a block.";
+    private const string teleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage = "TeleportsBlocks - startPositions and endPositions havve different sizes.";
+    private const string teleportBlocksSingularFunctionShouldBeUsedInsteadErrorMessage = "TeleportBlocks - TeleportBlock should be used instead.";
+    private const string teleportBlocksStartPositionsErrorMessage = "TeleportBlocks - startPositions does not have positions.";
+    private const string teleportBlocksEndPositionsErrorMessage = "TeleportBlocks - endPositions does not have positions.";
+    private const string teleportBlocksStartPositionsNullCellErrorMessageFirst = "TeleportBlocks - startPositions[";
+    private const string teleportBlocksStartPositionsNullCellErrorMessageSecond = "] does not have a block.";
+
+    private const string moveBlockNullStartPositionErrorMessage = "MoveBlock - startPosition does not have a block.";
+    private const string moveBlockNullDirectionErrorMessage = "MoveBlock - the direction points to nowhere.";
+    private const string moveBlockDistanceEqualsZeroErrorMessage = "MoveBlock - Distance == 0, it should be different of zero.";
+    private const string moveBlockFoundObstacleMessageFirstPart = "MoveBlock - found obstacle at ";
+    private const string moveBlockFoundObstacleMessageSecondPart = ", stopping movement.";
+
+    private const string moveBlocksStartPositionsEqualsZeroErrorMessage = "MoveBlocks - startPositions does not have positions.";
+    private const string moveBlocksNullDirectionErrorMessage = "MoveBlocks - the direction points to nowhere.";
+    private const string moveBlocksZeroDistanceErrorMessageFirstPart = "MoveBlocks - Distance == 0, it should be different of zero.";
+    private const string moveBlocksNoBlockErrorMessageFirstPart = "MoveBlocks - startPositions[";
+    private const string moveBlocksNoBlockErrorMessageSecondPart = "] does not have a block.";
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +59,13 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
     {
         if (tileMap.GetTile(startPosition) == null)
         {
-            Debug.LogError("TeleportBlock - startPosition does not have a block.");
+            Debug.LogError(teleportBlockNullStartPositionErrorMessage);
             return false;
         }
 
         if (tileMap.GetTile(endPosition) != null)
         {
-            Debug.LogError("TeleportBlock - endPosition already has a block.");
+            Debug.LogError(teleportBlockNullEndPositionErrorMessage);
             return false;
         }
 
@@ -55,24 +81,24 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         #region ErrorChecks
         if (startPositions.Length != endPositions.Length)
         {
-            Debug.LogError("TeleportsBlocks - startPositions and endPositions havve different sizes.");
+            Debug.LogError(teleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage);
             return false;
         }
 
         if (startPositions.Length == 1 && endPositions.Length == 1)
         {
-            Debug.LogWarning("TeleportBlocks - TeleportBlock should be used instead.");
+            Debug.LogWarning(teleportBlocksSingularFunctionShouldBeUsedInsteadErrorMessage);
         }
 
         if (startPositions.Length == 0)
         {
-            Debug.LogError("TeleportBlocks - startPositions does not have positions.");
+            Debug.LogError(teleportBlocksStartPositionsErrorMessage);
             return false;
         }
 
         if (endPositions.Length == 0)
         {
-            Debug.LogError("TeleportBlocks - endPositions does not have positions.");
+            Debug.LogError(teleportBlocksEndPositionsErrorMessage);
             return false;
         }
 
@@ -80,7 +106,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         {
             if (tileMap.GetTile(startPositions[i]) == null)
             {
-                Debug.LogError("TeleportBlocks - startPositions[" + i.ToString() + "] does not have a block.");
+                Debug.LogError(teleportBlocksStartPositionsNullCellErrorMessageFirst + i.ToString() + teleportBlocksStartPositionsNullCellErrorMessageSecond);
                 return false;
             }
         }
@@ -128,19 +154,19 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
     {
         if (tileMap.GetTile(startPosition) == null)
         {
-            Debug.LogError("MoveBlock - startPosition does not have a block.");
+            Debug.LogError(moveBlockNullStartPositionErrorMessage);
             return false;
         }
 
         if (direction == new Vector3Int(0, 0, 0))
         {
-            Debug.LogError("MoveBlock - the direction points to nowhere.");
+            Debug.LogError(moveBlockNullDirectionErrorMessage);
             return false;
         }
 
         if (distance == 0)
         {
-            Debug.LogError("MoveBlock - Distance == 0, it should be different of zero.");
+            Debug.LogError(moveBlockDistanceEqualsZeroErrorMessage);
             return false;
         }
 
@@ -151,7 +177,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         {
             if (tileMap.GetTile(nextStep) != null)
             {
-                Debug.Log("MoveBlock - found obstacle at " + nextStep + ", stopping movement.");
+                Debug.Log(moveBlockFoundObstacleMessageFirstPart + nextStep + moveBlockFoundObstacleMessageSecondPart);
                 break;
             }
             TeleportBlock(lastStep, nextStep);
@@ -168,19 +194,19 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         #region ErrorChecks
         if (startPositions.Length == 0)
         {
-            Debug.LogError("MoveBlocks - startPositions does not have positions.");
+            Debug.LogError(moveBlocksStartPositionsEqualsZeroErrorMessage);
             return false;
         }
 
         if (direction == new Vector3Int(0, 0, 0))
         {
-            Debug.LogError("MoveBlocks - the direction points to nowhere.");
+            Debug.LogError(moveBlocksNullDirectionErrorMessage);
             return false;
         }
 
         if (distance == 0)
         {
-            Debug.LogError("MoveBlocks - Distance == 0, it should be different of zero.");
+            Debug.LogError(moveBlocksZeroDistanceErrorMessageFirstPart);
             return false;
         }
 
@@ -188,7 +214,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         {
             if (tileMap.GetTile(startPositions[i]) == null)
             {
-                Debug.LogError("MoveBlocks - startPositions[" + i.ToString() + "] does not have a block.");
+                Debug.LogError(moveBlocksNoBlockErrorMessageFirstPart + i.ToString() + moveBlocksNoBlockErrorMessageSecondPart);
                 return false;
             }
         }
@@ -252,13 +278,5 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
     public bool MoveBlocksDownwards(Vector3Int[] startPositions, int distance)
     {
         return MoveBlocks(startPositions, new Vector3Int(0, -1, 0), distance);
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
