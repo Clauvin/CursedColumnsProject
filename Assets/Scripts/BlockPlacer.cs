@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
 #region UpdateLog
+//v1.3 - Brought back error messages
 //v1.2 - Removed error message functions and made error string consts
 //v1.1 - Added Init function
 #endregion UpdateLog
@@ -98,4 +99,36 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 
         return true;
     }
+
+    #region FunctionsForTests
+    public string GetAddBlockPositionErrorMessage()
+    {
+        return addBlockPositionErrorMessage;
+    }
+    public string GetAddBlockTileErrorMessage()
+    {
+        return addBlockTileErrorMessage;
+    }
+    public string GetAddBlocksZeroPositionsErrorMessage()
+    {
+        return addBlocksZeroPositionsErrorMessage;
+    }
+    public string GetAddBlocksZeroTilesErrorMessage()
+    {
+        return addBlocksZeroTilesErrorMessage;
+    }
+    public string GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage()
+    {
+        return addBlocksPositionsAmountDifferentFromTilesErrorMessage;
+    }
+    public string GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage()
+    {
+        return addSameBlockMultiplesTimesZeroPositionsErrorMessage;
+    }
+    public string GetAddSameBlockMultiplesTimesOnePositionWarningMessage()
+    {
+        return addSameBlockMultiplesTimesOnePositionWarningMessage;
+    }
+
+    #endregion FunctionsForTests
 }
