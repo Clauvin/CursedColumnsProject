@@ -50,7 +50,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementTeleportBlock()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -75,7 +75,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementTeleportBlocks()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -104,7 +104,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlock()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -129,7 +129,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlockButItCollides()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -155,7 +155,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlocks()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -183,7 +183,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlocksButItCollides()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -212,7 +212,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlockDownwards()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -237,7 +237,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlockDownwardsButItCollides()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -263,7 +263,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlocksDownwards()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
@@ -295,7 +295,7 @@ public class TestBlockMovement
     public IEnumerator TestBlockMovementMoveBlocksDownwardsButItCollides()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockMover interfaceBlockMover = gridGameObject.GetComponent<BlockMover>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 

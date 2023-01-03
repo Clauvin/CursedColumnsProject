@@ -6,9 +6,10 @@ using UnityEngine.Tilemaps;
 
 #region UpdateLog
 //v1.1 - Added error strings
+//v1.2 - BlockMover now is called BlockManipulator
 #endregion UpdateLog
 
-public class BlockMover : MonoBehaviour, InterfaceBlockMover
+public class BlockManipulator : MonoBehaviour, InterfaceBlockManipulator
 {
 
     Tilemap tileMap;

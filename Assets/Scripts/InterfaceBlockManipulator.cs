@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace ColumnsInterfaces
 {
-    public interface InterfaceBlockMover
+    public interface InterfaceBlockManipulator
     {
 
         public void Init(Tilemap tilemap);
