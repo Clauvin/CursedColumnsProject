@@ -15,6 +15,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
     InterfaceBlockPlacer interfaceBlockPlacer;
     InterfaceBlockRemover interfaceBlockRemover;
 
+    #region Strings for Error Messages
     private const string teleportBlockNullStartPositionErrorMessage = "TeleportBlock - startPosition does not have a block.";
     private const string teleportBlockNullEndPositionErrorMessage = "TeleportBlock - endPosition already has a block.";
     private const string teleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage = "TeleportsBlocks - startPositions and endPositions have different sizes.";
@@ -35,6 +36,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
     private const string moveBlocksZeroDistanceErrorMessageFirstPart = "MoveBlocks - Distance == 0, it should be different of zero.";
     private const string moveBlocksNoBlockErrorMessageFirstPart = "MoveBlocks - startPositions[";
     private const string moveBlocksNoBlockErrorMessageSecondPart = "] does not have a block.";
+    #endregion Strings for Error Messages
 
 
     // Start is called before the first frame update
@@ -53,6 +55,16 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
         this.tileMap = tilemap;
         interfaceBlockPlacer.Init(tileMap);
         interfaceBlockRemover.Init(tileMap);
+    }
+
+    public InterfaceBlockPlacer GetBlockPlacer()
+    {
+        return interfaceBlockPlacer;
+    }
+
+    public InterfaceBlockRemover GetBlockRemover()
+    {
+        return interfaceBlockRemover;
     }
 
     public bool TeleportBlock(Vector3Int startPosition, Vector3Int endPosition)
