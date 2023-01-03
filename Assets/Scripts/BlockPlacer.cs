@@ -4,35 +4,32 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using ColumnsInterfaces;
 
-
-//BlockPlacer, version 1.0
+#region UpdateLog
+//v1.3 - Brought back error messages
+//v1.2 - Removed error message functions and made error string consts
+//v1.1 - Added Init function
+#endregion UpdateLog
 
 public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
 {
     Tilemap tileMap;
 
-    private static string addBlockPositionErrorMessage = "At AddBlock, posiiton is null.";
-    private static string addBlockTileErrorMessage = "At AddBlock, tile is null.";
-    private static string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
-    private static string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
-    private static string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
-    private static string addSameBlockMultiplesTimesZeroPositionsErrorMessage = "At AddSameBlockMultiplesTimes, positions vector is empty.";
-    
-    private static string addSameBlockMultiplesTimesOnePositionWarningMessage = "At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call.";
+    private const string addBlockPositionErrorMessage = "At AddBlock, position is null.";
+    private const string addBlockTileErrorMessage = "At AddBlock, tile is null.";
+    private const string addBlocksZeroPositionsErrorMessage = "At AddBlocks, positions vector is empty.";
+    private const string addBlocksZeroTilesErrorMessage = "At AddBlocks, tiles vector is empty.";
+    private const string addBlocksPositionsAmountDifferentFromTilesErrorMessage = "At AddBlocks, positions vector does not have the same size as tiles vector.";
+    private const string addSameBlockMultiplesTimesZeroPositionsErrorMessage = "At AddSameBlockMultiplesTimes, positions vector is empty.";
+    private const string addSameBlockMultiplesTimesOnePositionWarningMessage = "At AddSameBlockMultiplesTimes, positions vector is equal one, on this case, this is not the best function to call.";
 
     void Start()
     {
-        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+        Init(gameObject.GetComponentInChildren<Tilemap>());
     }
 
-    public string GetAddBlockPositionErrorMessageString()
+    public void Init(Tilemap tilemap)
     {
-        return addBlockPositionErrorMessage;
-    }
-
-    public string GetAddBlockTileErrorMessageString()
-    {
-        return addBlockTileErrorMessage;
+        this.tileMap = tilemap;
     }
 
     public bool AddBlock(Vector3Int position, TileBase tile)
@@ -40,12 +37,12 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         //position can't be nullable, but just in case
         if (position == null)
         {
-            Debug.LogError(GetAddBlockPositionErrorMessageString());
+            Debug.LogError(addBlockPositionErrorMessage);
             return false;
         }
         if (tile == null)
         {
-            Debug.LogError(GetAddBlockTileErrorMessageString());
+            Debug.LogError(addBlockTileErrorMessage);
             return false;
         }
 
@@ -53,36 +50,21 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
-    public string GetAddBlocksZeroPositionsErrorMessage()
-    {
-        return addBlocksZeroPositionsErrorMessage;
-    }
-
-    public string GetAddBlocksZeroTilesErrorMessage()
-    {
-        return addBlocksZeroTilesErrorMessage;
-    }
-
-    public string GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage()
-    {
-        return addBlocksPositionsAmountDifferentFromTilesErrorMessage;
-    }
-
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles)
     {
         if (positions.Length == 0)
         {
-            Debug.LogError(GetAddBlocksZeroPositionsErrorMessage());
+            Debug.LogError(addBlocksZeroPositionsErrorMessage);
             return false;
         }
         else if (tiles.Length == 0)
         {
-            Debug.LogError(GetAddBlocksZeroTilesErrorMessage());
+            Debug.LogError(addBlocksZeroTilesErrorMessage);
             return false;
         }
         else if (positions.Length != tiles.Length)
         {
-            Debug.LogError(GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage());
+            Debug.LogError(addBlocksPositionsAmountDifferentFromTilesErrorMessage);
             return false;
         }
 
@@ -96,26 +78,16 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
-    public string GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage()
-    {
-        return addSameBlockMultiplesTimesZeroPositionsErrorMessage;
-    }
-
-    public string GetAddSameBlockMultiplesTimesOnePositionWarningMessage()
-    {
-        return addSameBlockMultiplesTimesOnePositionWarningMessage;
-    }
-
     public bool AddSameBlockMultiplesTimes(Vector3Int[] positions, TileBase tile)
     {
         if (positions.Length == 0)
         {
-            Debug.LogError(GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage());
+            Debug.LogError(addSameBlockMultiplesTimesZeroPositionsErrorMessage);
             return false;
         }
         else if (positions.Length == 1)
         {
-            Debug.LogWarning(GetAddSameBlockMultiplesTimesOnePositionWarningMessage());
+            Debug.LogWarning(addSameBlockMultiplesTimesOnePositionWarningMessage);
         }
 
         int amountOfBlocksToAdd = positions.Length;
@@ -128,9 +100,35 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
-    // Update is called once per frame
-    void Update()
+    #region FunctionsForTests
+    public string GetAddBlockPositionErrorMessage()
     {
-        
+        return addBlockPositionErrorMessage;
     }
+    public string GetAddBlockTileErrorMessage()
+    {
+        return addBlockTileErrorMessage;
+    }
+    public string GetAddBlocksZeroPositionsErrorMessage()
+    {
+        return addBlocksZeroPositionsErrorMessage;
+    }
+    public string GetAddBlocksZeroTilesErrorMessage()
+    {
+        return addBlocksZeroTilesErrorMessage;
+    }
+    public string GetAddBlocksPositionsAmountDifferentFromTilesErrorMessage()
+    {
+        return addBlocksPositionsAmountDifferentFromTilesErrorMessage;
+    }
+    public string GetAddSameBlockMultiplesTimesZeroPositionsErrorMessage()
+    {
+        return addSameBlockMultiplesTimesZeroPositionsErrorMessage;
+    }
+    public string GetAddSameBlockMultiplesTimesOnePositionWarningMessage()
+    {
+        return addSameBlockMultiplesTimesOnePositionWarningMessage;
+    }
+
+    #endregion FunctionsForTests
 }

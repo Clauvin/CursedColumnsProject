@@ -149,7 +149,11 @@ public class TestBlockRemover
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
-        if (!interfaceBlockRemover.RemoveBlock(new Vector3Int(0, 0, 0)))
+        bool result = interfaceBlockRemover.RemoveBlock(new Vector3Int(0, 0, 0));
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockRemover.GetRemoveBlockNullErrorMessage());
+
+        if (!result)
         {
             Assert.Pass();
         }
@@ -202,7 +206,11 @@ public class TestBlockRemover
         Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
         Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
 
-        if (!interfaceBlockRemover.RemoveBlocks(new Vector3Int[]{ new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0)}))
+        bool result = interfaceBlockRemover.RemoveBlocks(new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) });
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockRemover.GetRemoveBlocksNullErrorMessage());
+
+        if (!result)
         {
             Assert.Pass();
         }
