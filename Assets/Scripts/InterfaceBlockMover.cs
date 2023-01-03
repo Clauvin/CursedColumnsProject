@@ -9,6 +9,11 @@ namespace ColumnsInterfaces
     {
 
         public void Init(Tilemap tilemap);
+
+        public InterfaceBlockPlacer GetBlockPlacer();
+
+        public InterfaceBlockRemover GetBlockRemover();
+
         public bool TeleportBlock(Vector3Int startPosition, Vector3Int endPosition);
 
         public bool TeleportBlocks(Vector3Int[] startPositions, Vector3Int[] endPositions);
