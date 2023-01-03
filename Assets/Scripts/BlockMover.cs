@@ -17,7 +17,7 @@ public class BlockMover : MonoBehaviour, InterfaceBlockMover
 
     private const string teleportBlockNullStartPositionErrorMessage = "TeleportBlock - startPosition does not have a block.";
     private const string teleportBlockNullEndPositionErrorMessage = "TeleportBlock - endPosition already has a block.";
-    private const string teleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage = "TeleportsBlocks - startPositions and endPositions havve different sizes.";
+    private const string teleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage = "TeleportsBlocks - startPositions and endPositions have different sizes.";
     private const string teleportBlocksSingularFunctionShouldBeUsedInsteadErrorMessage = "TeleportBlocks - TeleportBlock should be used instead.";
     private const string teleportBlocksStartPositionsErrorMessage = "TeleportBlocks - startPositions does not have positions.";
     private const string teleportBlocksEndPositionsErrorMessage = "TeleportBlocks - endPositions does not have positions.";
