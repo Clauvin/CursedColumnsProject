@@ -11,12 +11,12 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameTimer = new GameTimer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
