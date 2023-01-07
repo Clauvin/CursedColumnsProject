@@ -60,5 +60,11 @@ public class TestDataManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTearDown]
+    public IEnumerator TearDown()
+    {
+        yield return new ExitPlayMode();
+    }
+
 
 }
