@@ -10,11 +10,6 @@ public class PlayerInteractions : MonoBehaviour
         
     }
 
-    public void ReceiveInput()
-    {
-
-    }
-
     private bool MoveBlockLaterally()
     {
         return false;
@@ -30,9 +25,9 @@ public class PlayerInteractions : MonoBehaviour
 
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
-
+        Debug.Log("It's working!");
     }
 
     private void ExitGame()
