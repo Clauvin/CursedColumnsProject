@@ -60,6 +60,44 @@ public class TestDataManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTest]
+    public IEnumerator TestDataManagerPause()
+    {
+        yield return new WaitForSeconds(2);
+
+        DataManager.Pause();
+        if (DataManager.isPaused)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestDataManagerUnpause()
+    {
+        yield return new WaitForSeconds(2);
+
+        DataManager.Pause();
+        DataManager.Unpause();
+
+        if (!DataManager.isPaused)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
     [UnityTearDown]
     public IEnumerator TearDown()
     {
