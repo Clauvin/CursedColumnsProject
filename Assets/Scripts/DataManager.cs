@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DataManager : MonoBehaviour
 {
     public Vector2Int blockSetSpawn;
     public Vector2Int gameSpace;
     public GameTimer gameTimer;
+
+    public Tile unpassable_tile;
+    public Tile[] common_tiles;
     public static bool isPaused { private set; get; }
 
     // Start is called before the first frame update
