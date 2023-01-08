@@ -7,6 +7,7 @@ public class DataManager : MonoBehaviour
 {
     public Vector2Int blockSetSpawn;
     public Vector2Int gameSpace;
+    private Vector2Int startingCoordinates;
     public GameTimer gameTimer;
 
     public Tile unpassable_tile;
