@@ -585,7 +585,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_ActionId: 3c4b00c2-9135-49c7-ab00-4fe79e05648f
     m_ActionName: Player/Pause[/Keyboard/p]
   - m_PersistentCalls:
