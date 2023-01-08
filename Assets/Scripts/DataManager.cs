@@ -7,13 +7,24 @@ public class DataManager : MonoBehaviour
     public Vector2Int blockSetSpawn;
     public Vector2Int gameSpace;
     public GameTimer gameTimer;
-    public bool isPaused;
+    public static bool isPaused;
 
     // Start is called before the first frame update
     void Start()
     {
         isPaused = false;
     }
+
+    public static void Pause()
+    {
+        isPaused = true;
+    }
+
+    public static void Unpause()
+    {
+        isPaused = false;
+    }
+
 
     // Update is called once per frame
     void Update()

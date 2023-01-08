@@ -27,7 +27,14 @@ public class PlayerInteractions : MonoBehaviour
 
     public void OnPause()
     {
-        Debug.Log("It's working!");
+        if (DataManager.isPaused)
+        {
+            DataManager.Unpause();
+        }
+        else
+        {
+            DataManager.Pause();
+        }
     }
 
     private void ExitGame()
