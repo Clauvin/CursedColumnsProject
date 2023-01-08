@@ -61,6 +61,26 @@ public class TestDataManager : MonoBehaviour
     }
 
     [UnityTest]
+    public IEnumerator TestDataManagerPausedTimer()
+    {
+        DataManager.Pause();
+
+        yield return new WaitForSeconds(2);
+
+        if (dataManager.gameTimer.GetTimer() < 0.1)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Debug.Log(dataManager.gameTimer.GetTimer());
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
     public IEnumerator TestDataManagerPause()
     {
         yield return new WaitForSeconds(2);
