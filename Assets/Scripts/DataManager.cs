@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
 
 public class DataManager : MonoBehaviour
@@ -10,14 +11,15 @@ public class DataManager : MonoBehaviour
     private Vector2Int startingCoordinates;
     public GameTimer gameTimer;
 
-    public Tile unpassable_tile;
-    public Tile[] common_tiles;
+    public static Tile unpassable_tile;
+    public static Tile[] common_tiles;
     public static bool isPaused { private set; get; }
 
     // Start is called before the first frame update
     void Start()
     {
         isPaused = false;
+        //unpassable_tile = Addressables.LoadAsset<Tile>("Unpassable Tile");
     }
 
     public static void Pause()
