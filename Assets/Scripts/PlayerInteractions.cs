@@ -25,7 +25,7 @@ public class PlayerInteractions : MonoBehaviour
 
     }
 
-    public void PauseGame()
+    public void OnPause()
     {
         Debug.Log("It's working!");
     }
