@@ -20,6 +20,9 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        if (!DataManager.isPaused)
+        {
+            timer += Time.deltaTime;
+        }
     }
 }
