@@ -19,6 +19,12 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitErrorStrings();
+        LoadAddressables();
+    }
+
+    private bool LoadAddressables()
+    {
         AsyncOperationHandle<Tile> opHandle;
 
         isPaused = false;
@@ -30,7 +36,13 @@ public class DataManager : MonoBehaviour
         {
             unpassable_tile = opHandle.Result;
         }
+        else if (opHandle.Status == AsyncOperationStatus.Failed)
+        {
+            Debug.LogError(errorMessageDidNotLoadUnpassableTile);
+            return false;
+        }
 
+         return true;
     }
 
     private void InitErrorStrings()
@@ -52,5 +64,6 @@ public class DataManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 }
