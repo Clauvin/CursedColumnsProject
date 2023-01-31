@@ -10,9 +10,6 @@ using UnityEngine.Tilemaps;
 public class TestBlockMovement
 {
     GameObject gridGameObject;
-    InterfaceBlockPlacer interfaceBlockPlacer;
-    Tile tileTest;
-    Tilemap tilemap;
 
     [OneTimeSetUp]
     public void NewTestSetUp()
