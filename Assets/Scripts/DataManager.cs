@@ -14,8 +14,11 @@ public class DataManager : MonoBehaviour
     public static Tile[] commonTiles;
     public static bool isPaused { private set; get; }
 
+    #region Error Messages For Tests
     public static string errorMessageDidNotLoadUnpassableTile { get; private set; }
     public static string errorMessageDidNotLoadCommonTiles { get; private set; }
+
+    #endregion Error Messages For Tests
 
     // Start is called before the first frame update
     void Start()
