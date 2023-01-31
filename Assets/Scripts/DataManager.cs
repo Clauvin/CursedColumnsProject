@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Tilemaps;
 
 public class DataManager : MonoBehaviour
@@ -18,10 +19,10 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AsyncOperationHandle<GameObject> opHandle;
+        AsyncOperationHandle<Tile> opHandle;
 
         isPaused = false;
-        opHandle = Addressables.LoadAsset("Unpassable Tile");
+        opHandle = Addressables.LoadAsset<Tile>("Unpassable Tile");
 
         if (opHandle.Status == AsyncOperationStatus.Succeeded)
         {
