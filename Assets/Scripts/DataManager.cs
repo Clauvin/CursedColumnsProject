@@ -24,16 +24,17 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         InitErrorStrings();
-        LoadAddressables();
+        LoadUnpassableTile();
+        LoadCommonTiles();
     }
 
-    private bool LoadAddressables()
     private void InitErrorStrings()
     {
         errorMessageDidNotLoadUnpassableTile = "Couldn't load unpassable tile.";
         errorMessageDidNotLoadCommonTiles = "Couldn't load common tiles.";
     }
 
+    private bool LoadUnpassableTile()
     {
         AsyncOperationHandle<Tile> opHandle;
 
