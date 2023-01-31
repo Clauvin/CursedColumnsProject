@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
@@ -19,7 +17,7 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         isPaused = false;
-        //unpassable_tile = Addressables.LoadAsset<Tile>("Unpassable Tile");
+        unpassable_tile = Addressables.LoadAsset<Tile>("Unpassable Tile");
     }
 
     public static void Pause()
