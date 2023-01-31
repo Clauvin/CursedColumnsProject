@@ -15,6 +15,7 @@ public class DataManager : MonoBehaviour
     public static bool isPaused { private set; get; }
 
     public static string errorMessageDidNotLoadUnpassableTile { get; private set; }
+    public static string errorMessageDidNotLoadCommonTiles { get; private set; }
 
     // Start is called before the first frame update
     void Start()
