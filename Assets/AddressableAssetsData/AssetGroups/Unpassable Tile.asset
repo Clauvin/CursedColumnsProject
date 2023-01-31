@@ -20,7 +20,8 @@ MonoBehaviour:
   - m_GUID: f4d589bc87a9ead4596a5060a357a16f
     m_Address: Assets/Tiles/unpassable_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Unpassable Tile
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c20483720f081584c993dca7e6f04d4e, type: 2}
