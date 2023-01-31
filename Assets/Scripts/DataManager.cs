@@ -22,7 +22,9 @@ public class DataManager : MonoBehaviour
         AsyncOperationHandle<Tile> opHandle;
 
         isPaused = false;
+#pragma warning disable CS0612 // O tipo ou membro é obsoleto
         opHandle = Addressables.LoadAsset<Tile>("Unpassable Tile");
+#pragma warning restore CS0612
 
         if (opHandle.Status == AsyncOperationStatus.Succeeded)
         {
