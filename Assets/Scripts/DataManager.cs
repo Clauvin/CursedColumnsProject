@@ -28,6 +28,12 @@ public class DataManager : MonoBehaviour
     }
 
     private bool LoadAddressables()
+    private void InitErrorStrings()
+    {
+        errorMessageDidNotLoadUnpassableTile = "Couldn't load unpassable tile.";
+        errorMessageDidNotLoadCommonTiles = "Couldn't load common tiles.";
+    }
+
     {
         AsyncOperationHandle<Tile> opHandle;
 
