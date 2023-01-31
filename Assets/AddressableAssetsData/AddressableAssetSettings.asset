@@ -87,6 +87,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Unpassable Tile
+    - Common Tiles
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 2946988b1dff9f0448fe427bc6b88f59, type: 2}
