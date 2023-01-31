@@ -292,4 +292,97 @@ public class BlockManipulator : MonoBehaviour, InterfaceBlockManipulator
     {
         return MoveBlocks(startPositions, new Vector3Int(0, -1, 0), distance);
     }
+
+    #region FunctionsForTests
+    public string GetTeleportBlockNullStartPositionErrorMessage()
+    {
+        return teleportBlockNullStartPositionErrorMessage;
+    }
+
+    public string GetTeleportBlockNullEndPositionErrorMessage()
+    {
+        return teleportBlockNullEndPositionErrorMessage;
+    }
+
+    public string GetTeleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage()
+    {
+        return teleportBlocksStartPositionsNotSizedAsEndPositionsErrorMessage;
+    }
+
+    public string GetTeleportBlocksSingularFunctionShouldBeUsedInsteadErrorMessage()
+    {
+        return teleportBlocksSingularFunctionShouldBeUsedInsteadErrorMessage;
+    }
+
+    public string GetTeleportBlocksStartPositionsErrorMessage()
+    {
+        return teleportBlocksStartPositionsErrorMessage;
+    }
+
+    public string GetTeleportBlocksEndPositionsErrorMessage()
+    {
+        return teleportBlocksEndPositionsErrorMessage;
+    }
+
+    public string GetTeleportBlocksStartPositionsNullCellErrorMessageFirst()
+    {
+        return teleportBlocksStartPositionsNullCellErrorMessageFirst;
+    }
+
+    public string GetTeleportBlocksStartPositionsNullCellErrorMessageSecond()
+    {
+        return teleportBlocksStartPositionsNullCellErrorMessageSecond;
+    }
+
+    public string GetMoveBlockNullStartPositionErrorMessage()
+    {
+        return moveBlockNullStartPositionErrorMessage;
+    }
+
+    public string GetMoveBlockNullDirectionErrorMessage()
+    {
+        return moveBlockNullDirectionErrorMessage;
+    }
+
+    public string GetMoveBlockDistanceEqualsZeroErrorMessage()
+    {
+        return moveBlockDistanceEqualsZeroErrorMessage;
+    }
+
+    public string GetMoveBlockFoundObstacleMessageFirstPart()
+    {
+        return moveBlockFoundObstacleMessageFirstPart;
+    }
+
+    public string GetMoveBlockFoundObstacleMessageSecondPart()
+    {
+        return moveBlockFoundObstacleMessageSecondPart;
+    }
+
+    public string GetMoveBlocksStartPositionsEqualsZeroErrorMessage()
+    {
+        return moveBlocksStartPositionsEqualsZeroErrorMessage;
+    }
+
+    public string GetMoveBlocksNullDirectionErrorMessage()
+    {
+        return moveBlocksNullDirectionErrorMessage;
+    }
+
+    public string GetMoveBlocksZeroDistanceErrorMessageFirstPart()
+    {
+        return moveBlocksZeroDistanceErrorMessageFirstPart;
+    }
+
+    public string GetMoveBlocksNoBlockErrorMessageFirstPart()
+    {
+        return moveBlocksNoBlockErrorMessageFirstPart;
+    }
+
+    public string GetMoveBlocksNoBlockErrorMessageSecondPart()
+    {
+        return moveBlocksNoBlockErrorMessageSecondPart;
+    }
+
+    #endregion FunctionsForTests
 }

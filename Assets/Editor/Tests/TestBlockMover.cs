@@ -7,12 +7,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.Tilemaps;
 
-public class TestBlockMovement
+public class TestBlockMover
 {
     GameObject gridGameObject;
-    InterfaceBlockPlacer interfaceBlockPlacer;
-    Tile tileTest;
-    Tilemap tilemap;
 
     [OneTimeSetUp]
     public void NewTestSetUp()
@@ -126,6 +123,57 @@ public class TestBlockMovement
     }
 
     [UnityTest]
+    public IEnumerator TestBlockMovementMoveBlockFailsBecauseDirectionIsWrong()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+        bool result = interfaceBlockMover.MoveBlock(new Vector3Int(1, 0, 0), new Vector3Int(0, 0, 0), 3);
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockMover.GetMoveBlockNullDirectionErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        } 
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestBlockMovementMoveBlockFailsBecauseDistanceEqualsZero()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+        interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
+        bool result = interfaceBlockMover.MoveBlock(new Vector3Int(0, 0, 0), new Vector3Int(0, 0, 0), 0);
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockMover.GetMoveBlockNullDirectionErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockButItCollides()
     {
         InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
@@ -176,6 +224,95 @@ public class TestBlockMovement
             Assert.Fail();
         }
         Assert.Fail();
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestBlockMovementMoveBlocksFailsBecauseThereAreNoStartingPositions()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
+        Vector3Int[] wrongBlocks = new Vector3Int[] { };
+        Vector3Int[] finalPositions = new Vector3Int[] { new Vector3Int(0, 2, 0), new Vector3Int(0, 3, 0) };
+
+        interfaceBlockPlacer.AddSameBlockMultiplesTimes(blocks, tileTest);
+        bool result = interfaceBlockMover.MoveBlocks(wrongBlocks, new Vector3Int(0, 1, 0), 2);
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockMover.GetMoveBlocksStartPositionsEqualsZeroErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    public IEnumerator TestBlockMovementMoveBlocksFailsBecauseDirectionIsWrong()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
+        Vector3Int[] finalPositions = new Vector3Int[] { new Vector3Int(0, 2, 0), new Vector3Int(0, 3, 0) };
+
+        interfaceBlockPlacer.AddSameBlockMultiplesTimes(blocks, tileTest);
+        bool result = interfaceBlockMover.MoveBlocks(blocks, new Vector3Int(0, 0, 0), 3);
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockMover.GetMoveBlocksNullDirectionErrorMessage());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    public IEnumerator TestBlockMovementMoveBlocksFailsBecauseDistanceEqualsZero()
+    {
+        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
+        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
+        interfaceBlockMover.Init(tilemap);
+
+        Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
+        Vector3Int[] finalPositions = new Vector3Int[] { new Vector3Int(0, 2, 0), new Vector3Int(0, 3, 0) };
+
+        interfaceBlockPlacer.AddSameBlockMultiplesTimes(blocks, tileTest);
+        bool result = interfaceBlockMover.MoveBlocks(blocks, new Vector3Int(0, 1, 0), 0);
+
+        UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockMover.GetMoveBlocksZeroDistanceErrorMessageFirstPart());
+
+        if (result == false)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
         yield return new WaitForFixedUpdate();
     }
 
