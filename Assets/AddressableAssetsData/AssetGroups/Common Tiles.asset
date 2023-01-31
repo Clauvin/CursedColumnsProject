@@ -20,32 +20,38 @@ MonoBehaviour:
   - m_GUID: 07b09772b4f3ed641812550e89ff1c97
     m_Address: Assets/Tiles/blue_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Common Tiles
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a22f059fd7f752c47919d68646d50d51
     m_Address: Assets/Tiles/brown_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Common Tiles
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e99c2ec2634a8fe47bc28f270d93d7e5
     m_Address: Assets/Tiles/green_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Common Tiles
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af51e33f44850734ab6744fa6f50d7a9
     m_Address: Assets/Tiles/purple_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Common Tiles
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5320bc12b86eff349a0be28bd4fa2330
     m_Address: Assets/Tiles/red_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Common Tiles
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e7076f797afe89745ade69d75e396114
     m_Address: Assets/Tiles/yellow_tile.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Common Tiles
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c20483720f081584c993dca7e6f04d4e, type: 2}
