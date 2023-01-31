@@ -55,10 +55,28 @@ public class DataManager : MonoBehaviour
          return true;
     }
 
-    private void InitErrorStrings()
+    private bool LoadCommonTiles()
     {
-        errorMessageDidNotLoadUnpassableTile = "Couldn't load unpassable tile.";
+        AsyncOperationHandle<Tile[]> opHandle;
+
+        isPaused = false;
+#pragma warning disable CS0612 // O tipo ou membro � obsoleto
+        opHandle = Addressables.LoadAsset<Tile[]>("Common Tiles");
+#pragma warning restore CS0612
+
+        if (opHandle.Status == AsyncOperationStatus.Succeeded)
+        {
+            commonTiles = opHandle.Result;
+        }
+        else if (opHandle.Status == AsyncOperationStatus.Failed)
+        {
+            Debug.LogError(errorMessageDidNotLoadCommonTiles);
+            return false;
+        }
+
+        return true;
     }
+
 
     public static void Pause()
     {
