@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.Tilemaps;
 
-public class TestBlockMovement
+public class TestBlockMover
 {
     GameObject gridGameObject;
 
