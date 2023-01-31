@@ -10,8 +10,8 @@ public class DataManager : MonoBehaviour
     private Vector2Int startingCoordinates;
     public GameTimer gameTimer;
 
-    public static Tile unpassable_tile;
-    public static Tile[] common_tiles;
+    public static Tile unpassableTile;
+    public static Tile[] commonTiles;
     public static bool isPaused { private set; get; }
 
     public static string errorMessageDidNotLoadUnpassableTile { get; private set; }
@@ -34,7 +34,7 @@ public class DataManager : MonoBehaviour
 
         if (opHandle.Status == AsyncOperationStatus.Succeeded)
         {
-            unpassable_tile = opHandle.Result;
+            unpassableTile = opHandle.Result;
         }
         else if (opHandle.Status == AsyncOperationStatus.Failed)
         {
