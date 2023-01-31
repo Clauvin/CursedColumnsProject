@@ -21,6 +21,7 @@ public class DataManager : MonoBehaviour
 
     public void StartManager()
     {
+        isPaused = false;
         InitErrorStrings();
         LoadUnpassableTile();
         LoadCommonTiles();
@@ -36,7 +37,6 @@ public class DataManager : MonoBehaviour
     {
         AsyncOperationHandle<Tile> opHandle;
 
-        isPaused = false;
 #pragma warning disable CS0612 // O tipo ou membro é obsoleto
         opHandle = Addressables.LoadAsset<Tile>("Unpassable Tile");
 #pragma warning restore CS0612
@@ -50,15 +50,19 @@ public class DataManager : MonoBehaviour
             Debug.LogError(errorMessageDidNotLoadUnpassableTile);
             return false;
         }
+        else if (opHandle.Status == AsyncOperationStatus.None)
+        {
+            Debug.LogError(errorMessageDidNotLoadUnpassableTile);
+            return false;
+        }
 
-         return true;
+        return true;
     }
 
     private bool LoadCommonTiles()
     {
         AsyncOperationHandle<Tile[]> opHandle;
 
-        isPaused = false;
 #pragma warning disable CS0612 // O tipo ou membro ï¿½ obsoleto
         opHandle = Addressables.LoadAsset<Tile[]>("Common Tiles");
 #pragma warning restore CS0612
@@ -66,8 +70,14 @@ public class DataManager : MonoBehaviour
         if (opHandle.Status == AsyncOperationStatus.Succeeded)
         {
             commonTiles = opHandle.Result;
+            Debug.Log(commonTiles[0]);
         }
         else if (opHandle.Status == AsyncOperationStatus.Failed)
+        {
+            Debug.LogError(errorMessageDidNotLoadCommonTiles);
+            return false;
+        }
+        else if (opHandle.Status == AsyncOperationStatus.None)
         {
             Debug.LogError(errorMessageDidNotLoadCommonTiles);
             return false;
