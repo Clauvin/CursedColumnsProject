@@ -51,6 +51,16 @@ public class BlockManipulator : MonoBehaviour, InterfaceBlockManipulator
         interfaceBlockRemover.Init(tileMap);
     }
 
+    public void StartManager()
+    {
+        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+        interfaceBlockPlacer = new BlockPlacer();
+        interfaceBlockPlacer.Init(tileMap);
+
+        interfaceBlockRemover = new BlockRemover();
+        interfaceBlockRemover.Init(tileMap);
+    }
+
     public void Init(Tilemap tilemap)
     {
         this.tileMap = tilemap;

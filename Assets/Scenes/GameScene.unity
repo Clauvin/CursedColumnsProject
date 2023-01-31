@@ -527,7 +527,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1891015441}
-  - component: {fileID: 1891015440}
   - component: {fileID: 1891015442}
   m_Layer: 0
   m_Name: InputManager
@@ -536,92 +535,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1891015440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891015439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 1c30cad4ddf38a641b43890b3fdf4731, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 59ece1f1-9868-4aa8-bfc6-52498242adc6
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 554e84fb-9948-413d-b374-d693358812fb
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 511c2ec9-ceb8-424c-88e9-72edbe1ee5f8
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3c4b00c2-9135-49c7-ab00-4fe79e05648f
-    m_ActionName: Player/Pause[/Keyboard/p]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ba2cfd15-cb44-474e-8462-7da287d7faac
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 45892f6d-0040-460b-bf7a-9448f04f9705
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 308ef738-485e-41f7-95cc-73cca5fbeee1
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9b1e342d-7f63-4f55-b4b4-bdb268a35049
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 59634aae-c731-4e71-a791-8efaec4eb5ec
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2427cdac-c909-4d51-b8c3-8bc3425a6a9a
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1939e55f-f954-4221-9e67-ed28385c8239
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4dc159b8-b5e1-4e35-bb35-917037e24baa
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c22529ab-41e1-491b-b1d8-fec93c16c8fb
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: dd969bf4-8602-428a-a14b-5b899b6d5e13
-    m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!4 &1891015441
 Transform:
   m_ObjectHideFlags: 0
@@ -680,14 +593,6 @@ MonoBehaviour:
   blockSetSpawn: {x: 2, y: 0}
   gameSpace: {x: 6, y: 14}
   gameTimer: {fileID: 0}
-  unpassable_tile: {fileID: 11400000, guid: f4d589bc87a9ead4596a5060a357a16f, type: 2}
-  common_tiles:
-  - {fileID: 11400000, guid: 07b09772b4f3ed641812550e89ff1c97, type: 2}
-  - {fileID: 11400000, guid: a22f059fd7f752c47919d68646d50d51, type: 2}
-  - {fileID: 11400000, guid: e99c2ec2634a8fe47bc28f270d93d7e5, type: 2}
-  - {fileID: 11400000, guid: af51e33f44850734ab6744fa6f50d7a9, type: 2}
-  - {fileID: 11400000, guid: 5320bc12b86eff349a0be28bd4fa2330, type: 2}
-  - {fileID: 11400000, guid: e7076f797afe89745ade69d75e396114, type: 2}
 --- !u!4 &2133225886
 Transform:
   m_ObjectHideFlags: 0

@@ -20,8 +20,7 @@ public class DataManager : MonoBehaviour
 
     #endregion Error Messages For Tests
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartManager()
     {
         InitErrorStrings();
         LoadUnpassableTile();
