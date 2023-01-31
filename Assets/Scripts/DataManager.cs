@@ -13,11 +13,26 @@ public class DataManager : MonoBehaviour
     public static Tile[] common_tiles;
     public static bool isPaused { private set; get; }
 
+    public static string errorMessageDidNotLoadUnpassableTile { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
+        AsyncOperationHandle<GameObject> opHandle;
+
         isPaused = false;
-        unpassable_tile = Addressables.LoadAsset<Tile>("Unpassable Tile");
+        opHandle = Addressables.LoadAsset("Unpassable Tile");
+
+        if (opHandle.Status == AsyncOperationStatus.Succeeded)
+        {
+            unpassable_tile = opHandle.Result;
+        }
+
+    }
+
+    private void InitErrorStrings()
+    {
+        errorMessageDidNotLoadUnpassableTile = "Couldn't load unpassable tile.";
     }
 
     public static void Pause()
