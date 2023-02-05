@@ -33,53 +33,42 @@ public class DataManager : MonoBehaviour
         errorMessageDidNotLoadCommonTiles = "Couldn't load common tiles.";
     }
 
-    private void StartLoadingUnpassableTile()
+    private bool StartLoadingUnpassableTile()
     {
-#pragma warning disable CS0612 // O tipo ou membro é obsoleto
-        Addressables.LoadAsset<Tile>("Unpassable Tile").Completed += OnUnpassableTileLoadDone;
-#pragma warning restore CS0612
-    }
+        AsyncOperationHandle<Tile> opHandle;
 
-    private void OnUnpassableTileLoadDone(AsyncOperationHandle<Tile> opHandle)
-    {
-        if (opHandle.Status == AsyncOperationStatus.Succeeded)
-        {
-            unpassableTile = opHandle.Result;
-            Debug.Log("Ufs");
-        }
-        else if (opHandle.Status == AsyncOperationStatus.Failed)
+#pragma warning disable CS0612 // Obsolete type or member
+        opHandle = Addressables.LoadAsset<Tile>("Unpassable Tile");
+        unpassableTile = opHandle.WaitForCompletion();
+#pragma warning restore CS0612
+
+        if (unpassableTile == null)
         {
             Debug.LogError(errorMessageDidNotLoadUnpassableTile);
+            return false;
         }
-        else if (opHandle.Status == AsyncOperationStatus.None)
-        {
-            Debug.LogError(errorMessageDidNotLoadUnpassableTile);
-        }
+
+        return true;
     }
 
-    private void StartLoadingCommonTiles()
+    private bool StartLoadingCommonTiles()
     {
-#pragma warning disable CS0612 // O tipo ou membro ï¿½ obsoleto
-        Addressables.LoadAsset<Tile[]>("Common Tiles").Completed += OnCommonTilesLoadDone;
+        AsyncOperationHandle<Tile[]> opHandle;
+
+#pragma warning disable CS0612 // Obsolete type or member
+        opHandle = Addressables.LoadAsset<Tile[]>("Common Tiles");
 #pragma warning restore CS0612
+        commonTiles = opHandle.WaitForCompletion();
+
+        if (commonTiles == null)
+        {
+            Debug.LogError(errorMessageDidNotLoadCommonTiles);
+            return false;
+        }
+
+        return true;
     }
 
-    private void OnCommonTilesLoadDone(AsyncOperationHandle<Tile[]> opHandle)
-    {
-        if (opHandle.Status == AsyncOperationStatus.Succeeded)
-        {
-            commonTiles = opHandle.Result;
-            Debug.Log(commonTiles[0]);
-        }
-        else if (opHandle.Status == AsyncOperationStatus.Failed)
-        {
-            Debug.LogError(errorMessageDidNotLoadCommonTiles);
-        }
-        else if (opHandle.Status == AsyncOperationStatus.None)
-        {
-            Debug.LogError(errorMessageDidNotLoadCommonTiles);
-        }
-    }
 
     public static void Pause()
     {
