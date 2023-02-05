@@ -38,21 +38,27 @@ public class GameManager : MonoBehaviour
 
         List<Vector3Int> newBlocks = new List<Vector3Int>();
 
+        for (int i = leftLimit; i <= rightLimit; i++)
+        {
+            newBlocks.Add(new Vector3Int(i, lowerLimit, 0));
+        }
+
         for (int i = lowerLimit; i < upperLimit; i++)
         {
             newBlocks.Add(new Vector3Int(leftLimit, i, 0));
             newBlocks.Add(new Vector3Int(rightLimit, i, 0));
         }
 
-        for (int i = leftLimit; i <= rightLimit; i++)
-        {
-            newBlocks.Add(new Vector3Int(i, lowerLimit, 0));
-        }
-
         Vector3Int[] blocksToAdd = newBlocks.ToArray();
         Tile tileToUse = DataManager.commonTiles[0];
 
         blockManipulator.GetBlockPlacer().AddSameBlockMultiplesTimes(blocksToAdd, tileToUse);
+
+        for (int i = 0; i < blocksToAdd.Length; i++)
+        {
+            Debug.Log(blocksToAdd[i] + " " + blockManipulator.tileMap.GetTile(blocksToAdd[i]));
+        }
+        
     }
 
     // Update is called once per frame
