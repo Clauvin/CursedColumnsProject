@@ -12,7 +12,7 @@ using UnityEngine.Tilemaps;
 public class BlockManipulator : MonoBehaviour, InterfaceBlockManipulator
 {
 
-    Tilemap tileMap;
+    public Tilemap tileMap;
     InterfaceBlockPlacer interfaceBlockPlacer;
     InterfaceBlockRemover interfaceBlockRemover;
 
