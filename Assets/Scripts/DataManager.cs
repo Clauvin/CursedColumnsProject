@@ -17,6 +17,8 @@ public class DataManager : MonoBehaviour
     public static string errorMessageDidNotLoadUnpassableTile { get; private set; }
     public static string errorMessageDidNotLoadCommonTiles { get; private set; }
 
+    public static string errorMessageDidNotLoadAllCommonTiles { get; private set; }
+
     #endregion Error Messages For Tests
 
     public void StartManager()
@@ -31,6 +33,7 @@ public class DataManager : MonoBehaviour
     {
         errorMessageDidNotLoadUnpassableTile = "Couldn't load unpassable tile.";
         errorMessageDidNotLoadCommonTiles = "Couldn't load common tiles.";
+        errorMessageDidNotLoadAllCommonTiles = "Not all common tiles were loaded.";
     }
 
     private bool StartLoadingUnpassableTile()
@@ -63,6 +66,12 @@ public class DataManager : MonoBehaviour
         if (commonTiles == null)
         {
             Debug.LogError(errorMessageDidNotLoadCommonTiles);
+            return false;
+        }
+
+        if (commonTiles.Length != 6)
+        {
+            Debug.LogError(errorMessageDidNotLoadAllCommonTiles);
             return false;
         }
 
