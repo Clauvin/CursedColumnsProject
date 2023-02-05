@@ -312,7 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSetSpawn: {x: 2, y: 0}
   gameSpace: {x: 6, y: 14}
-  gameTimer: {fileID: 0}
 --- !u!114 &147338803
 MonoBehaviour:
   m_ObjectHideFlags: 0
