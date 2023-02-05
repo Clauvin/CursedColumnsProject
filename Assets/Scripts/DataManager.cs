@@ -16,7 +16,6 @@ public class DataManager : MonoBehaviour
     #region Error Messages For Tests
     public static string errorMessageDidNotLoadUnpassableTile { get; private set; }
     public static string errorMessageDidNotLoadCommonTiles { get; private set; }
-
     public static string errorMessageDidNotLoadAllCommonTiles { get; private set; }
 
     #endregion Error Messages For Tests
@@ -59,7 +58,6 @@ public class DataManager : MonoBehaviour
         AsyncOperationHandle<System.Collections.Generic.IList<Tile>> opHandle;
 
 #pragma warning disable CS0612 // Obsolete type or member
-
         opHandle = Addressables.LoadAssets<Tile>("Common Tiles", null);
 #pragma warning restore CS0612
 
@@ -90,12 +88,5 @@ public class DataManager : MonoBehaviour
     public static void Unpause()
     {
         isPaused = false;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
