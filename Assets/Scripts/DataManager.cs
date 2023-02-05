@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -56,12 +57,15 @@ public class DataManager : MonoBehaviour
 
     private bool StartLoadingCommonTiles()
     {
-        AsyncOperationHandle<Tile[]> opHandle;
+        AsyncOperationHandle<System.Collections.Generic.IList<Tile>> opHandle;
 
 #pragma warning disable CS0612 // Obsolete type or member
-        opHandle = Addressables.LoadAsset<Tile[]>("Common Tiles");
+
+        opHandle = Addressables.LoadAssets<Tile>("Common Tiles", null);
 #pragma warning restore CS0612
-        commonTiles = opHandle.WaitForCompletion();
+
+        List<Tile> receiverOfCommonTiles = (List<Tile>)opHandle.WaitForCompletion();
+        commonTiles = receiverOfCommonTiles.ToArray();
 
         if (commonTiles == null)
         {
