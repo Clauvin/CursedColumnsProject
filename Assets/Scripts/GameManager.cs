@@ -53,12 +53,6 @@ public class GameManager : MonoBehaviour
         Tile tileToUse = DataManager.commonTiles[0];
 
         blockManipulator.GetBlockPlacer().AddSameBlockMultiplesTimes(blocksToAdd, tileToUse);
-
-        for (int i = 0; i < blocksToAdd.Length; i++)
-        {
-            Debug.Log(blocksToAdd[i] + " " + blockManipulator.tileMap.GetTile(blocksToAdd[i]));
-        }
-        
     }
 
     // Update is called once per frame
