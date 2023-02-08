@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Unpassable Tile
+  m_EditorClassIdentifier: 
+  m_GroupName: Unpassable Tile
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8e0a1c693f841b14db0946a4f863a98e
+  m_SerializeEntries:
+  - m_GUID: f4d589bc87a9ead4596a5060a357a16f
+    m_Address: Assets/Tiles/unpassable_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Unpassable Tile
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: c20483720f081584c993dca7e6f04d4e, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 78719e7a809edfa499ccd3d29e512d81, type: 2}
+    - {fileID: 11400000, guid: 901c543207742bf47b21dbe878c3ec41, type: 2}

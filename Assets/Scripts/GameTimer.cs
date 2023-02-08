@@ -12,7 +12,7 @@ public class GameTimer : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void StartManager()
     {
         timer = 0;   
     }

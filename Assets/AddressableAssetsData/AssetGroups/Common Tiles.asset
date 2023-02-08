@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Common Tiles
+  m_EditorClassIdentifier: 
+  m_GroupName: Common Tiles
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d34eb4718ae8b5848b0d3243cd4bfe01
+  m_SerializeEntries:
+  - m_GUID: 07b09772b4f3ed641812550e89ff1c97
+    m_Address: Assets/Tiles/blue_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common Tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a22f059fd7f752c47919d68646d50d51
+    m_Address: Assets/Tiles/brown_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common Tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e99c2ec2634a8fe47bc28f270d93d7e5
+    m_Address: Assets/Tiles/green_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common Tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af51e33f44850734ab6744fa6f50d7a9
+    m_Address: Assets/Tiles/purple_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common Tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5320bc12b86eff349a0be28bd4fa2330
+    m_Address: Assets/Tiles/red_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common Tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7076f797afe89745ade69d75e396114
+    m_Address: Assets/Tiles/yellow_tile.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Common Tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: c20483720f081584c993dca7e6f04d4e, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: efe0e6f0f41ae0440aeb88e992c1f8d4, type: 2}
+    - {fileID: 11400000, guid: 23961d526d89f0545b006f4b21504f76, type: 2}

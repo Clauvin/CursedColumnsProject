@@ -12,7 +12,7 @@ using UnityEngine.Tilemaps;
 public class BlockManipulator : MonoBehaviour, InterfaceBlockManipulator
 {
 
-    Tilemap tileMap;
+    public Tilemap tileMap;
     InterfaceBlockPlacer interfaceBlockPlacer;
     InterfaceBlockRemover interfaceBlockRemover;
 
@@ -42,6 +42,16 @@ public class BlockManipulator : MonoBehaviour, InterfaceBlockManipulator
 
     // Start is called before the first frame update
     void Start()
+    {
+        tileMap = gameObject.GetComponentInChildren<Tilemap>();
+        interfaceBlockPlacer = new BlockPlacer();
+        interfaceBlockPlacer.Init(tileMap);
+
+        interfaceBlockRemover = new BlockRemover();
+        interfaceBlockRemover.Init(tileMap);
+    }
+
+    public void StartManager()
     {
         tileMap = gameObject.GetComponentInChildren<Tilemap>();
         interfaceBlockPlacer = new BlockPlacer();

@@ -2,91 +2,32 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.TestTools;
+using UnityEngine.Tilemaps;
 
 public class TestDataManager : MonoBehaviour
 {
     DataManager dataManager;
 
-    [OneTimeSetUp]
-    public void NewTestSetUp()
-    {
-        SceneManager.LoadScene("TestScene");
-    }
-
     [UnitySetUp]
     public IEnumerator SetUp()
     {
-        yield return new WaitForFixedUpdate();
-
-        Scene currentScene = SceneManager.GetActiveScene();
-        GameObject[] gameObjects = currentScene.GetRootGameObjects();
-
-        for (int i = 0; i < gameObjects.Length; i++)
-        {
-            if (gameObjects[i].name == "DataManager")
-            {
-                dataManager = gameObjects[i].GetComponent<DataManager>();
-                break;
-            }
-        }
-
-        if (dataManager == null)
-        {
-            Assert.Fail();
-        }
+        dataManager = new DataManager();
 
         yield return new EnterPlayMode();
 
     }
 
     [UnityTest]
-    public IEnumerator TestDataManagerStart()
+    public IEnumerator TestDataManagerInitErrorStrings()
     {
-        yield return new WaitForSeconds(2);
-        
+        dataManager.StartManager();
 
-        if (dataManager.gameTimer.GetTimer() > 0)
-        {
-            Assert.Pass();
-        } 
-        else
-        {
-            Debug.Log(dataManager.gameTimer.GetTimer());
-            Assert.Fail();
-        }
-
-        yield return new WaitForFixedUpdate();
-    }
-
-    [UnityTest]
-    public IEnumerator TestDataManagerPausedTimer()
-    {
-        DataManager.Pause();
-
-        yield return new WaitForSeconds(2);
-
-        if (dataManager.gameTimer.GetTimer() < 0.1)
-        {
-            Assert.Pass();
-        }
-        else
-        {
-            Debug.Log(dataManager.gameTimer.GetTimer());
-            Assert.Fail();
-        }
-
-        yield return new WaitForFixedUpdate();
-    }
-
-    [UnityTest]
-    public IEnumerator TestDataManagerPause()
-    {
-        yield return new WaitForSeconds(2);
-
-        DataManager.Pause();
-        if (DataManager.isPaused)
+        if ((DataManager.errorMessageDidNotLoadUnpassableTile == "Couldn't load unpassable tile.") &&
+                (DataManager.errorMessageDidNotLoadCommonTiles == "Couldn't load common tiles.") &&
+                (DataManager.errorMessageDidNotLoadAllCommonTiles == "Not all common tiles were loaded."))
         {
             Assert.Pass();
         }
@@ -99,14 +40,19 @@ public class TestDataManager : MonoBehaviour
     }
 
     [UnityTest]
-    public IEnumerator TestDataManagerUnpause()
+    public IEnumerator TestDataManagerInitUnpassableTile()
     {
-        yield return new WaitForSeconds(2);
+        dataManager.StartManager();
 
-        DataManager.Pause();
-        DataManager.Unpause();
+        AsyncOperationHandle<Tile> opHandle;
+        Tile unpassableTile;
 
-        if (!DataManager.isPaused)
+#pragma warning disable CS0612 // Obsolete type or member
+        opHandle = Addressables.LoadAsset<Tile>("Unpassable Tile");
+        unpassableTile = opHandle.WaitForCompletion();
+#pragma warning restore CS0612
+
+        if (DataManager.unpassableTile == unpassableTile)
         {
             Assert.Pass();
         }
@@ -114,6 +60,34 @@ public class TestDataManager : MonoBehaviour
         {
             Assert.Fail();
         }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestDataManagerInitCommonTiles()
+    {
+        dataManager.StartManager();
+
+        AsyncOperationHandle<System.Collections.Generic.IList<Tile>> opHandle;
+        Tile[] commonTiles;
+
+#pragma warning disable CS0612 // Obsolete type or member
+        opHandle = Addressables.LoadAssets<Tile>("Common Tiles", null);
+#pragma warning restore CS0612
+
+        List<Tile> receiverOfCommonTiles = (List<Tile>)opHandle.WaitForCompletion();
+        commonTiles = receiverOfCommonTiles.ToArray();
+
+        for (int i = 0; i < DataManager.commonTiles.Length; i++)
+        {
+            if (DataManager.commonTiles[i] != commonTiles[i])
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
     }
@@ -121,6 +95,8 @@ public class TestDataManager : MonoBehaviour
     [UnityTearDown]
     public IEnumerator TearDown()
     {
+        dataManager = null;
+
         yield return new ExitPlayMode();
     }
 
