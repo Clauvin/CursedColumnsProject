@@ -2,56 +2,101 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.TestTools;
+using UnityEngine.Tilemaps;
 
 public class TestDataManager : MonoBehaviour
 {
     DataManager dataManager;
 
-    [OneTimeSetUp]
-    public void NewTestSetUp()
-    {
-        SceneManager.LoadScene("TestScene");
-    }
-
     [UnitySetUp]
     public IEnumerator SetUp()
     {
-        yield return new WaitForFixedUpdate();
-
-        Scene currentScene = SceneManager.GetActiveScene();
-        GameObject[] gameObjects = currentScene.GetRootGameObjects();
-
-        for (int i = 0; i < gameObjects.Length; i++)
-        {
-            if (gameObjects[i].name == "DataManager")
-            {
-                dataManager = gameObjects[i].GetComponent<DataManager>();
-                break;
-            }
-        }
-
-        if (dataManager == null)
-        {
-            Assert.Fail();
-        }
+        dataManager = new DataManager();
 
         yield return new EnterPlayMode();
 
     }
 
     [UnityTest]
-    public IEnumerator TestDataManagerStart()
+    public IEnumerator TestDataManagerInitErrorStrings()
     {
-         Assert.Pass();
+        dataManager.StartManager();
 
-         yield return new WaitForFixedUpdate();
+        if ((DataManager.errorMessageDidNotLoadUnpassableTile == "Couldn't load unpassable tile.") &&
+                (DataManager.errorMessageDidNotLoadCommonTiles == "Couldn't load common tiles.") &&
+                (DataManager.errorMessageDidNotLoadAllCommonTiles == "Not all common tiles were loaded."))
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestDataManagerInitUnpassableTile()
+    {
+        dataManager.StartManager();
+
+        AsyncOperationHandle<Tile> opHandle;
+        Tile unpassableTile;
+
+#pragma warning disable CS0612 // Obsolete type or member
+        opHandle = Addressables.LoadAsset<Tile>("Unpassable Tile");
+        unpassableTile = opHandle.WaitForCompletion();
+#pragma warning restore CS0612
+
+        if (DataManager.unpassableTile == unpassableTile)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestDataManagerInitCommonTiles()
+    {
+        dataManager.StartManager();
+
+        AsyncOperationHandle<System.Collections.Generic.IList<Tile>> opHandle;
+        Tile[] commonTiles;
+
+#pragma warning disable CS0612 // Obsolete type or member
+        opHandle = Addressables.LoadAssets<Tile>("Common Tiles", null);
+#pragma warning restore CS0612
+
+        List<Tile> receiverOfCommonTiles = (List<Tile>)opHandle.WaitForCompletion();
+        commonTiles = receiverOfCommonTiles.ToArray();
+
+        for (int i = 0; i < DataManager.commonTiles.Length; i++)
+        {
+            if (DataManager.commonTiles[i] != commonTiles[i])
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
     }
 
     [UnityTearDown]
     public IEnumerator TearDown()
     {
+        dataManager = null;
+
         yield return new ExitPlayMode();
     }
 
