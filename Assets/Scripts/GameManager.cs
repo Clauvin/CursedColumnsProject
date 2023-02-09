@@ -87,6 +87,16 @@ public class GameManager : MonoBehaviour
         nextBlockSet = new BlockSet(tile, positions);
     }
 
+    private void PlaceCurrentBlockSetAtGameArea()
+    {
+        for (int i = 0; i < currentBlockSet.positions.Capacity; i++)
+        {
+            currentBlockSet.positions[i] += dataManager.blockSetSpawnPoint;
+        }
+
+        blockManipulator.GetBlockPlacer().AddBlocks(currentBlockSet.GetPositionsArray(), currentBlockSet.GetTilesArray());
+    }
+
     // Update is called once per frame
     void Update()
     {
