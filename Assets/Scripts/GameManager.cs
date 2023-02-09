@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     private void PlaceCurrentBlockSetAtGameArea()
     {
-        for (int i = 0; i < currentBlockSet.positions.Capacity; i++)
+        for (int i = 0; i < currentBlockSet.positions.Count; i++)
         {
             currentBlockSet.positions[i] += dataManager.blockSetSpawnPoint;
         }
