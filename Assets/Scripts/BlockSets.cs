@@ -17,6 +17,7 @@ namespace BlockSets
             {
                 tiles.Add(tile);
             }
+            this.tiles = tiles;
             this.positions = positions;
         }
 
