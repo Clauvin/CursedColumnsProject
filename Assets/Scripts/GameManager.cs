@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         CreateStartingGameSpace();
         CreateCurrentBlockSet();
         CreateNextBlockSet();
+
+        PlaceCurrentBlockSetAtGameArea();
     }
 
     public void CreateStartingGameSpace()
@@ -88,6 +90,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Game cycle
+        //Check player's input
+        //If left or right, try to move to the left or to the right
+        //If down, try to speed it down
+        //If it collided, make a new currentBlockSet and control that.
+        //Move the set one block down
+        //If it collided, make a new currentBlockSet and control that.
     }
 }
