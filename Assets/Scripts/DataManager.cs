@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class DataManager : MonoBehaviour
 {
-    public Vector3Int blockSetSpawn;
+    public Vector3Int blockSetSpawnPoint;
     public Vector2Int gameSpace;
 
     public static Tile unpassableTile;
