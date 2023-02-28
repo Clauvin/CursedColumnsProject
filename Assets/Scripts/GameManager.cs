@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         dataManager.timePassedWithoutBlockMovement += Time.deltaTime;
-        Debug.Log(dataManager.timePassedWithoutBlockMovement);
         if (dataManager.timePassedWithoutBlockMovement >= dataManager.currentBlockSpeedPerSecond)
         {
             dataManager.timePassedWithoutBlockMovement %= dataManager.currentBlockSpeedPerSecond;
