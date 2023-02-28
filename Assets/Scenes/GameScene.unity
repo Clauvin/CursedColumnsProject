@@ -300,6 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aeca308247cda94ab6a2a192694cb90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: 1c30cad4ddf38a641b43890b3fdf4731, type: 3}
+  moveAmount: {x: 0, y: 0}
 --- !u!114 &147338802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSetSpawnPoint: {x: 0, y: 12, z: 0}
   gameSpace: {x: 6, y: 14}
+  currentBlockSpeedPerSecond: 0
+  timePassedWithoutBlockMovement: 0
 --- !u!114 &147338803
 MonoBehaviour:
   m_ObjectHideFlags: 0
