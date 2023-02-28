@@ -112,8 +112,19 @@ public class GameManager : MonoBehaviour
             //If left or right, try to move to the left or to the right
             //If down, try to speed it down
             //If it collided, make a new currentBlockSet and control that.
-            //Move the set one block down
-            //If it collided, make a new currentBlockSet and control that.
+            bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
+            if (!blockWentDown)
+            {
+                for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                {
+                    currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                }
+            }
+            else
+            {
+                //If it collided, make a new currentBlockSet and control that.
+            }
+
         }
 
 
