@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
         gameTimer.StartManager();
         blockManipulator.StartManager();
 
+        dataManager.currentBlockSpeedPerSecond = 1;
+        dataManager.timePassedWithoutBlockMovement = 0;
         CreateStartingGameSpace();
         CreateCurrentBlockSet();
         CreateNextBlockSet();
@@ -100,12 +102,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Game cycle
-        //Check player's input
-        //If left or right, try to move to the left or to the right
-        //If down, try to speed it down
-        //If it collided, make a new currentBlockSet and control that.
-        //Move the set one block down
-        //If it collided, make a new currentBlockSet and control that.
+        dataManager.timePassedWithoutBlockMovement += Time.deltaTime;
+        Debug.Log(dataManager.timePassedWithoutBlockMovement);
+        if (dataManager.timePassedWithoutBlockMovement >= dataManager.currentBlockSpeedPerSecond)
+        {
+            dataManager.timePassedWithoutBlockMovement %= dataManager.currentBlockSpeedPerSecond;
+            //Game cycle
+            //Check player's input
+            //If left or right, try to move to the left or to the right
+            //If down, try to speed it down
+            //If it collided, make a new currentBlockSet and control that.
+            //Move the set one block down
+            //If it collided, make a new currentBlockSet and control that.
+        }
+
+
     }
 }
