@@ -121,12 +121,15 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                CurrentBlockSetReceivesNextBlockSet();
                 CreateNextBlockSet();
                 PlaceCurrentBlockSetAtGameArea();
             }
-
         }
+    }
 
-
+    private void CurrentBlockSetReceivesNextBlockSet()
+    {
+        currentBlockSet = nextBlockSet;
     }
 }
