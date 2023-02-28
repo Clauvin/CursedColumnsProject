@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
             //If down, try to speed it down
             //If it collided, make a new currentBlockSet and control that.
             bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
-            if (!blockWentDown)
+            if (blockWentDown)
             {
                 for (int i = 0; i < currentBlockSet.positions.Count; i++)
                 {
@@ -121,7 +121,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                //If it collided, make a new currentBlockSet and control that.
+                CreateNextBlockSet();
+                PlaceCurrentBlockSetAtGameArea();
             }
 
         }
