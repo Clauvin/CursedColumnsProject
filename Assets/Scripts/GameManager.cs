@@ -108,6 +108,18 @@ public class GameManager : MonoBehaviour
             dataManager.timePassedWithoutBlockMovement %= dataManager.currentBlockSpeedPerSecond;
             //Game cycle
             //Check player's input
+            if (inputManager.moveAmount.x < 0)
+            {
+                Debug.Log("Move to left");
+            }
+            else if (inputManager.moveAmount.x > 0)
+            {
+                Debug.Log("Move to right");
+            }
+            else if (inputManager.moveAmount.y < 0)
+            {
+                Debug.Log("Move down");
+            }
             //If left or right, try to move to the left or to the right
             //If down, try to speed it down
             //If it collided, make a new currentBlockSet and control that.
