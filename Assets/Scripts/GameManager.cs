@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        SetUpStaticManagers();
+    }
+
+    public void SetUpStaticManagers()
+    {
         dataManager = GetComponent<DataManager>();
         inputManager = GetComponent<PlayerInteractions>();
         gameTimer = GetComponent<GameTimer>();
