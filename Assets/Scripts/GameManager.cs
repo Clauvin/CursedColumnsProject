@@ -102,40 +102,57 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dataManager.timePassedWithoutBlockMovement += Time.deltaTime;
-        if (dataManager.timePassedWithoutBlockMovement >= dataManager.currentBlockSpeedPerSecond)
+        if (!DataManager.isPaused)
         {
-            dataManager.timePassedWithoutBlockMovement %= dataManager.currentBlockSpeedPerSecond;
-            //Game cycle
-            //Check player's input
-            if (inputManager.moveAmount.x < 0)
+            dataManager.timePassedWithoutBlockMovement += Time.deltaTime;
+            if (dataManager.timePassedWithoutBlockMovement >= dataManager.currentBlockSpeedPerSecond)
             {
-                MoveBlockSetToTheLeft();
-            }
-            else if (inputManager.moveAmount.x > 0)
-            {
-                MoveBlockSetToTheRight();
-            }
-            else if (inputManager.moveAmount.y < 0)
-            {
-                MoveBlockSetStraightDown();
-            }
+                dataManager.timePassedWithoutBlockMovement %= dataManager.currentBlockSpeedPerSecond;
 
-            bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
-            if (blockWentDown)
-            {
-                for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                if (inputManager.pauseIsCurrentlyPressed)
                 {
-                    currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                    Debug.Log("a");
+                    inputManager.OnPause();
+                }
+
+                if (inputManager.moveAmount.x < 0)
+                {
+                    MoveBlockSetToTheLeft();
+                }
+                else if (inputManager.moveAmount.x > 0)
+                {
+                    MoveBlockSetToTheRight();
+                }
+                else if (inputManager.moveAmount.y < 0)
+                {
+                    MoveBlockSetStraightDown();
+                }
+
+                bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
+                if (blockWentDown)
+                {
+                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                    {
+                        currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                    }
+                }
+                else
+                {
+                    CurrentBlockSetReceivesNextBlockSet();
+                    CreateNextBlockSet();
+                    PlaceCurrentBlockSetAtGameArea();
                 }
             }
-            else
+        }
+        else
+        {
+            if (inputManager.pauseIsCurrentlyPressed)
             {
-                CurrentBlockSetReceivesNextBlockSet();
-                CreateNextBlockSet();
-                PlaceCurrentBlockSetAtGameArea();
+                Debug.Log("b");
+                inputManager.OnPause();
             }
         }
+        
     }
 
     private bool MoveBlockSetToTheLeft()
