@@ -110,33 +110,17 @@ public class GameManager : MonoBehaviour
             //Check player's input
             if (inputManager.moveAmount.x < 0)
             {
-                bool blocksWentLeft = blockManipulator.MoveBlocks(currentBlockSet.GetPositionsArray(), new Vector3Int(-1,0,0), 1);
-                if (blocksWentLeft)
-                {
-                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
-                    {
-                        currentBlockSet.positions[i] += new Vector3Int(-1, 0, 0);
-                    }
-                }
+                MoveBlockSetToTheLeft();
             }
             else if (inputManager.moveAmount.x > 0)
             {
-                bool blocksWentRight = blockManipulator.MoveBlocks(currentBlockSet.GetPositionsArray(), new Vector3Int(1, 0, 0), 1);
-                if (blocksWentRight)
-                {
-                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
-                    {
-                        currentBlockSet.positions[i] += new Vector3Int(1, 0, 0);
-                    }
-                }
+                MoveBlockSetToTheRight();
             }
             else if (inputManager.moveAmount.y < 0)
             {
-                Debug.Log("Move down");
+                MoveBlockSetStraightDown();
             }
-            //If left or right, try to move to the left or to the right
-            //If down, try to speed it down
-            //If it collided, make a new currentBlockSet and control that.
+
             bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
             if (blockWentDown)
             {
@@ -151,6 +135,51 @@ public class GameManager : MonoBehaviour
                 CreateNextBlockSet();
                 PlaceCurrentBlockSetAtGameArea();
             }
+        }
+    }
+
+    private bool MoveBlockSetToTheLeft()
+    {
+        bool blocksWentLeft = blockManipulator.MoveBlocks(currentBlockSet.GetPositionsArray(), new Vector3Int(-1, 0, 0), 1);
+        if (blocksWentLeft)
+        {
+            for (int i = 0; i < currentBlockSet.positions.Count; i++)
+            {
+                currentBlockSet.positions[i] += new Vector3Int(-1, 0, 0);
+            }
+        }
+
+        return blocksWentLeft;
+    }
+
+    private bool MoveBlockSetToTheRight()
+    {
+        bool blocksWentRight = blockManipulator.MoveBlocks(currentBlockSet.GetPositionsArray(), new Vector3Int(1, 0, 0), 1);
+        if (blocksWentRight)
+        {
+            for (int i = 0; i < currentBlockSet.positions.Count; i++)
+            {
+                currentBlockSet.positions[i] += new Vector3Int(1, 0, 0);
+            }
+        }
+
+        return blocksWentRight;
+    }
+
+    private void MoveBlockSetStraightDown()
+    {
+        bool blocksCanStillGoDown = true;
+        while (blocksCanStillGoDown)
+        {
+            bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
+            if (blockWentDown)
+            {
+                for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                {
+                    currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                }
+            }
+            blocksCanStillGoDown = blockWentDown;
         }
     }
 
