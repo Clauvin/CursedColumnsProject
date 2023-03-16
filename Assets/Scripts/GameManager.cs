@@ -110,11 +110,25 @@ public class GameManager : MonoBehaviour
             //Check player's input
             if (inputManager.moveAmount.x < 0)
             {
-                Debug.Log("Move to left");
+                bool blocksWentLeft = blockManipulator.MoveBlocks(currentBlockSet.GetPositionsArray(), new Vector3Int(-1,0,0), 1);
+                if (blocksWentLeft)
+                {
+                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                    {
+                        currentBlockSet.positions[i] += new Vector3Int(-1, 0, 0);
+                    }
+                }
             }
             else if (inputManager.moveAmount.x > 0)
             {
-                Debug.Log("Move to right");
+                bool blocksWentRight = blockManipulator.MoveBlocks(currentBlockSet.GetPositionsArray(), new Vector3Int(1, 0, 0), 1);
+                if (blocksWentRight)
+                {
+                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                    {
+                        currentBlockSet.positions[i] += new Vector3Int(1, 0, 0);
+                    }
+                }
             }
             else if (inputManager.moveAmount.y < 0)
             {
