@@ -9,12 +9,18 @@ public class PlayerInteractions : MonoBehaviour
     private InputAction pauseAction;
 
     public Vector2 moveAmount;
-    public bool pausePressed;
+
+    public bool pauseIsCurrentlyPressed;
+    public bool pauseJustPressed;
+    public bool pausePressReleaseHappened;
 
     void Awake()
     {
         moveAction = actions.FindActionMap("player").FindAction("move");
         pauseAction = actions.FindActionMap("player").FindAction("pause");
+        pauseIsCurrentlyPressed = false;
+        pauseJustPressed = false;
+        pausePressReleaseHappened = true;
     }
 
     public void StartManager()
@@ -71,14 +77,24 @@ public class PlayerInteractions : MonoBehaviour
     {
         moveAmount = moveAction.ReadValue<Vector2>();
         float pauseValue = pauseAction.ReadValue<float>();
-        if (pauseValue > 0.7f)
+        if (pauseValue > 0.7f && pausePressReleaseHappened)
         {
-            pausePressed = true;
+            pauseIsCurrentlyPressed = true;
+            pauseJustPressed = true;
+            pausePressReleaseHappened = false;
+        }
+        else if (pauseValue < 0.7 && !pausePressReleaseHappened)
+        {
+            pauseIsCurrentlyPressed = false;
+            pauseJustPressed = false;
+            pausePressReleaseHappened = true;
         }
         else
         {
-            pausePressed = false;
+            pauseJustPressed = false;
         }
+
+
    
     }
 
