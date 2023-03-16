@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
         dataManager.currentBlockSpeedPerSecond = 1;
         dataManager.timePassedWithoutBlockMovement = 0;
+        blockManipulator.tileMap.ClearAllTiles();
         CreateStartingGameSpace();
         CreateCurrentBlockSet();
         CreateNextBlockSet();
