@@ -23,11 +23,8 @@ public class TestGameManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestCreatingGameSpace()
     {
-        Debug.Log(GameManager.dataManager);
         GameManager.dataManager.StartManager();
-
         GameManager.inputManager.StartManager();
-        Debug.Log(GameManager.inputManager);
         GameManager.gameTimer.StartManager();
         GameManager.blockManipulator.StartManager();
 
