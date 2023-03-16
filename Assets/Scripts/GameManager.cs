@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour
 
                 if (inputManager.pauseIsCurrentlyPressed)
                 {
-                    Debug.Log("a");
                     inputManager.OnPause();
                 }
 
@@ -146,9 +145,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (inputManager.pauseIsCurrentlyPressed)
+            if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
             {
-                Debug.Log("b");
                 inputManager.OnPause();
             }
         }
