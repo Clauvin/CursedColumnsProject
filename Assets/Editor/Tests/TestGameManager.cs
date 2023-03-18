@@ -65,6 +65,44 @@ public class TestGameManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTest]
+    public IEnumerator TestCreateCurrentBlockSet()
+    {
+        GameManager.dataManager.StartManager();
+        GameManager.inputManager.StartManager();
+        GameManager.gameTimer.StartManager();
+        GameManager.blockManipulator.StartManager();
+
+        GameManager.dataManager.currentBlockSpeedPerSecond = 1;
+        GameManager.dataManager.timePassedWithoutBlockMovement = 0;
+
+        gameManager.CreateCurrentBlockSet();
+
+        BlockSet blockSet = GameManager.currentBlockSet;
+
+        for (int i = 0; i < blockSet.tiles.Count; i++)
+        {
+            UnityEngine.Tilemaps.Tile tile = blockSet.tiles[i];
+            bool failure = true;
+            for (int j = 0; j < DataManager.commonTiles.Length; j++)
+            {
+                if (tile == DataManager.commonTiles[j])
+                {
+                    failure = false;
+                    break;
+                }
+            }
+            if (failure)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+
+    }
     [UnityTearDown]
     public IEnumerator TearDown()
     {
