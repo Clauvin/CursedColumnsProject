@@ -132,34 +132,37 @@ public class GameManager : MonoBehaviour
                 {
                     inputManager.OnPause();
                 }
-
-                if (inputManager.moveAmount.x < 0)
-                {
-                    MoveBlockSetToTheLeft();
-                }
-                else if (inputManager.moveAmount.x > 0)
-                {
-                    MoveBlockSetToTheRight();
-                }
-                else if (inputManager.moveAmount.y < 0)
-                {
-                    MoveBlockSetStraightDown();
-                }
-
-                bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
-                if (blockWentDown)
-                {
-                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
-                    {
-                        currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
-                    }
-                }
                 else
                 {
-                    CurrentBlockSetReceivesNextBlockSet();
-                    CreateNextBlockSet();
-                    PlaceCurrentBlockSetAtGameArea();
+                    if (inputManager.moveAmount.x < 0)
+                    {
+                        MoveBlockSetToTheLeft();
+                    }
+                    else if (inputManager.moveAmount.x > 0)
+                    {
+                        MoveBlockSetToTheRight();
+                    }
+                    else if (inputManager.moveAmount.y < 0)
+                    {
+                        MoveBlockSetStraightDown();
+                    }
+
+                    bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
+                    if (blockWentDown)
+                    {
+                        for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                        {
+                            currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                        }
+                    }
+                    else
+                    {
+                        CurrentBlockSetReceivesNextBlockSet();
+                        CreateNextBlockSet();
+                        PlaceCurrentBlockSetAtGameArea();
+                    }
                 }
+
             }
         }
         else
