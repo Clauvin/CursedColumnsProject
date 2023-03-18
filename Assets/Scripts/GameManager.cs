@@ -73,26 +73,34 @@ public class GameManager : MonoBehaviour
 
     public void CreateCurrentBlockSet()
     {
-        //For 0.3, change commonTiles[0] to commonTiles[random], and add random tiles.
-        Tile tile = DataManager.commonTiles[0];
+        List<Tile> tiles = CreateRandomizedTileList(3);
         List<Vector3Int> positions = new List<Vector3Int>();
         positions.Add(new Vector3Int(0, 0, 0));
         positions.Add(new Vector3Int(0, 1, 0));
         positions.Add(new Vector3Int(0, 2, 0));
 
-        currentBlockSet = new BlockSet(tile, positions);
+        currentBlockSet = new BlockSet(tiles, positions);
     }
 
     public void CreateNextBlockSet()
     {
-        //For 0.3, change commonTiles[0] to commonTiles[random], and add random tiles.
-        Tile tile = DataManager.commonTiles[0];
+        List<Tile> tiles = CreateRandomizedTileList(3);
         List<Vector3Int> positions = new List<Vector3Int>();
         positions.Add(new Vector3Int(0, 0, 0));
         positions.Add(new Vector3Int(0, 1, 0));
         positions.Add(new Vector3Int(0, 2, 0));
 
-        nextBlockSet = new BlockSet(tile, positions);
+        nextBlockSet = new BlockSet(tiles, positions);
+    }
+
+    public List<Tile> CreateRandomizedTileList(int amountOfTiles)
+    {
+        List<Tile> tiles = new List<Tile>();
+        for (int i = 0; i < amountOfTiles; i++)
+        {
+            tiles.Add(DataManager.commonTiles[Random.Range(0, DataManager.commonTiles.Length)]);
+        }
+        return tiles;
     }
 
     private void PlaceCurrentBlockSetAtGameArea()
