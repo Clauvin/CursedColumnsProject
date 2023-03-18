@@ -74,10 +74,7 @@ public class GameManager : MonoBehaviour
     public void CreateCurrentBlockSet()
     {
         List<Tile> tiles = CreateRandomizedTileList(3);
-        List<Vector3Int> positions = new List<Vector3Int>();
-        positions.Add(new Vector3Int(0, 0, 0));
-        positions.Add(new Vector3Int(0, 1, 0));
-        positions.Add(new Vector3Int(0, 2, 0));
+        List<Vector3Int> positions = CreateTilePositionList(3);
 
         currentBlockSet = new BlockSet(tiles, positions);
     }
@@ -85,10 +82,7 @@ public class GameManager : MonoBehaviour
     public void CreateNextBlockSet()
     {
         List<Tile> tiles = CreateRandomizedTileList(3);
-        List<Vector3Int> positions = new List<Vector3Int>();
-        positions.Add(new Vector3Int(0, 0, 0));
-        positions.Add(new Vector3Int(0, 1, 0));
-        positions.Add(new Vector3Int(0, 2, 0));
+        List<Vector3Int> positions = CreateTilePositionList(3);
 
         nextBlockSet = new BlockSet(tiles, positions);
     }
@@ -101,6 +95,17 @@ public class GameManager : MonoBehaviour
             tiles.Add(DataManager.commonTiles[Random.Range(0, DataManager.commonTiles.Length)]);
         }
         return tiles;
+    }
+
+    public List<Vector3Int> CreateTilePositionList(int amountOfTiles)
+    {
+        List<Vector3Int> positions = new List<Vector3Int>();
+        for (int i = 0; i < amountOfTiles; i++)
+        {
+            positions.Add(new Vector3Int(0, i, 0));
+
+        }
+        return positions;
     }
 
     private void PlaceCurrentBlockSetAtGameArea()
