@@ -142,6 +142,10 @@ public class GameManager : MonoBehaviour
                     {
                         MoveBlockSetToTheRight();
                     }
+                    else if (inputManager.moveAmount.y > 0)
+                    {
+                        CycleBlockSetUp();
+                    }
                     else if (inputManager.moveAmount.y < 0)
                     {
                         MoveBlockSetStraightDown();
@@ -162,7 +166,6 @@ public class GameManager : MonoBehaviour
                         PlaceCurrentBlockSetAtGameArea();
                     }
                 }
-
             }
         }
         else
