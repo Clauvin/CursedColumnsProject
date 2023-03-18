@@ -6,8 +6,10 @@ using UnityEngine.Tilemaps;
 
 public class DataManager : MonoBehaviour
 {
-    public Vector2Int blockSetSpawn;
+    public Vector3Int blockSetSpawnPoint;
     public Vector2Int gameSpace;
+    public float currentBlockSpeedPerSecond;
+    public float timePassedWithoutBlockMovement;
 
     public static Tile unpassableTile;
     public static Tile[] commonTiles;

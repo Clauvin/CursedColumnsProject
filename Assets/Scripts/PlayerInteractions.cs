@@ -1,14 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public InputActionAsset actions;
+
+    private InputAction moveAction;
+    private InputAction pauseAction;
+
+    public Vector2 moveAmount;
+
+    public bool pauseIsCurrentlyPressed;
+    public bool pauseJustPressed;
+    public bool pausePressReleaseHappened;
+
+    void Awake()
+    {
+        moveAction = actions.FindActionMap("player").FindAction("move");
+        pauseAction = actions.FindActionMap("player").FindAction("pause");
+        pauseIsCurrentlyPressed = false;
+        pauseJustPressed = false;
+        pausePressReleaseHappened = true;
+    }
+
     public void StartManager()
     {
-        
+        moveAmount = new Vector2(0, 0);
     }
+
 
     private bool MoveBlockLaterally()
     {
@@ -42,11 +61,41 @@ public class PlayerInteractions : MonoBehaviour
 
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void OnEnable()
     {
-        
+        moveAction.Enable();
+        pauseAction.Enable();
+    }
+
+    public void OnDisable()
+    {
+        moveAction.Disable();
+        pauseAction.Disable();
+    }
+
+    public void Update()
+    {
+        moveAmount = moveAction.ReadValue<Vector2>();
+        float pauseValue = pauseAction.ReadValue<float>();
+        if (pauseValue > 0.7f && pausePressReleaseHappened)
+        {
+            pauseIsCurrentlyPressed = true;
+            pauseJustPressed = true;
+            pausePressReleaseHappened = false;
+        }
+        else if (pauseValue < 0.7 && !pausePressReleaseHappened)
+        {
+            pauseIsCurrentlyPressed = false;
+            pauseJustPressed = false;
+            pausePressReleaseHappened = true;
+        }
+        else
+        {
+            pauseJustPressed = false;
+        }
+
+
+   
     }
 
 
