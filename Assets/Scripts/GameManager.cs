@@ -203,6 +203,24 @@ public class GameManager : MonoBehaviour
         return blocksWentRight;
     }
 
+    private void CycleBlockSetUp()
+    {
+        BlockSet originalBlockSet = currentBlockSet;
+        List<Tile> originalTileList = originalBlockSet.tiles;
+        List<Tile> newTileList = new List<Tile>();
+        newTileList.Add(originalTileList[originalTileList.Count - 1]);
+        for (int i = 0; i < originalTileList.Count-1; i++)
+        {
+            newTileList.Add(originalTileList[i]);
+        }
+        
+        currentBlockSet = new BlockSet(newTileList, originalBlockSet.positions);
+        for (int i = 0; i < currentBlockSet.tiles.Count; i++)
+        {
+            blockManipulator.tileMap.SetTile(currentBlockSet.GetPositionsArray()[i], currentBlockSet.tiles[i]); 
+        }
+    }
+
     private void MoveBlockSetStraightDown()
     {
         bool blocksCanStillGoDown = true;
