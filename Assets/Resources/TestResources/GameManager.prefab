@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSetSpawnPoint: {x: 0, y: 12, z: 0}
   gameSpace: {x: 6, y: 14}
-  currentBlockSpeedPerSecond: 0
+  currentBlockSpeedPerSecond: 1
   timePassedWithoutBlockMovement: 0
 --- !u!114 &8769006880440509332
 MonoBehaviour:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9245d985eada54e9fa39901fdf3430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMap: {fileID: 0}
+  tileMap: {fileID: 8769006880439785881}
 --- !u!156049354 &8769006880440509328
 Grid:
   m_ObjectHideFlags: 0
