@@ -24,10 +24,7 @@ public class TestGameManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestCreatingGameSpace()
     {
-        GameManager.dataManager.StartManager();
-        GameManager.inputManager.StartManager();
-        GameManager.gameTimer.StartManager();
-        GameManager.blockManipulator.StartManager();
+        gameManager.StartManagers();
 
         GameManager.dataManager.currentBlockSpeedPerSecond = 1;
         GameManager.dataManager.timePassedWithoutBlockMovement = 0;
@@ -69,10 +66,7 @@ public class TestGameManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestCreateCurrentBlockSet()
     {
-        GameManager.dataManager.StartManager();
-        GameManager.inputManager.StartManager();
-        GameManager.gameTimer.StartManager();
-        GameManager.blockManipulator.StartManager();
+        gameManager.StartManagers();
 
         GameManager.dataManager.currentBlockSpeedPerSecond = 1;
         GameManager.dataManager.timePassedWithoutBlockMovement = 0;
@@ -108,10 +102,7 @@ public class TestGameManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestCreateNextBlockSet()
     {
-        GameManager.dataManager.StartManager();
-        GameManager.inputManager.StartManager();
-        GameManager.gameTimer.StartManager();
-        GameManager.blockManipulator.StartManager();
+        gameManager.StartManagers();
 
         GameManager.dataManager.currentBlockSpeedPerSecond = 1;
         GameManager.dataManager.timePassedWithoutBlockMovement = 0;
