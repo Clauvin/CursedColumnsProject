@@ -132,6 +132,37 @@ public class TestGameManager : MonoBehaviour
 
     }
 
+    [UnityTest]
+    public IEnumerator TestCycleCurrentBlockSet()
+    {
+        gameManager.StartManagers();
+
+        gameManager.StartDataManagerVariables();
+
+        gameManager.CreateCurrentBlockSet();
+
+        BlockSet blockSet = GameManager.currentBlockSet;
+
+        gameManager.CycleCurrentBlockSet();
+
+        if (blockSet.tiles[blockSet.tiles.Count-1] != GameManager.currentBlockSet.tiles[0])
+        {
+            Assert.Fail();
+        }
+
+        for (int i = 0; i < blockSet.tiles.Count-1; i++)
+        {
+            if (blockSet.tiles[i] != GameManager.currentBlockSet.tiles[i + 1])
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
     [UnityTearDown]
     public IEnumerator TearDown()
     {
