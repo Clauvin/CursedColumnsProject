@@ -26,8 +26,7 @@ public class TestGameManager : MonoBehaviour
     {
         gameManager.StartManagers();
 
-        GameManager.dataManager.currentBlockSpeedPerSecond = 1;
-        GameManager.dataManager.timePassedWithoutBlockMovement = 0;
+        gameManager.StartDataManagerVariables();
 
         gameManager.CreateStartingGameSpace();
 
@@ -68,8 +67,7 @@ public class TestGameManager : MonoBehaviour
     {
         gameManager.StartManagers();
 
-        GameManager.dataManager.currentBlockSpeedPerSecond = 1;
-        GameManager.dataManager.timePassedWithoutBlockMovement = 0;
+        gameManager.StartDataManagerVariables();
 
         gameManager.CreateCurrentBlockSet();
 
@@ -104,8 +102,7 @@ public class TestGameManager : MonoBehaviour
     {
         gameManager.StartManagers();
 
-        GameManager.dataManager.currentBlockSpeedPerSecond = 1;
-        GameManager.dataManager.timePassedWithoutBlockMovement = 0;
+        gameManager.StartDataManagerVariables();
 
         gameManager.CreateNextBlockSet();
 
