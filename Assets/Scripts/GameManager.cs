@@ -31,9 +31,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartManagers();
+        StartDataManagerVariables();
 
-        dataManager.currentBlockSpeedPerSecond = 1;
-        dataManager.timePassedWithoutBlockMovement = 0;
         blockManipulator.tileMap.ClearAllTiles();
         CreateStartingGameSpace();
         CreateCurrentBlockSet();
@@ -48,6 +47,12 @@ public class GameManager : MonoBehaviour
         inputManager.StartManager();
         gameTimer.StartManager();
         blockManipulator.StartManager();
+    }
+
+    public void StartDataManagerVariables()
+    {
+        dataManager.currentBlockSpeedPerSecond = 1;
+        dataManager.timePassedWithoutBlockMovement = 0;
     }
 
     public void CreateStartingGameSpace()
