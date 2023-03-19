@@ -30,10 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dataManager.StartManager();
-        inputManager.StartManager();
-        gameTimer.StartManager();
-        blockManipulator.StartManager();
+        StartManagers();
 
         dataManager.currentBlockSpeedPerSecond = 1;
         dataManager.timePassedWithoutBlockMovement = 0;
@@ -43,6 +40,14 @@ public class GameManager : MonoBehaviour
         CreateNextBlockSet();
 
         PlaceCurrentBlockSetAtGameArea();
+    }
+
+    public void StartManagers()
+    {
+        dataManager.StartManager();
+        inputManager.StartManager();
+        gameTimer.StartManager();
+        blockManipulator.StartManager();
     }
 
     public void CreateStartingGameSpace()
