@@ -59,4 +59,24 @@ public class TestUIManager : MonoBehaviour
 
         yield return new WaitForFixedUpdate();
     }
+
+    [UnityTest]
+    public IEnumerator TestUnpause()
+    {
+        UIManager uiManager = gameManager.GetComponent<UIManager>();
+
+        UIManager.Pause();
+        UIManager.Unpause();
+
+        if (UIManager.pauseText.enabled)
+        {
+            Assert.Fail();
+        }
+        else
+        {
+            Assert.Pass();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
 }
