@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
                     }
                     else if (inputManager.moveAmount.y > 0)
                     {
-                        CycleBlockSetUp();
+                        CycleCurrentBlockSet();
                     }
                     else if (inputManager.moveAmount.y < 0)
                     {
@@ -216,11 +216,12 @@ public class GameManager : MonoBehaviour
         return blocksWentRight;
     }
 
-    private void CycleBlockSetUp()
+    public void CycleCurrentBlockSet()
     {
         BlockSet originalBlockSet = currentBlockSet;
         List<Tile> originalTileList = originalBlockSet.tiles;
         List<Tile> newTileList = new List<Tile>();
+
         newTileList.Add(originalTileList[originalTileList.Count - 1]);
         for (int i = 0; i < originalTileList.Count-1; i++)
         {
