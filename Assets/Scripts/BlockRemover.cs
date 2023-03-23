@@ -56,6 +56,21 @@ public class BlockRemover : MonoBehaviour, InterfaceBlockRemover
         return true;
     }
 
+    public static bool EraseBlocksInATileMap(Vector3Int[] positions, Tilemap aTileMap)
+    {
+        if (positions.Length == 0)
+        {
+            Debug.LogError(eraseBlocksNoPositionsErrorMessage);
+            return false;
+        }
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            aTileMap.SetTile(positions[i], null);
+        }
+        return true;
+    }
+
     public bool RemoveBlock(Vector3Int position)
     {
         if (tileMap.GetTile(position) == null)
