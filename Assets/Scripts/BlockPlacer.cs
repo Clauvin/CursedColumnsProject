@@ -50,6 +50,24 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         return true;
     }
 
+    public static bool AddBlockInATileMap(Vector3Int position, TileBase tile, Tilemap aTilemap)
+    {
+        //position can't be nullable, but just in case
+        if (position == null)
+        {
+            Debug.LogError(addBlockPositionErrorMessage);
+            return false;
+        }
+        if (tile == null)
+        {
+            Debug.LogError(addBlockTileErrorMessage);
+            return false;
+        }
+
+        aTilemap.SetTile(position, tile);
+        return true;
+    }
+
     public bool AddBlocks(Vector3Int[] positions, TileBase[] tiles)
     {
         if (positions.Length == 0)
@@ -95,6 +113,28 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
         for (int i = 0; i < amountOfBlocksToAdd; i++)
         {
             AddBlock(positions[i], tile);
+        }
+
+        return true;
+    }
+
+    public static bool AddSameBlockMultiplesTimesInATilemap(Vector3Int[] positions, TileBase tile, Tilemap aTilemap)
+    {
+        if (positions.Length == 0)
+        {
+            Debug.LogError(addSameBlockMultiplesTimesZeroPositionsErrorMessage);
+            return false;
+        }
+        else if (positions.Length == 1)
+        {
+            Debug.LogWarning(addSameBlockMultiplesTimesOnePositionWarningMessage);
+        }
+
+        int amountOfBlocksToAdd = positions.Length;
+
+        for (int i = 0; i < amountOfBlocksToAdd; i++)
+        {
+            BlockPlacer.AddBlockInATileMap(positions[i], tile, aTilemap);
         }
 
         return true;
