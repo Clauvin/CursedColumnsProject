@@ -62,6 +62,11 @@ public class GameManager : MonoBehaviour
         int lowerLimit = -1;
         int upperLimit = dataManager.gameSpace.y + 1;
 
+        dataManager.leftLimit = leftLimit;
+        dataManager.rightLimit = rightLimit;
+        dataManager.lowerLimit = lowerLimit;
+        dataManager.upperLimit = upperLimit;
+
         List<Vector3Int> newBlocks = new List<Vector3Int>();
 
         for (int i = leftLimit; i <= rightLimit; i++)
