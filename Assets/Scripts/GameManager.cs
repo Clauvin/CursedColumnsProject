@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static PlayerInteractions inputManager;
     public static GameTimer gameTimer;
     public static BlockManipulator blockManipulator;
+    public static BlockMatchChecker blockMatchChecker;
 
     public static BlockSet currentBlockSet;
     public static BlockSet nextBlockSet;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         inputManager = GetComponent<PlayerInteractions>();
         gameTimer = GetComponent<GameTimer>();
         blockManipulator = GetComponent<BlockManipulator>();
+        blockMatchChecker = GetComponent<BlockMatchChecker>();
     }
 
     // Start is called before the first frame update
@@ -176,6 +178,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
+                        blockMatchChecker.FullMatchCheck();
                         CurrentBlockSetReceivesNextBlockSet();
                         CreateNextBlockSet();
                         PlaceCurrentBlockSetAtGameArea();
