@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 8769006880440509332}
   - component: {fileID: 8769006880440509333}
   - component: {fileID: 8769006880440509322}
+  - component: {fileID: 4430679402125005502}
   - component: {fileID: 574235557491335728}
   - component: {fileID: 8769006880440509328}
   - component: {fileID: 4250984635020809537}
@@ -183,6 +184,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSetSpawnPoint: {x: 0, y: 12, z: 0}
   gameSpace: {x: 6, y: 14}
+  leftLimit: 0
+  rightLimit: 0
+  lowerLimit: 0
+  upperLimit: 0
   currentBlockSpeedPerSecond: 1
   timePassedWithoutBlockMovement: 0
 --- !u!114 &8769006880440509332
@@ -224,6 +229,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b9245d985eada54e9fa39901fdf3430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMap: {fileID: 8769006880439785881}
+--- !u!114 &4430679402125005502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769006880440509323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c563a01d79b92b4db5992475c8ef5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileMap: {fileID: 8769006880439785881}
