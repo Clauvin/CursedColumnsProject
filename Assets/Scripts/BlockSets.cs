@@ -42,5 +42,30 @@ namespace BlockSets
             return positions.ToArray();
         }
     }
+
+    public class MatchSet: BlockSet
+    {
+        public enum Direction
+        {
+            HORIZONTAL,
+            VERTICAL,
+            DOWNLEFT,
+            DOWNRIGHT
+        }
+
+        public Direction matchDirection;
+
+        public MatchSet(Tile tile, List<Vector3Int> positions, Direction matchDirection)
+        {
+            tiles = new List<Tile>();
+            for (int i = 0; i < positions.Count; i++)
+            {
+                tiles.Add(tile);
+            }
+            this.tiles = tiles;
+            this.positions = positions;
+            this.matchDirection = matchDirection;
+        }
+    }
 }
 
