@@ -1,3 +1,4 @@
+using BlockSets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,11 +29,11 @@ public class BlockMatchChecker : MonoBehaviour
         verticalCheckTilemap = tileMap;
         leftDownCheckTilemap = tileMap;
         rightDownCheckTilemap = tileMap;
-        HorizontalCheck();
+        HorizontalChecks();
 
     }
 
-    private void HorizontalCheck()
+    private void HorizontalChecks()
     {
         Vector2 gameSpace = GameManager.dataManager.gameSpace;
 
@@ -40,7 +41,14 @@ public class BlockMatchChecker : MonoBehaviour
         {
             for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
             {
-                Debug.Log(i + " " + j + horizontalCheckTilemap.GetTile(new Vector3Int(i, j, 0)));
+                Tile tile = horizontalCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
+                if (tile != null && tile != DataManager.unpassableTile)
+                {
+                    MatchSet matchSet = new MatchSet(tile, new List<Vector3Int>(), MatchSet.Direction.HORIZONTAL);
+                    matchSet.positions.Add(new Vector3Int(i, j, 0));
+
+                    matchSet = 
+                }
             }
         }
         
@@ -50,6 +58,24 @@ public class BlockMatchChecker : MonoBehaviour
          * if you found blocks or not from the color of the starting block, remove those from the horizontalCheckTilemap
          * if it found, store the match in the horizontal match list
          */
+    }
+
+    private MatchSet HorizontalDynamicDoubleCheck(MatchSet startingMatchSet)
+    {
+        MatchSet endingMatchSet = DynamicCheck(startingMatchSet, startingMatchSet.positions[0], new Vector3Int(-1, 0, 0));
+        endingMatchSet = DynamicCheck(endingMatchSet, startingMatchSet.positions[0], new Vector3Int(1, 0, 0));
+        return endingMatchSet;
+    }
+
+    private MatchSet DynamicCheck(MatchSet matchSet, Vector3Int currentPosition, Vector3Int toWhere)
+    {
+        Vector3Int positionToCheck = currentPosition + toWhere;
+        //Change this part to get the correct tileset instead of the horizontal one
+        if (matchSet.tiles[0] == horizontalCheckTilemap.GetTile<Tile>(positionToCheck))
+        {
+            //matchSet.
+            //return 
+        }
     }
 
     private void VerticalCheck()
