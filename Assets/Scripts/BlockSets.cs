@@ -55,6 +55,13 @@ namespace BlockSets
 
         public Direction matchDirection;
 
+        public MatchSet(Direction matchDirection)
+        {
+            tiles = new List<Tile>();
+            positions = new List<Vector3Int>();
+            this.matchDirection = matchDirection;
+        }
+
         public MatchSet(Tile tile, List<Vector3Int> positions, Direction matchDirection)
         {
             tiles = new List<Tile>();
@@ -65,6 +72,12 @@ namespace BlockSets
             this.tiles = tiles;
             this.positions = positions;
             this.matchDirection = matchDirection;
+        }
+
+        public void AddTile(Tile tile, Vector3Int position)
+        {
+            tiles.Add(tile);
+            positions.Add(position);
         }
     }
 }
