@@ -7,8 +7,13 @@ namespace BlockSets
 {
     public class BlockSet
     {
-        public List<Tile> tiles { get; private set; }
-        public List<Vector3Int> positions { get; private set; }
+        public List<Tile> tiles { get; protected set; }
+        public List<Vector3Int> positions { get; protected set; }
+
+        public BlockSet()
+        {
+
+        }
 
         public BlockSet(Tile tile, List<Vector3Int> positions)
         {
