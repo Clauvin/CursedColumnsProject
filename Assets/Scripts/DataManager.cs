@@ -8,6 +8,10 @@ public class DataManager : MonoBehaviour
 {
     public Vector3Int blockSetSpawnPoint;
     public Vector2Int gameSpace;
+    public int leftLimit;
+    public int rightLimit;
+    public int lowerLimit;
+    public int upperLimit;
     public float currentBlockSpeedPerSecond;
     public float timePassedWithoutBlockMovement;
 
