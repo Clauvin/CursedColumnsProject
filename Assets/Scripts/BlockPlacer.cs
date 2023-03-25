@@ -125,10 +125,6 @@ public class BlockPlacer : MonoBehaviour, InterfaceBlockPlacer
             Debug.LogError(addSameBlockMultiplesTimesZeroPositionsErrorMessage);
             return false;
         }
-        else if (positions.Length == 1)
-        {
-            Debug.LogWarning(addSameBlockMultiplesTimesOnePositionWarningMessage);
-        }
 
         int amountOfBlocksToAdd = positions.Length;
 
