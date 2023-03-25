@@ -44,6 +44,14 @@ public class BlockMatchChecker : MonoBehaviour
         LeftDownChecks();
         RightDownChecks();
         Debug.Log(horizontalMatchSetsFound.Count);
+        for (int i = 0; i < horizontalMatchSetsFound.Count; i++)
+        {
+            for (int j = 0; j < horizontalMatchSetsFound[i].positions.Count; j++)
+            {
+                Debug.Log(horizontalMatchSetsFound[i].positions[j].ToString());
+            }
+            Debug.Log("--");
+        }
         Debug.Log(verticalMatchSetsFound.Count);
         Debug.Log(leftDownMatchSetsFound.Count);
         Debug.Log(rightDownMatchSetsFound.Count);
