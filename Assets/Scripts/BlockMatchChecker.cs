@@ -51,6 +51,26 @@ public class BlockMatchChecker : MonoBehaviour
 
     private void HorizontalChecks()
     {
+        DirectionalChecks(horizontalCheckTilemap, horizontalMatchSetsFound, MatchSet.Direction.HORIZONTAL);
+    }
+
+    private void VerticalChecks()
+    {
+        DirectionalChecks(verticalCheckTilemap, verticalMatchSetsFound, MatchSet.Direction.VERTICAL);
+    }
+
+    private void LeftDownChecks()
+    {
+        DirectionalChecks(leftDownCheckTilemap, leftDownMatchSetsFound, MatchSet.Direction.DOWNLEFT);
+    }
+
+    private void RightDownChecks()
+    {
+        DirectionalChecks(rightDownCheckTilemap, rightDownMatchSetsFound, MatchSet.Direction.DOWNRIGHT);
+    }
+
+    private void DirectionalChecks(Tilemap directionalTilemap, List<MatchSet> directionalMatchList, MatchSet.Direction direction)
+    {
         Vector2 gameSpace = GameManager.dataManager.gameSpace;
 
         for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
@@ -61,21 +81,41 @@ public class BlockMatchChecker : MonoBehaviour
                 Tile tileCheck = null;
                 try
                 {
-                    tileCheck = horizontalCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
+                    tileCheck = directionalTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
                 }
-                catch(NullReferenceException nre)
+                catch (NullReferenceException nre)
                 {
                     tileCheck = null;
                 }
                 if (tile != null && tile != DataManager.unpassableTile && tileCheck == null)
                 {
-                    MatchSet matchSet = new MatchSet(MatchSet.Direction.HORIZONTAL);
+                    MatchSet matchSet = new MatchSet(direction);
                     matchSet.AddTile(tile, new Vector3Int(i, j, 0));
 
-                    matchSet = HorizontalDynamicDoubleCheck(matchSet);
+                    Vector3Int directionVector = new Vector3Int(0, 0, 0);
+                    switch (direction)
+                    {
+                        case MatchSet.Direction.HORIZONTAL:
+                            directionVector = new Vector3Int(-1, 0, 0);
+                            break;
+                        case MatchSet.Direction.VERTICAL:
+                            directionVector = new Vector3Int(0, -1, 0);
+                            break;
+                        case MatchSet.Direction.DOWNLEFT:
+                            directionVector = new Vector3Int(-1, -1, 0);
+                            break;
+                        case MatchSet.Direction.DOWNRIGHT:
+                            directionVector = new Vector3Int(1, -1, 0);
+                            break;
+                        default:
+                            Debug.LogError("BlockMatchChecker - Ok, how we got another direction here .-.");
+                            break;
+                    }
+                    matchSet = DynamicDoubleCheck(matchSet, directionVector);
+
                     if (matchSet.positions.Count >= matchSize)
                     {
-                        horizontalMatchSetsFound.Add(matchSet);
+                        directionalMatchList.Add(matchSet);
                     }
                     BlockPlacer.AddSameBlockMultiplesTimesInATilemap(matchSet.GetPositionsArray(), tile, horizontalCheckTilemap);
                 }
@@ -83,141 +123,10 @@ public class BlockMatchChecker : MonoBehaviour
         }
     }
 
-    private MatchSet HorizontalDynamicDoubleCheck(MatchSet startingMatchSet)
+    private MatchSet DynamicDoubleCheck(MatchSet startingMatchSet, Vector3Int direction)
     {
-        MatchSet endingMatchSet = DynamicCheck(startingMatchSet, startingMatchSet.positions[0], new Vector3Int(-1, 0, 0),
-            tileMap);
-        endingMatchSet = DynamicCheck(endingMatchSet, startingMatchSet.positions[0], new Vector3Int(1, 0, 0),
-            tileMap);
-        return endingMatchSet;
-    }
-
-    private void VerticalChecks()
-    {
-        Vector2 gameSpace = GameManager.dataManager.gameSpace;
-
-        for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
-        {
-            for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
-            {
-                Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck = null;
-                try
-                {
-                    tileCheck = verticalCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                }
-                catch (NullReferenceException nre)
-                {
-                    tileCheck = null;
-                }
-                if (tile != null && tile != DataManager.unpassableTile && tileCheck == null)
-                {
-                    MatchSet matchSet = new MatchSet(MatchSet.Direction.VERTICAL);
-                    matchSet.AddTile(tile, new Vector3Int(i, j, 0));
-
-                    matchSet = VerticalDynamicDoubleCheck(matchSet);
-                    if (matchSet.positions.Count >= matchSize)
-                    {
-                        verticalMatchSetsFound.Add(matchSet);
-                    }
-                    BlockPlacer.AddSameBlockMultiplesTimesInATilemap(matchSet.GetPositionsArray(), tile, verticalCheckTilemap);
-                }
-            }
-        }
-    }
-
-    private MatchSet VerticalDynamicDoubleCheck(MatchSet startingMatchSet)
-    {
-        MatchSet endingMatchSet = DynamicCheck(startingMatchSet, startingMatchSet.positions[0], new Vector3Int(0, -1, 0),
-            tileMap);
-        endingMatchSet = DynamicCheck(endingMatchSet, startingMatchSet.positions[0], new Vector3Int(0, 1, 0),
-            tileMap);
-        return endingMatchSet;
-    }
-
-    private void LeftDownChecks()
-    {
-        Vector2 gameSpace = GameManager.dataManager.gameSpace;
-
-        for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
-        {
-            for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
-            {
-                Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck = null;
-                try
-                {
-                    tileCheck = leftDownCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                }
-                catch (NullReferenceException nre)
-                {
-                    tileCheck = null;
-                }
-                if (tile != null && tile != DataManager.unpassableTile && tileCheck == null)
-                {
-                    MatchSet matchSet = new MatchSet(MatchSet.Direction.DOWNLEFT);
-                    matchSet.AddTile(tile, new Vector3Int(i, j, 0));
-
-                    matchSet = LeftDownDynamicDoubleCheck(matchSet);
-                    if (matchSet.positions.Count >= matchSize)
-                    {
-                        leftDownMatchSetsFound.Add(matchSet);
-                    }
-                    BlockPlacer.AddSameBlockMultiplesTimesInATilemap(matchSet.GetPositionsArray(), tile, leftDownCheckTilemap);
-                }
-            }
-        }
-    }
-
-    private MatchSet LeftDownDynamicDoubleCheck(MatchSet startingMatchSet)
-    {
-        MatchSet endingMatchSet = DynamicCheck(startingMatchSet, startingMatchSet.positions[0], new Vector3Int(-1, -1, 0),
-            tileMap);
-        endingMatchSet = DynamicCheck(endingMatchSet, startingMatchSet.positions[0], new Vector3Int(1, 1, 0),
-            tileMap);
-        return endingMatchSet;
-    }
-
-    private void RightDownChecks()
-    {
-        Vector2 gameSpace = GameManager.dataManager.gameSpace;
-
-        for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
-        {
-            for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
-            {
-                Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck = null;
-                try
-                {
-                    tileCheck = rightDownCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                }
-                catch (NullReferenceException nre)
-                {
-                    tileCheck = null;
-                }
-                if (tile != null && tile != DataManager.unpassableTile && tileCheck == null)
-                {
-                    MatchSet matchSet = new MatchSet(MatchSet.Direction.DOWNRIGHT);
-                    matchSet.AddTile(tile, new Vector3Int(i, j, 0));
-
-                    matchSet = RightDownDynamicDoubleCheck(matchSet);
-                    if (matchSet.positions.Count >= matchSize)
-                    {
-                        rightDownMatchSetsFound.Add(matchSet);
-                    }
-                    BlockPlacer.AddSameBlockMultiplesTimesInATilemap(matchSet.GetPositionsArray(), tile, rightDownCheckTilemap);
-                }
-            }
-        }
-    }
-
-    private MatchSet RightDownDynamicDoubleCheck(MatchSet startingMatchSet)
-    {
-        MatchSet endingMatchSet = DynamicCheck(startingMatchSet, startingMatchSet.positions[0], new Vector3Int(1, -1, 0),
-            tileMap);
-        endingMatchSet = DynamicCheck(endingMatchSet, startingMatchSet.positions[0], new Vector3Int(-1, 1, 0),
-            tileMap);
+        MatchSet endingMatchSet = DynamicCheck(startingMatchSet, startingMatchSet.positions[0], direction, tileMap);
+        endingMatchSet = DynamicCheck(endingMatchSet, startingMatchSet.positions[0], direction*-1, tileMap);
         return endingMatchSet;
     }
 
@@ -232,21 +141,6 @@ public class BlockMatchChecker : MonoBehaviour
         }
 
         return matchSet;
-    }
-
-    private void VerticalCheck()
-    {
-
-    }
-
-    private void leftDownCheck()
-    {
-
-    }
-
-    private void rightDownCheck()
-    {
-
     }
 
     public void GetListOfMatches()
