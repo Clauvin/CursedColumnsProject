@@ -117,7 +117,7 @@ public class BlockMatchChecker : MonoBehaviour
                     {
                         directionalMatchList.Add(matchSet);
                     }
-                    BlockPlacer.AddSameBlockMultiplesTimesInATilemap(matchSet.GetPositionsArray(), tile, horizontalCheckTilemap);
+                    BlockPlacer.AddSameBlockMultiplesTimesInATilemap(matchSet.GetPositionsArray(), tile, directionalTilemap);
                 }
             }
         }
