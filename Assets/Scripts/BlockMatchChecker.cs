@@ -9,10 +9,10 @@ public class BlockMatchChecker : MonoBehaviour
 {
     public Tilemap tileMap;
     public int matchSize = 3;
-    private Tilemap horizontalCheckTilemap;
-    private Tilemap verticalCheckTilemap;
-    private Tilemap leftDownCheckTilemap;
-    private Tilemap rightDownCheckTilemap;
+    public Tilemap horizontalCheckTilemap;
+    public Tilemap verticalCheckTilemap;
+    public Tilemap leftDownCheckTilemap;
+    public Tilemap rightDownCheckTilemap;
     private List<MatchSet> horizontalMatchSetsFound;
     private List<MatchSet> verticalMatchSetsFound;
     private List<MatchSet> leftDownMatchSetsFound;
@@ -31,10 +31,10 @@ public class BlockMatchChecker : MonoBehaviour
 
     public void FullMatchCheck()
     {
-        horizontalCheckTilemap = new Tilemap();
-        verticalCheckTilemap = new Tilemap();
-        leftDownCheckTilemap = new Tilemap();
-        rightDownCheckTilemap = new Tilemap();
+        horizontalCheckTilemap.ClearAllTiles();
+        verticalCheckTilemap.ClearAllTiles();
+        leftDownCheckTilemap.ClearAllTiles();
+        rightDownCheckTilemap.ClearAllTiles();
         horizontalMatchSetsFound = new List<MatchSet>();
         verticalMatchSetsFound = new List<MatchSet>();
         leftDownMatchSetsFound = new List<MatchSet>();
@@ -58,7 +58,7 @@ public class BlockMatchChecker : MonoBehaviour
             for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
             {
                 Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck;
+                Tile tileCheck = null;
                 try
                 {
                     tileCheck = horizontalCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
@@ -100,8 +100,8 @@ public class BlockMatchChecker : MonoBehaviour
         {
             for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
             {
-                Tile tile = verticalCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck;
+                Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
+                Tile tileCheck = null;
                 try
                 {
                     tileCheck = verticalCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
@@ -143,8 +143,8 @@ public class BlockMatchChecker : MonoBehaviour
         {
             for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
             {
-                Tile tile = leftDownCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck;
+                Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
+                Tile tileCheck = null;
                 try
                 {
                     tileCheck = leftDownCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
@@ -186,8 +186,8 @@ public class BlockMatchChecker : MonoBehaviour
         {
             for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
             {
-                Tile tile = rightDownCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
-                Tile tileCheck;
+                Tile tile = tileMap.GetTile<Tile>(new Vector3Int(i, j, 0));
+                Tile tileCheck = null;
                 try
                 {
                     tileCheck = rightDownCheckTilemap.GetTile<Tile>(new Vector3Int(i, j, 0));
