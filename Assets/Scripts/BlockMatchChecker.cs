@@ -235,7 +235,7 @@ public class BlockMatchChecker : MonoBehaviour
         //Change this part to get the correct tileset instead of the horizontal one
         if (matchSet.tiles[0] == tileMap.GetTile<Tile>(positionToCheck))
         {
-            matchSet.AddTile(matchSet.tiles[0], currentPosition);
+            matchSet.AddTile(matchSet.tiles[0], positionToCheck);
             return DynamicCheck(matchSet, positionToCheck, toWhere, tileMap);
         }
 
