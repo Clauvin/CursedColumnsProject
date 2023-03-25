@@ -31,22 +31,28 @@ public class BlockMatchChecker : MonoBehaviour
 
     public void FullMatchCheck()
     {
-        horizontalCheckTilemap.ClearAllTiles();
-        verticalCheckTilemap.ClearAllTiles();
-        leftDownCheckTilemap.ClearAllTiles();
-        rightDownCheckTilemap.ClearAllTiles();
-        horizontalMatchSetsFound = new List<MatchSet>();
-        verticalMatchSetsFound = new List<MatchSet>();
-        leftDownMatchSetsFound = new List<MatchSet>();
-        rightDownMatchSetsFound = new List<MatchSet>();
+        ClearDirectionalTilemaps();
+        ResetListOfMatches();
         HorizontalChecks();
         VerticalChecks();
         LeftDownChecks();
         RightDownChecks();
-        Debug.Log(horizontalMatchSetsFound.Count);
-        Debug.Log(verticalMatchSetsFound.Count);
-        Debug.Log(leftDownMatchSetsFound.Count);
-        Debug.Log(rightDownMatchSetsFound.Count);
+    }
+
+    private void ClearDirectionalTilemaps()
+    {
+        horizontalCheckTilemap.ClearAllTiles();
+        verticalCheckTilemap.ClearAllTiles();
+        leftDownCheckTilemap.ClearAllTiles();
+        rightDownCheckTilemap.ClearAllTiles();
+    }
+
+    private void ResetListOfMatches()
+    {
+        horizontalMatchSetsFound = new List<MatchSet>();
+        verticalMatchSetsFound = new List<MatchSet>();
+        leftDownMatchSetsFound = new List<MatchSet>();
+        rightDownMatchSetsFound = new List<MatchSet>();
     }
 
     private void HorizontalChecks()
@@ -144,11 +150,6 @@ public class BlockMatchChecker : MonoBehaviour
     }
 
     public void GetListOfMatches()
-    {
-
-    }
-
-    private void ResetListOfMatches()
     {
 
     }
