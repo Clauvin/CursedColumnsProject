@@ -13,10 +13,22 @@ public class BlockMatchChecker : MonoBehaviour
     public Tilemap verticalCheckTilemap;
     public Tilemap leftDownCheckTilemap;
     public Tilemap rightDownCheckTilemap;
+    
     private List<MatchSet> horizontalMatchSetsFound;
+    public List<MatchSet> HorizontalMatchSetsFound
+    { get { return horizontalMatchSetsFound; } }
+
     private List<MatchSet> verticalMatchSetsFound;
+    public List<MatchSet> VerticalMatchSetsFound
+    { get { return verticalMatchSetsFound; } }
+
     private List<MatchSet> leftDownMatchSetsFound;
+    public List<MatchSet> LeftDownMatchSetsFound
+    { get { return leftDownMatchSetsFound; } }
+
     private List<MatchSet> rightDownMatchSetsFound;
+    public List<MatchSet> RightDownMatchSetsFound
+    { get {  return rightDownMatchSetsFound; } }
 
     // Start is called before the first frame update
     void Start()
