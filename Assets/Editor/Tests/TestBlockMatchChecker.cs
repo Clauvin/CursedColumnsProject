@@ -64,6 +64,31 @@ public class TestBlockMatchChecker
     }
 
     [UnityTest]
+    public IEnumerator TestHorizontalFailureCheck()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 0, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+        positionsList.Add(new Vector3Int(2, 0, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        if (blockMatchChecker.HorizontalMatchSetsFound.Count != 0)
+        {
+            Assert.Fail();
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+
+    }
+
+    [UnityTest]
     public IEnumerator TestVerticalCheck()
     {
         List<Vector3Int> positionsList = new List<Vector3Int>();
@@ -78,6 +103,31 @@ public class TestBlockMatchChecker
         blockMatchChecker.FullMatchCheck();
 
         if (blockMatchChecker.VerticalMatchSetsFound.Count != 1)
+        {
+            Assert.Fail();
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestVerticalFailureCheck()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(0, 3, 0));
+        positionsList.Add(new Vector3Int(0, 2, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        if (blockMatchChecker.VerticalMatchSetsFound.Count != 0)
         {
             Assert.Fail();
         }
@@ -114,6 +164,31 @@ public class TestBlockMatchChecker
     }
 
     [UnityTest]
+    public IEnumerator TestLeftDownFailureCheck()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(3, 3, 0));
+        positionsList.Add(new Vector3Int(2, 2, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        if (blockMatchChecker.LeftDownMatchSetsFound.Count != 0)
+        {
+            Assert.Fail();
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+
+    }
+
+    [UnityTest]
     public IEnumerator TestRightDownCheck()
     {
         List<Vector3Int> positionsList = new List<Vector3Int>();
@@ -128,6 +203,31 @@ public class TestBlockMatchChecker
         blockMatchChecker.FullMatchCheck();
 
         if (blockMatchChecker.RightDownMatchSetsFound.Count != 1)
+        {
+            Assert.Fail();
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+
+    }
+
+    [UnityTest]
+    public IEnumerator TestRightDownFailureCheck()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(3, 1, 0));
+        positionsList.Add(new Vector3Int(2, 0, 0));
+        positionsList.Add(new Vector3Int(1, 0, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        if (blockMatchChecker.RightDownMatchSetsFound.Count != 0)
         {
             Assert.Fail();
         }
