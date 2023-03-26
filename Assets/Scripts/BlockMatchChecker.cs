@@ -33,7 +33,7 @@ public class BlockMatchChecker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     public void Init(Tilemap tilemap)
@@ -59,7 +59,7 @@ public class BlockMatchChecker : MonoBehaviour
         rightDownCheckTilemap.ClearAllTiles();
     }
 
-    private void ResetListOfMatches()
+    public void ResetListOfMatches()
     {
         horizontalMatchSetsFound = new List<MatchSet>();
         verticalMatchSetsFound = new List<MatchSet>();
