@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     public void CreateStartingGameSpace()
     {
+        blockManipulator.tileMap.ClearAllTiles();
+
         int leftLimit = -dataManager.gameSpace.x / 2 - 1;
         int rightLimit = dataManager.gameSpace.x / 2 + 1;
         int lowerLimit = -1;
