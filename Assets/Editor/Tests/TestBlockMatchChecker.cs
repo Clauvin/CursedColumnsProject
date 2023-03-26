@@ -27,7 +27,13 @@ public class TestBlockMatchChecker
         gameManagerPrefab = (GameObject)Resources.Load("TestResources/GameManager");
         gameManager = gameManagerPrefab.GetComponent<GameManager>();
         gameManager.SetUpStaticManagers();
+        gameManager.StartManagers();
+        gameManager.StartDataManagerVariables();
+        gameManager.CreateStartingGameSpace();
+
         blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
+
+       
 
         yield return new WaitForFixedUpdate();
      }
@@ -35,8 +41,6 @@ public class TestBlockMatchChecker
     [UnityTest]
     public IEnumerator TestHorizontalCheck()
     {
-        Tilemap tilemap = blockMatchChecker.tileMap;
-
         List<Vector3Int> positionsList = new List<Vector3Int>();
         positionsList.Add(new Vector3Int(-1, 0, 0));
         positionsList.Add(new Vector3Int(0, 0, 0));
@@ -44,9 +48,9 @@ public class TestBlockMatchChecker
 
         Tile tile = DataManager.commonTiles[0];
 
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, tilemap);
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
 
-        blockMatchChecker.HorizontalChecks();
+        blockMatchChecker.FullMatchCheck();
 
         if (blockMatchChecker.HorizontalMatchSetsFound.Count != 1)
         {
