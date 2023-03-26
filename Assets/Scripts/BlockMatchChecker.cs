@@ -55,22 +55,22 @@ public class BlockMatchChecker : MonoBehaviour
         rightDownMatchSetsFound = new List<MatchSet>();
     }
 
-    private void HorizontalChecks()
+    public void HorizontalChecks()
     {
         DirectionalChecks(horizontalCheckTilemap, horizontalMatchSetsFound, MatchSet.Direction.HORIZONTAL);
     }
 
-    private void VerticalChecks()
+    public void VerticalChecks()
     {
         DirectionalChecks(verticalCheckTilemap, verticalMatchSetsFound, MatchSet.Direction.VERTICAL);
     }
 
-    private void LeftDownChecks()
+    public void LeftDownChecks()
     {
         DirectionalChecks(leftDownCheckTilemap, leftDownMatchSetsFound, MatchSet.Direction.DOWNLEFT);
     }
 
-    private void RightDownChecks()
+    public void RightDownChecks()
     {
         DirectionalChecks(rightDownCheckTilemap, rightDownMatchSetsFound, MatchSet.Direction.DOWNRIGHT);
     }
@@ -147,16 +147,5 @@ public class BlockMatchChecker : MonoBehaviour
         }
 
         return matchSet;
-    }
-
-    public void GetListOfMatches()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
