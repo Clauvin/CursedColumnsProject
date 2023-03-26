@@ -59,7 +59,7 @@ public class BlockMatchChecker : MonoBehaviour
         rightDownCheckTilemap.ClearAllTiles();
     }
 
-    public void ResetListOfMatches()
+    private void ResetListOfMatches()
     {
         horizontalMatchSetsFound = new List<MatchSet>();
         verticalMatchSetsFound = new List<MatchSet>();
