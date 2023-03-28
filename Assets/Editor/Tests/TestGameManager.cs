@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.Tilemaps;
 
 public class TestGameManager : MonoBehaviour
 {
@@ -95,6 +96,150 @@ public class TestGameManager : MonoBehaviour
 
         yield return new WaitForFixedUpdate();
 
+    }
+
+    [UnityTest]
+    public IEnumerator TestRemoveHorizontalMatches()
+    {
+        gameManager.StartManagers();
+        gameManager.StartDataManagerVariables();
+        gameManager.CreateStartingGameSpace();
+
+        BlockMatchChecker blockMatchChecker;
+        blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
+
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 2, 0));
+        positionsList.Add(new Vector3Int(0, 2, 0));
+        positionsList.Add(new Vector3Int(1, 2, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        gameManager.RemoveMatches();
+
+        for (int i = 0; i < positionsList.Count; i++)
+        {
+            if (GameManager.blockManipulator.tileMap.GetTile(positionsList[i]) != null)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestRemoveVerticalMatches()
+    {
+        gameManager.StartManagers();
+        gameManager.StartDataManagerVariables();
+        gameManager.CreateStartingGameSpace();
+
+        BlockMatchChecker blockMatchChecker;
+        blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
+
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 3, 0));
+        positionsList.Add(new Vector3Int(-1, 2, 0));
+        positionsList.Add(new Vector3Int(-1, 1, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        gameManager.RemoveMatches();
+
+        for (int i = 0; i < positionsList.Count; i++)
+        {
+            if (GameManager.blockManipulator.tileMap.GetTile(positionsList[i]) != null)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestRemoveLeftDownMatches()
+    {
+        gameManager.StartManagers();
+        gameManager.StartDataManagerVariables();
+        gameManager.CreateStartingGameSpace();
+
+        BlockMatchChecker blockMatchChecker;
+        blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
+
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 3, 0));
+        positionsList.Add(new Vector3Int(0, 4, 0));
+        positionsList.Add(new Vector3Int(1, 5, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        gameManager.RemoveMatches();
+
+        for (int i = 0; i < positionsList.Count; i++)
+        {
+            if (GameManager.blockManipulator.tileMap.GetTile(positionsList[i]) != null)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestRemoveRightDownMatches()
+    {
+        gameManager.StartManagers();
+        gameManager.StartDataManagerVariables();
+        gameManager.CreateStartingGameSpace();
+
+        BlockMatchChecker blockMatchChecker;
+        blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
+
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 3, 0));
+        positionsList.Add(new Vector3Int(0, 2, 0));
+        positionsList.Add(new Vector3Int(1, 1, 0));
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+
+        gameManager.RemoveMatches();
+
+        for (int i = 0; i < positionsList.Count; i++)
+        {
+            if (GameManager.blockManipulator.tileMap.GetTile(positionsList[i]) != null)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
     }
 
     [UnityTest]
