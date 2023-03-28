@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
                     {
                         blockMatchChecker.FullMatchCheck();
                         RemoveMatches();
+                        ApplyGravity();
                         CurrentBlockSetReceivesNextBlockSet();
                         CreateNextBlockSet();
                         PlaceCurrentBlockSetAtGameArea();
@@ -233,6 +234,22 @@ public class GameManager : MonoBehaviour
         RemoveMatchBlocks(blockMatchChecker.VerticalMatchSetsFound);
         RemoveMatchBlocks(blockMatchChecker.LeftDownMatchSetsFound);
         RemoveMatchBlocks(blockMatchChecker.RightDownMatchSetsFound);
+    }
+
+    public void ApplyGravity()
+    {
+        //dumb way:
+        //get game area limits
+            //on each game area's column
+            //check if the tile at each block on the column is null
+            //if it is, look for all blocks above it and move it one down
+
+        //less dumb way:
+        //get game area limits
+            //get the position and tile of each column in a List, starting with the block on the bottom of the column
+            //go through the list, and remove all null blocks
+            //replace all blocks on the column with those on the list, unless the list limit has been reached
+            //on that point onwards, add a null to the remaining blocks on the column
     }
 
     private void RemoveMatchBlocks(List<MatchSet> matches)
