@@ -46,18 +46,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(1, 0, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.HorizontalMatchSetsFound.Count != 1)
+        if (TestCheck(positionsList, 1, BlockSets.MatchSet.Direction.HORIZONTAL))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
-        } 
-        
-        Assert.Pass();
+        }
 
         yield return new WaitForFixedUpdate();
 
@@ -71,18 +67,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(2, 0, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.HorizontalMatchSetsFound.Count != 0)
+        if (TestCheck(positionsList, 0, BlockSets.MatchSet.Direction.HORIZONTAL))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
         }
-
-        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
 
@@ -96,18 +88,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(0, 1, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.VerticalMatchSetsFound.Count != 1)
+        if (TestCheck(positionsList, 1, BlockSets.MatchSet.Direction.VERTICAL))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
         }
-
-        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
 
@@ -121,18 +109,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(0, 2, 0));
         positionsList.Add(new Vector3Int(0, 0, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.VerticalMatchSetsFound.Count != 0)
+        if (TestCheck(positionsList, 0, BlockSets.MatchSet.Direction.VERTICAL))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
         }
-
-        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
 
@@ -146,18 +130,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(1, 1, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.LeftDownMatchSetsFound.Count != 1)
+        if (TestCheck(positionsList, 1, BlockSets.MatchSet.Direction.DOWNLEFT))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
         }
-
-        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
 
@@ -171,18 +151,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(2, 2, 0));
         positionsList.Add(new Vector3Int(0, 0, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.LeftDownMatchSetsFound.Count != 0)
+        if (TestCheck(positionsList, 0, BlockSets.MatchSet.Direction.DOWNLEFT))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
         }
-
-        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
 
@@ -196,18 +172,14 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(-1, 1, 0));
 
-        Tile tile = DataManager.commonTiles[0];
-
-        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
-
-        blockMatchChecker.FullMatchCheck();
-
-        if (blockMatchChecker.RightDownMatchSetsFound.Count != 1)
+        if (TestCheck(positionsList, 1, BlockSets.MatchSet.Direction.DOWNRIGHT))
+        {
+            Assert.Pass();
+        }
+        else
         {
             Assert.Fail();
         }
-
-        Assert.Pass();
 
         yield return new WaitForFixedUpdate();
 
@@ -221,21 +193,52 @@ public class TestBlockMatchChecker
         positionsList.Add(new Vector3Int(2, 0, 0));
         positionsList.Add(new Vector3Int(1, 0, 0));
 
+        if (TestCheck(positionsList, 0, BlockSets.MatchSet.Direction.DOWNRIGHT))
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+
+        yield return new WaitForFixedUpdate();
+
+    }
+
+    public bool TestCheck(List<Vector3Int> positionsList, int amountOfChecks, BlockSets.MatchSet.Direction direction)
+    {
         Tile tile = DataManager.commonTiles[0];
 
         BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
 
         blockMatchChecker.FullMatchCheck();
 
-        if (blockMatchChecker.RightDownMatchSetsFound.Count != 0)
+        List<BlockSets.MatchSet> matchSetsFound = null;
+        switch (direction)
         {
-            Assert.Fail();
+            case BlockSets.MatchSet.Direction.HORIZONTAL:
+                matchSetsFound = blockMatchChecker.HorizontalMatchSetsFound;
+                break;
+            case BlockSets.MatchSet.Direction.VERTICAL:
+                matchSetsFound = blockMatchChecker.VerticalMatchSetsFound;
+                break;
+            case BlockSets.MatchSet.Direction.DOWNLEFT:
+                matchSetsFound = blockMatchChecker.LeftDownMatchSetsFound;
+                break;
+            case BlockSets.MatchSet.Direction.DOWNRIGHT:
+                matchSetsFound = blockMatchChecker.RightDownMatchSetsFound;
+                break;
+            default:
+                break;
         }
 
-        Assert.Pass();
+        if (matchSetsFound.Count != amountOfChecks)
+        {
+            return false;
+        }
 
-        yield return new WaitForFixedUpdate();
-
+        return true;
     }
 
     [UnityTearDown]
