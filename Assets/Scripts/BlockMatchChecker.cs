@@ -89,8 +89,6 @@ public class BlockMatchChecker : MonoBehaviour
 
     private void DirectionalChecks(Tilemap directionalTilemap, List<MatchSet> directionalMatchList, MatchSet.Direction direction)
     {
-        Vector2 gameSpace = GameManager.dataManager.gameSpace;
-
         for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
         {
             for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
