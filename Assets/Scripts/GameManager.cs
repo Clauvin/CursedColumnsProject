@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
         return blocksWentRight;
     }
 
-    private void RemoveMatches()
+    public void RemoveMatches()
     {
         RemoveMatchBlocks(blockMatchChecker.HorizontalMatchSetsFound);
         RemoveMatchBlocks(blockMatchChecker.VerticalMatchSetsFound);
