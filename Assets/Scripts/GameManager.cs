@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         blockMatchChecker.FullMatchCheck();
+                        RemoveMatches();
                         CurrentBlockSetReceivesNextBlockSet();
                         CreateNextBlockSet();
                         PlaceCurrentBlockSetAtGameArea();
@@ -224,6 +225,22 @@ public class GameManager : MonoBehaviour
         }
 
         return blocksWentRight;
+    }
+
+    private void RemoveMatches()
+    {
+        RemoveMatchBlocks(blockMatchChecker.HorizontalMatchSetsFound);
+        RemoveMatchBlocks(blockMatchChecker.VerticalMatchSetsFound);
+        RemoveMatchBlocks(blockMatchChecker.LeftDownMatchSetsFound);
+        RemoveMatchBlocks(blockMatchChecker.RightDownMatchSetsFound);
+    }
+
+    private void RemoveMatchBlocks(List<MatchSet> matches)
+    {
+        for (int i = 0; i < matches.Count; i++)
+        {
+            blockManipulator.GetBlockRemover().EraseBlocks(matches[i].positions.ToArray());
+        }
     }
 
     public void CycleCurrentBlockSet()
