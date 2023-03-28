@@ -272,6 +272,29 @@ public class TestGameManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTest]
+    public IEnumerator TestGravityAfterCheck()
+    {
+        gameManager.StartManagers();
+
+        gameManager.StartDataManagerVariables();
+
+        GameManager.blockManipulator.GetBlockPlacer().AddBlock(new Vector3Int(-1, 5, 0), DataManager.commonTiles[0]);
+
+        gameManager.ApplyGravity();
+
+        if (GameManager.blockManipulator.tileMap.GetTile(new Vector3Int(-1, 0, 0)) == null)
+        {
+            Assert.Fail();
+        }
+        else
+        {
+            Assert.Pass();
+        }
+
+        yield return new WaitForFixedUpdate();
+    }
+
     [UnityTearDown]
     public IEnumerator TearDown()
     {
