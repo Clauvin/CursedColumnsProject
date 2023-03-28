@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
+                        //in the future: add recursive check
                         blockMatchChecker.FullMatchCheck();
                         RemoveMatches();
                         ApplyGravity();
@@ -238,18 +239,35 @@ public class GameManager : MonoBehaviour
 
     public void ApplyGravity()
     {
-        //dumb way:
-        //get game area limits
-            //on each game area's column
-            //check if the tile at each block on the column is null
-            //if it is, look for all blocks above it and move it one down
+        for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
+        {
+            Vector2Int startingPosition = new Vector2Int(i, GameManager.dataManager.lowerLimit + 1);
+            List<Tile> tiles = new List<Tile>();
 
-        //less dumb way:
-        //get game area limits
-            //get the position and tile of each column in a List, starting with the block on the bottom of the column
-            //go through the list, and remove all null blocks
-            //replace all blocks on the column with those on the list, unless the list limit has been reached
-            //on that point onwards, add a null to the remaining blocks on the column
+            for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
+            {
+                Tile tile = (Tile)GameManager.blockManipulator.tileMap.GetTile(new Vector3Int(i, j, 0));
+                if (tile != null)
+                {
+                    tiles.Add(tile);
+                }
+            }
+
+            int tilesListPosition = 0;
+            for (int j = GameManager.dataManager.lowerLimit + 1; j < GameManager.dataManager.upperLimit; j++)
+            {
+                if (tilesListPosition < tiles.Count)
+                {
+                    GameManager.blockManipulator.GetBlockPlacer().AddBlock(new Vector3Int(i, j, 0), tiles[tilesListPosition]);
+                    tilesListPosition++;
+                }
+                else
+                {
+                    GameManager.blockManipulator.GetBlockRemover().EraseBlock(new Vector3Int(i, j, 0));
+                }
+                
+            }
+        }
     }
 
     private void RemoveMatchBlocks(List<MatchSet> matches)
