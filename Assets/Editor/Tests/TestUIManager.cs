@@ -8,6 +8,7 @@ using UnityEngine.TestTools;
 public class TestUIManager : MonoBehaviour
 {
     GameObject gameManager;
+    UIManager uiManager;
 
     [OneTimeSetUp]
     public void NewTestSetUp()
@@ -44,7 +45,7 @@ public class TestUIManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestPause()
     {
-        UIManager uiManager = gameManager.GetComponent<UIManager>();
+        uiManager = gameManager.GetComponent<UIManager>();
 
         UIManager.Pause();
 
@@ -63,7 +64,7 @@ public class TestUIManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestUnpause()
     {
-        UIManager uiManager = gameManager.GetComponent<UIManager>();
+        uiManager = gameManager.GetComponent<UIManager>();
 
         UIManager.Pause();
         UIManager.Unpause();
