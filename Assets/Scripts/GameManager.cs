@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
                         //in the future: add recursive check
                         blockMatchChecker.FullMatchCheck();
                         CalculateScorePointsFromAllMatches();
+                        UIManager.UpdateScoreUI();
                         RemoveMatches();
                         ApplyGravity();
                         CurrentBlockSetReceivesNextBlockSet();
@@ -261,7 +262,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-            dataManager.currentScore += matchPointValue;
+            DataManager.currentScore += matchPointValue;
         }
     }
 
