@@ -37,6 +37,11 @@ public class UIManager : MonoBehaviour
         pauseText.enabled = false;
     }
 
+    public static void UpdateScoreUI()
+    {
+        scoreValueText.text = DataManager.currentScore.ToString();
+    }
+
     // Update is called once per frame
     void Update()
     {
