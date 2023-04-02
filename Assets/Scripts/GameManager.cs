@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
                     {
                         //in the future: add recursive check
                         blockMatchChecker.FullMatchCheck();
+                        CalculateScorePointsFromAllMatches();
                         RemoveMatches();
                         ApplyGravity();
                         CurrentBlockSetReceivesNextBlockSet();
@@ -227,6 +228,41 @@ public class GameManager : MonoBehaviour
         }
 
         return blocksWentRight;
+    }
+
+    public void CalculateScorePointsFromAllMatches()
+    {
+        CalculateScorePointsFromMatches(blockMatchChecker.HorizontalMatchSetsFound);
+        CalculateScorePointsFromMatches(blockMatchChecker.VerticalMatchSetsFound);
+        CalculateScorePointsFromMatches(blockMatchChecker.LeftDownMatchSetsFound);
+        CalculateScorePointsFromMatches(blockMatchChecker.RightDownMatchSetsFound);
+    }
+
+
+    public void CalculateScorePointsFromMatches(List<MatchSet> matches)
+    {
+        for (int i = 0; i < matches.Count; i++)
+        {
+            int matchPointValue = 0;
+            switch (matches[i].positions.Count)
+            {
+                case 3:
+                    matchPointValue += DataManager.MATCH3SCOREVALUE;
+                    break;
+                case 4:
+                    matchPointValue += DataManager.MATCH4SCOREVALUE;
+                    break;
+                case 5:
+                    matchPointValue += DataManager.MATCH5SCOREVALUE;
+                    break;
+                case 6:
+                    matchPointValue += DataManager.MATCH6SCOREVALUE;
+                    break;
+                default:
+                    break;
+            }
+            dataManager.currentScore += matchPointValue;
+        }
     }
 
     public void RemoveMatches()
