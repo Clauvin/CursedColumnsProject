@@ -303,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 8769006880439785884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_Children: []
   m_Father: {fileID: 5465142378434251243}
   m_RootOrder: 0
@@ -327,7 +327,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 0, y: 0, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -464,12 +464,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSetSpawnPoint: {x: 0, y: 12, z: 0}
   gameSpace: {x: 6, y: 14}
-  leftLimit: 0
-  rightLimit: 0
-  lowerLimit: 0
-  upperLimit: 0
+  leftLimit: -4
+  rightLimit: 4
+  lowerLimit: -1
+  upperLimit: 15
   currentBlockSpeedPerSecond: 1
   timePassedWithoutBlockMovement: 0
+  currentScore: 0
 --- !u!114 &8769006880440509332
 MonoBehaviour:
   m_ObjectHideFlags: 0
