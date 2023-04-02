@@ -15,6 +15,12 @@ public class DataManager : MonoBehaviour
     public float currentBlockSpeedPerSecond;
     public float timePassedWithoutBlockMovement;
 
+    public int currentScore = 0;
+    public const int MATCH3SCOREVALUE = 100;
+    public const int MATCH4SCOREVALUE = MATCH3SCOREVALUE * 2;
+    public const int MATCH5SCOREVALUE = MATCH3SCOREVALUE * 4;
+    public const int MATCH6SCOREVALUE = MATCH3SCOREVALUE * 8;
+
     public static Tile unpassableTile;
     public static Tile[] commonTiles;
     public static bool isPaused { private set; get; }
