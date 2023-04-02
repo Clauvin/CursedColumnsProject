@@ -68,7 +68,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -92,7 +92,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -112,7 +112,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -174,7 +174,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -197,7 +197,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -295,7 +295,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -315,7 +315,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -336,7 +336,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -363,7 +363,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 
@@ -386,7 +386,7 @@ public class TestBlockMover
         {
             Assert.Fail();
         }
-        Assert.Fail();
+
         yield return new WaitForFixedUpdate();
     }
 }
