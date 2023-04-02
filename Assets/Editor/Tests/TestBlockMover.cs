@@ -10,6 +10,10 @@ using UnityEngine.Tilemaps;
 public class TestBlockMover
 {
     GameObject gridGameObject;
+    InterfaceBlockPlacer interfaceBlockPlacer;
+    InterfaceBlockManipulator interfaceBlockMover;
+    Tile tileTest;
+    Tilemap tilemap;
 
     [OneTimeSetUp]
     public void NewTestSetUp()
@@ -39,6 +43,11 @@ public class TestBlockMover
             Assert.Fail();
         }
 
+        interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
+        tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
         yield return new EnterPlayMode();
     }
 
@@ -46,11 +55,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementTeleportBlock()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
@@ -71,11 +75,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementTeleportBlocks()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
@@ -100,11 +99,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlock()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
@@ -125,11 +119,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockFailsBecauseDirectionIsWrong()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
         bool result = interfaceBlockMover.MoveBlock(new Vector3Int(1, 0, 0), new Vector3Int(0, 0, 0), 3);
 
@@ -150,11 +139,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockFailsBecauseDistanceEqualsZero()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
         bool result = interfaceBlockMover.MoveBlock(new Vector3Int(0, 0, 0), new Vector3Int(0, 0, 0), 0);
@@ -176,11 +160,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockButItCollides()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
@@ -202,11 +181,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlocks()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
@@ -230,11 +204,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlocksFailsBecauseThereAreNoStartingPositions()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
@@ -260,11 +229,6 @@ public class TestBlockMover
 
     public IEnumerator TestBlockMovementMoveBlocksFailsBecauseDirectionIsWrong()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
@@ -289,11 +253,6 @@ public class TestBlockMover
 
     public IEnumerator TestBlockMovementMoveBlocksFailsBecauseDistanceEqualsZero()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
@@ -319,11 +278,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlocksButItCollides()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) };
@@ -348,11 +302,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockDownwards()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 3, 0), tileTest);
@@ -373,11 +322,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlockDownwardsButItCollides()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 3, 0), tileTest);
@@ -399,11 +343,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlocksDownwards()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 4, 0), new Vector3Int(0, 5, 0), new Vector3Int(0, 6, 0) };
@@ -431,11 +370,6 @@ public class TestBlockMover
     [UnityTest]
     public IEnumerator TestBlockMovementMoveBlocksDownwardsButItCollides()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockManipulator interfaceBlockMover = gridGameObject.GetComponent<BlockManipulator>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockMover.Init(tilemap);
 
         Vector3Int[] blocks = new Vector3Int[] { new Vector3Int(0, 4, 0), new Vector3Int(0, 5, 0), new Vector3Int(0, 6, 0) };
