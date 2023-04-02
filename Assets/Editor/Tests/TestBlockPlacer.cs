@@ -43,16 +43,16 @@ public class TestBlockPlacer
             Assert.Fail();
         }
 
+        interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
         yield return new EnterPlayMode();
     }
 
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingABlock()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
 
         if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == tileTest)
@@ -70,10 +70,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingANullBlock()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         bool result = interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), null);
         UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockPlacer.GetAddBlockTileErrorMessage());
 
@@ -91,10 +87,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingBlocks()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new [] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
         Tile[] tiles = new[] { tileTest, tileTest, tileTest };
 
@@ -126,10 +118,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingZeroBlocks()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = Array.Empty<Vector3Int>();
         Tile[] tiles = new[] { tileTest, tileTest, tileTest };
 
@@ -150,10 +138,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerPlacingZeroTiles()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new[] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
         Tile[] tiles = Array.Empty<Tile>();
 
@@ -175,10 +159,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerWithMismatchBetweenPositionsAndTilesAmounts()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new[] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
         Tile[] tiles = new[] { tileTest, tileTest };
 
@@ -200,10 +180,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerAddingSameBlockMultiplesTimes()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new[] { new Vector3Int(-1, 0, 0), new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
 
         interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
@@ -234,10 +210,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerAddingSameBlockMultiplesTimesWithZeroPositions()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = Array.Empty<Vector3Int>();
 
         bool result = interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
@@ -258,10 +230,6 @@ public class TestBlockPlacer
     [UnityTest]
     public IEnumerator TestsBlockPlacerAddingSameBlockMultiplesTimesWithOnePosition()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new[] { new Vector3Int(0, 1, 0) };
 
         bool result = interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
