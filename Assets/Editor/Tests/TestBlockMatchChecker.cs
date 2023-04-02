@@ -33,8 +33,6 @@ public class TestBlockMatchChecker
 
         blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
 
-       
-
         yield return new WaitForFixedUpdate();
      }
 
@@ -244,8 +242,6 @@ public class TestBlockMatchChecker
     [UnityTearDown]
     public IEnumerator TearDown()
     {
-
-
         yield return new ExitPlayMode();
     }
 }
