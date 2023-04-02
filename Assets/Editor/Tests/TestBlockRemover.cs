@@ -11,6 +11,7 @@ public class TestBlockRemover
 {
     GameObject gridGameObject;
     InterfaceBlockPlacer interfaceBlockPlacer;
+    InterfaceBlockRemover interfaceBlockRemover;
     Tile tileTest;
     Tilemap tilemap;
 
@@ -42,17 +43,17 @@ public class TestBlockRemover
             Assert.Fail();
         }
 
+        interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
+        interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
+        tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
+        tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
+
         yield return new EnterPlayMode();
     }
 
     [UnityTest]
     public IEnumerator TestBlockRemoverEraseBlock()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         interfaceBlockPlacer.AddBlock(new Vector3Int(0, 0, 0), tileTest);
         if (tilemap.GetTile(new Vector3Int(0, 0, 0)) == tileTest)
         {
@@ -78,11 +79,6 @@ public class TestBlockRemover
     [UnityTest]
     public IEnumerator TestBlockRemoverEraseBlocks()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
 
         interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
@@ -111,11 +107,6 @@ public class TestBlockRemover
     [UnityTest]
     public IEnumerator TestBlockRemoverRemoveBlock()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int position = new Vector3Int(0, 0, 0);
 
         interfaceBlockPlacer.AddBlock(position, tileTest);
@@ -144,11 +135,6 @@ public class TestBlockRemover
     [UnityTest]
     public IEnumerator TestBlockRemoverRemoveBlockFailed()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         bool result = interfaceBlockRemover.RemoveBlock(new Vector3Int(0, 0, 0));
 
         UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockRemover.GetRemoveBlockNullErrorMessage());
@@ -168,11 +154,6 @@ public class TestBlockRemover
     [UnityTest]
     public IEnumerator TestBlockRemoverRemoveBlocks()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         Vector3Int[] positions = new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0) };
 
         interfaceBlockPlacer.AddSameBlockMultiplesTimes(positions, tileTest);
@@ -201,11 +182,6 @@ public class TestBlockRemover
     [UnityTest]
     public IEnumerator TestBlockRemoverRemoveBlocksFailed()
     {
-        InterfaceBlockPlacer interfaceBlockPlacer = gridGameObject.GetComponent<BlockPlacer>();
-        InterfaceBlockRemover interfaceBlockRemover = gridGameObject.GetComponent<BlockRemover>();
-        Tile tileTest = gridGameObject.GetComponentInChildren<TileTesting>().tileTest;
-        Tilemap tilemap = gridGameObject.GetComponentInChildren<Tilemap>();
-
         bool result = interfaceBlockRemover.RemoveBlocks(new Vector3Int[] { new Vector3Int(0, 0, 0), new Vector3Int(0, 1, 0) });
 
         UnityEngine.TestTools.LogAssert.Expect(LogType.Error, interfaceBlockRemover.GetRemoveBlocksNullErrorMessage());
