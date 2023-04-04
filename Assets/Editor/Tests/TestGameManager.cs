@@ -295,12 +295,118 @@ public class TestGameManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTest]
+    public IEnumerator TestMatch3ScoreValuation()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 0, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+        positionsList.Add(new Vector3Int(1, 0, 0));
+
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH3SCOREVALUE))
+        {
+            Assert.Pass();
+        }
+
+        Assert.Fail();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestMatch4ScoreValuation()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-2, 0, 0));
+        positionsList.Add(new Vector3Int(-1, 0, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+        positionsList.Add(new Vector3Int(1, 0, 0));
+
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH4SCOREVALUE))
+        {
+            Assert.Pass();
+        }
+
+        Assert.Fail();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestMatch5ScoreValuation()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-2, 0, 0));
+        positionsList.Add(new Vector3Int(-1, 0, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+        positionsList.Add(new Vector3Int(1, 0, 0));
+        positionsList.Add(new Vector3Int(2, 0, 0));
+
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH5SCOREVALUE))
+        {
+            Assert.Pass();
+        }
+
+        Assert.Fail();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestMatch6ScoreValuation()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-2, 0, 0));
+        positionsList.Add(new Vector3Int(-1, 0, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+        positionsList.Add(new Vector3Int(1, 0, 0));
+        positionsList.Add(new Vector3Int(2, 0, 0));
+        positionsList.Add(new Vector3Int(3, 0, 0));
+
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH6SCOREVALUE))
+        {
+            Assert.Pass(); 
+        }
+
+        Assert.Fail();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    bool TestMatchScoreValidation(List<Vector3Int> positionsList, int valueToValidate)
+    {
+        gameManager.StartManagers();
+
+        gameManager.StartDataManagerVariables();
+
+        gameManager.CreateStartingGameSpace();
+
+        Tile tile = DataManager.commonTiles[0];
+
+        BlockMatchChecker blockMatchChecker;
+        blockMatchChecker = gameManagerPrefab.GetComponent<BlockMatchChecker>();
+
+        BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
+
+        blockMatchChecker.FullMatchCheck();
+        gameManager.CalculateScorePointsFromAllMatches();
+
+        if (DataManager.currentScore != valueToValidate)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     [UnityTearDown]
     public IEnumerator TearDown()
     {
         GameManager.blockManipulator.tileMap.ClearAllTiles();
         gameManagerPrefab = null;
         gameManager = null;
+
+        DataManager.currentScore = 0;
 
         yield return new WaitForFixedUpdate();
     }
