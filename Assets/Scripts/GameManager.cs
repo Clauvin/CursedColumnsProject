@@ -180,12 +180,15 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        //in the future: add recursive check
-                        blockMatchChecker.FullMatchCheck();
-                        CalculateScorePointsFromAllMatches();
-                        UIManager.UpdateScoreUI();
-                        RemoveMatches();
-                        ApplyGravity();
+                        bool haveAMatchBeenFound = false;
+                        do
+                        {
+                            haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
+                            CalculateScorePointsFromAllMatches();
+                            UIManager.UpdateScoreUI();
+                            RemoveMatches();
+                            ApplyGravity();
+                        } while (haveAMatchBeenFound);
                         CurrentBlockSetReceivesNextBlockSet();
                         CreateNextBlockSet();
                         PlaceCurrentBlockSetAtGameArea();
