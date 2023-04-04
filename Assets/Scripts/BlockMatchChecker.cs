@@ -41,14 +41,18 @@ public class BlockMatchChecker : MonoBehaviour
         this.tileMap = tilemap;
     }
 
-    public void FullMatchCheck()
+    public bool FullMatchCheck()
     {
+        bool haveAMatchBeenFound = false;
+
         ClearDirectionalTilemaps();
         ResetListOfMatches();
-        HorizontalChecks();
-        VerticalChecks();
-        LeftDownChecks();
-        RightDownChecks();
+        haveAMatchBeenFound |= HorizontalChecks();
+        haveAMatchBeenFound |= VerticalChecks();
+        haveAMatchBeenFound |= LeftDownChecks();
+        haveAMatchBeenFound |= RightDownChecks();
+
+        return haveAMatchBeenFound;
     }
 
     private void ClearDirectionalTilemaps()
@@ -67,27 +71,27 @@ public class BlockMatchChecker : MonoBehaviour
         rightDownMatchSetsFound = new List<MatchSet>();
     }
 
-    public void HorizontalChecks()
+    public bool HorizontalChecks()
     {
-        DirectionalChecks(horizontalCheckTilemap, horizontalMatchSetsFound, MatchSet.Direction.HORIZONTAL);
+        return DirectionalChecks(horizontalCheckTilemap, horizontalMatchSetsFound, MatchSet.Direction.HORIZONTAL);
     }
 
-    public void VerticalChecks()
+    public bool VerticalChecks()
     {
-        DirectionalChecks(verticalCheckTilemap, verticalMatchSetsFound, MatchSet.Direction.VERTICAL);
+        return DirectionalChecks(verticalCheckTilemap, verticalMatchSetsFound, MatchSet.Direction.VERTICAL);
     }
 
-    public void LeftDownChecks()
+    public bool LeftDownChecks()
     {
-        DirectionalChecks(leftDownCheckTilemap, leftDownMatchSetsFound, MatchSet.Direction.DOWNLEFT);
+        return DirectionalChecks(leftDownCheckTilemap, leftDownMatchSetsFound, MatchSet.Direction.DOWNLEFT);
     }
 
-    public void RightDownChecks()
+    public bool RightDownChecks()
     {
-        DirectionalChecks(rightDownCheckTilemap, rightDownMatchSetsFound, MatchSet.Direction.DOWNRIGHT);
+        return DirectionalChecks(rightDownCheckTilemap, rightDownMatchSetsFound, MatchSet.Direction.DOWNRIGHT);
     }
 
-    private void DirectionalChecks(Tilemap directionalTilemap, List<MatchSet> directionalMatchList, MatchSet.Direction direction)
+    private bool DirectionalChecks(Tilemap directionalTilemap, List<MatchSet> directionalMatchList, MatchSet.Direction direction)
     {
         for (int i = GameManager.dataManager.leftLimit + 1; i < GameManager.dataManager.rightLimit; i++)
         {
@@ -137,6 +141,9 @@ public class BlockMatchChecker : MonoBehaviour
                 }
             }
         }
+
+        if (directionalMatchList.Count > 0) return true;
+        else return false;
     }
 
     private MatchSet DynamicDoubleCheck(MatchSet startingMatchSet, Vector3Int direction)
