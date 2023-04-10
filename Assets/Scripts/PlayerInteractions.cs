@@ -10,6 +10,8 @@ public class PlayerInteractions : MonoBehaviour
 
     public Vector2 moveAmount;
 
+    public bool cycleButtonIsCurrentlyPressedAfterApplyingItsEffect;
+
     public bool pauseIsCurrentlyPressed;
     public bool pauseJustPressed;
     public bool pausePressReleaseHappened;
@@ -18,6 +20,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         moveAction = actions.FindActionMap("player").FindAction("move");
         pauseAction = actions.FindActionMap("player").FindAction("pause");
+        cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
         pauseIsCurrentlyPressed = false;
         pauseJustPressed = false;
         pausePressReleaseHappened = true;
