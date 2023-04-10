@@ -143,57 +143,60 @@ public class GameManager : MonoBehaviour
     {
         if (!DataManager.isPaused)
         {
-            dataManager.timePassedWithoutPlayerBlockGravityBeingApplied += Time.deltaTime;
-            if (dataManager.timePassedWithoutPlayerBlockGravityBeingApplied >= dataManager.currentAmountOfSecondsToApplyBlockGravity)
+            dataManager.timePassedWithoutHorizontalBlockMovementCheck += Time.deltaTime;
+            if (dataManager.timePassedWithoutHorizontalBlockMovementCheck >= dataManager.currentAmountOfSecondsToCheckPlayerInput)
             {
-                dataManager.timePassedWithoutPlayerBlockGravityBeingApplied %= dataManager.currentAmountOfSecondsToApplyBlockGravity;
+                dataManager.timePassedWithoutHorizontalBlockMovementCheck %= dataManager.currentAmountOfSecondsToCheckPlayerInput;
 
                 if (inputManager.pauseIsCurrentlyPressed)
                 {
                     inputManager.OnPause();
                 }
+                else if (inputManager.moveAmount.x < 0)
+                {
+                    MoveBlockSetToTheLeft();
+                }
+                else if (inputManager.moveAmount.x > 0)
+                {
+                    MoveBlockSetToTheRight();
+                }
+                else if (inputManager.moveAmount.y > 0)
+                {
+                    CycleCurrentBlockSet();
+                }
+                else if (inputManager.moveAmount.y < 0)
+                {
+                    MoveBlockSetStraightDown();
+                }
+            }
+
+            dataManager.timePassedWithoutPlayerBlockGravityBeingApplied += Time.deltaTime;
+            if (dataManager.timePassedWithoutPlayerBlockGravityBeingApplied >= dataManager.currentAmountOfSecondsToApplyBlockGravity)
+            {
+                dataManager.timePassedWithoutPlayerBlockGravityBeingApplied %= dataManager.currentAmountOfSecondsToApplyBlockGravity;
+
+                bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
+                if (blockWentDown)
+                {
+                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                    {
+                        currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                    }
+                }
                 else
                 {
-                    if (inputManager.moveAmount.x < 0)
+                    bool haveAMatchBeenFound = false;
+                    do
                     {
-                        MoveBlockSetToTheLeft();
-                    }
-                    else if (inputManager.moveAmount.x > 0)
-                    {
-                        MoveBlockSetToTheRight();
-                    }
-                    else if (inputManager.moveAmount.y > 0)
-                    {
-                        CycleCurrentBlockSet();
-                    }
-                    else if (inputManager.moveAmount.y < 0)
-                    {
-                        MoveBlockSetStraightDown();
-                    }
-
-                    bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
-                    if (blockWentDown)
-                    {
-                        for (int i = 0; i < currentBlockSet.positions.Count; i++)
-                        {
-                            currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
-                        }
-                    }
-                    else
-                    {
-                        bool haveAMatchBeenFound = false;
-                        do
-                        {
-                            haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
-                            CalculateScorePointsFromAllMatches();
-                            UIManager.UpdateScoreUI();
-                            RemoveMatches();
-                            ApplyGravity();
-                        } while (haveAMatchBeenFound);
-                        CurrentBlockSetReceivesNextBlockSet();
-                        CreateNextBlockSet();
-                        PlaceCurrentBlockSetAtGameArea();
-                    }
+                        haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
+                        CalculateScorePointsFromAllMatches();
+                        UIManager.UpdateScoreUI();
+                        RemoveMatches();
+                        ApplyGravity();
+                    } while (haveAMatchBeenFound);
+                    CurrentBlockSetReceivesNextBlockSet();
+                    CreateNextBlockSet();
+                    PlaceCurrentBlockSetAtGameArea();
                 }
             }
         }
