@@ -12,7 +12,7 @@ public class DataManager : MonoBehaviour
     public int rightLimit;
     public int lowerLimit;
     public int upperLimit;
-    public float currentBlockSpeedPerSecond;
+    public float currentAmountOfSecondsToApplyBlockGravity;
     public float currentAmountOfSecondsToCheckPlayerInput;
     public float timePassedWithoutPlayerBlockGravityBeingApplied;
 
