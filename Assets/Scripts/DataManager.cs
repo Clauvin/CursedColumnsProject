@@ -13,7 +13,7 @@ public class DataManager : MonoBehaviour
     public int lowerLimit;
     public int upperLimit;
     public float currentBlockSpeedPerSecond;
-    public float timePassedWithoutBlockMovement;
+    public float timePassedWithoutPlayerBlockGravityBeingApplied;
 
     public static int currentScore = 0;
     public const int MATCH3SCOREVALUE = 100;

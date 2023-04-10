@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     public void StartDataManagerVariables()
     {
         dataManager.currentBlockSpeedPerSecond = 1;
-        dataManager.timePassedWithoutBlockMovement = 0;
+        dataManager.timePassedWithoutPlayerBlockGravityBeingApplied = 0;
     }
 
     public void CreateStartingGameSpace()
@@ -142,10 +142,10 @@ public class GameManager : MonoBehaviour
     {
         if (!DataManager.isPaused)
         {
-            dataManager.timePassedWithoutBlockMovement += Time.deltaTime;
-            if (dataManager.timePassedWithoutBlockMovement >= dataManager.currentBlockSpeedPerSecond)
+            dataManager.timePassedWithoutPlayerBlockGravityBeingApplied += Time.deltaTime;
+            if (dataManager.timePassedWithoutPlayerBlockGravityBeingApplied >= dataManager.currentBlockSpeedPerSecond)
             {
-                dataManager.timePassedWithoutBlockMovement %= dataManager.currentBlockSpeedPerSecond;
+                dataManager.timePassedWithoutPlayerBlockGravityBeingApplied %= dataManager.currentBlockSpeedPerSecond;
 
                 if (inputManager.pauseIsCurrentlyPressed)
                 {
