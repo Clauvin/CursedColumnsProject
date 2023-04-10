@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void StartDataManagerVariables()
     {
-        dataManager.currentAmountOfSecondsToApplyBlockGravity = 1;
+        dataManager.currentAmountOfSecondsToApplyBlockGravity = 0.8f;
         dataManager.timePassedWithoutPlayerBlockGravityBeingApplied = 0;
     }
 
