@@ -56,7 +56,9 @@ public class GameManager : MonoBehaviour
         dataManager.secondsToApplyBlockGravity = 0.8f;
         dataManager.secondsToCheckPlayerInput = 0.05f;
         dataManager.timeWithoutPBlockGravityBeingApplied = 0;
-    }
+        dataManager.timeForDelayAfterAllMatchChecks = 0.3f;
+        dataManager.isDelayingAfterAllMatchChecks = false;
+}
 
     public void CreateStartingGameSpace()
     {
@@ -144,6 +146,21 @@ public class GameManager : MonoBehaviour
         if (!DataManager.isPaused)
         {
             float deltaTime = Time.deltaTime * 1f;
+
+            if (dataManager.isDelayingAfterAllMatchChecks)
+            {
+                dataManager.secondsOfDelayAfterAllMatchChecks += deltaTime;
+                if (dataManager.secondsOfDelayAfterAllMatchChecks >= dataManager.timeForDelayAfterAllMatchChecks)
+                {
+                    dataManager.secondsOfDelayAfterAllMatchChecks = 0.0f;
+                    dataManager.isDelayingAfterAllMatchChecks = false;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             dataManager.timeWithoutInputCheck += deltaTime;
             if (dataManager.timeWithoutInputCheck >= dataManager.secondsToCheckPlayerInput)
             {
@@ -207,7 +224,7 @@ public class GameManager : MonoBehaviour
                     CurrentBlockSetReceivesNextBlockSet();
                     CreateNextBlockSet();
                     PlaceCurrentBlockSetAtGameArea();
-                    dataManager.timeWithoutInputCheck = 0;
+                    dataManager.isDelayingAfterAllMatchChecks = true;
                 }
             }
         }
