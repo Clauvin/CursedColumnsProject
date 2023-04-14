@@ -15,6 +15,8 @@ public class DataManager : MonoBehaviour
     public float secondsToApplyBlockGravity;
     public float secondsToCheckPlayerInput;
     public float timeWithoutInputCheck;
+    public float timeForDelayAfterAllMatchChecks;
+
     public float timeWithoutPBlockGravityBeingApplied;
 
     public static int currentScore = 0;
