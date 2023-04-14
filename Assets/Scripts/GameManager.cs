@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         dataManager.currentAmountOfSecondsToApplyBlockGravity = 0.8f;
         dataManager.currentAmountOfSecondsToCheckPlayerInput = 0.05f;
-        dataManager.timePassedWithoutPlayerBlockGravityBeingApplied = 0;
+        dataManager.timeWithoutPBlockGravityBeingApplied = 0;
     }
 
     public void CreateStartingGameSpace()
@@ -144,10 +144,10 @@ public class GameManager : MonoBehaviour
         if (!DataManager.isPaused)
         {
             float deltaTime = Time.deltaTime * 1f;
-            dataManager.timePassedWithoutPlayerInputCheck += deltaTime;
-            if (dataManager.timePassedWithoutPlayerInputCheck >= dataManager.currentAmountOfSecondsToCheckPlayerInput)
+            dataManager.timeWithoutInputCheck += deltaTime;
+            if (dataManager.timeWithoutInputCheck >= dataManager.currentAmountOfSecondsToCheckPlayerInput)
             {
-                dataManager.timePassedWithoutPlayerInputCheck %= dataManager.currentAmountOfSecondsToCheckPlayerInput;
+                dataManager.timeWithoutInputCheck %= dataManager.currentAmountOfSecondsToCheckPlayerInput;
 
                 if (inputManager.pauseIsCurrentlyPressed)
                 {
@@ -180,10 +180,10 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            dataManager.timePassedWithoutPlayerBlockGravityBeingApplied += deltaTime;
-            if (dataManager.timePassedWithoutPlayerBlockGravityBeingApplied >= dataManager.currentAmountOfSecondsToApplyBlockGravity)
+            dataManager.timeWithoutPBlockGravityBeingApplied += deltaTime;
+            if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.currentAmountOfSecondsToApplyBlockGravity)
             {
-                dataManager.timePassedWithoutPlayerBlockGravityBeingApplied %= dataManager.currentAmountOfSecondsToApplyBlockGravity;
+                dataManager.timeWithoutPBlockGravityBeingApplied %= dataManager.currentAmountOfSecondsToApplyBlockGravity;
 
                 bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
                 if (blockWentDown)
@@ -207,6 +207,7 @@ public class GameManager : MonoBehaviour
                     CurrentBlockSetReceivesNextBlockSet();
                     CreateNextBlockSet();
                     PlaceCurrentBlockSetAtGameArea();
+                    dataManager.timeWithoutInputCheck = 0;
                 }
             }
         }

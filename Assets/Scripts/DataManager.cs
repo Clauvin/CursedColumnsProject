@@ -14,8 +14,8 @@ public class DataManager : MonoBehaviour
     public int upperLimit;
     public float currentAmountOfSecondsToApplyBlockGravity;
     public float currentAmountOfSecondsToCheckPlayerInput;
-    public float timePassedWithoutPlayerInputCheck;
-    public float timePassedWithoutPlayerBlockGravityBeingApplied;
+    public float timeWithoutInputCheck;
+    public float timeWithoutPBlockGravityBeingApplied;
 
     public static int currentScore = 0;
     public const int MATCH3SCOREVALUE = 100;
