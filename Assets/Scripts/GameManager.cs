@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
 
     public void StartDataManagerVariables()
     {
-        dataManager.currentAmountOfSecondsToApplyBlockGravity = 0.8f;
-        dataManager.currentAmountOfSecondsToCheckPlayerInput = 0.05f;
+        dataManager.secondsToApplyBlockGravity = 0.8f;
+        dataManager.secondsToCheckPlayerInput = 0.05f;
         dataManager.timeWithoutPBlockGravityBeingApplied = 0;
     }
 
@@ -145,9 +145,9 @@ public class GameManager : MonoBehaviour
         {
             float deltaTime = Time.deltaTime * 1f;
             dataManager.timeWithoutInputCheck += deltaTime;
-            if (dataManager.timeWithoutInputCheck >= dataManager.currentAmountOfSecondsToCheckPlayerInput)
+            if (dataManager.timeWithoutInputCheck >= dataManager.secondsToCheckPlayerInput)
             {
-                dataManager.timeWithoutInputCheck %= dataManager.currentAmountOfSecondsToCheckPlayerInput;
+                dataManager.timeWithoutInputCheck %= dataManager.secondsToCheckPlayerInput;
 
                 if (inputManager.pauseIsCurrentlyPressed)
                 {
@@ -181,9 +181,9 @@ public class GameManager : MonoBehaviour
             }
 
             dataManager.timeWithoutPBlockGravityBeingApplied += deltaTime;
-            if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.currentAmountOfSecondsToApplyBlockGravity)
+            if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.secondsToApplyBlockGravity)
             {
-                dataManager.timeWithoutPBlockGravityBeingApplied %= dataManager.currentAmountOfSecondsToApplyBlockGravity;
+                dataManager.timeWithoutPBlockGravityBeingApplied %= dataManager.secondsToApplyBlockGravity;
 
                 bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
                 if (blockWentDown)
