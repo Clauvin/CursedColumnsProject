@@ -18,7 +18,6 @@ public class DataManager : MonoBehaviour
     public float timeWithoutInputCheck;
     public float timeForDelayAfterAllMatchChecks;
     public bool isDelayingAfterAllMatchChecks;
-
     public float timeWithoutPBlockGravityBeingApplied;
 
     public static int currentScore = 0;
@@ -26,6 +25,11 @@ public class DataManager : MonoBehaviour
     public const int MATCH4SCOREVALUE = MATCH3SCOREVALUE * 2;
     public const int MATCH5SCOREVALUE = MATCH3SCOREVALUE * 4;
     public const int MATCH6SCOREVALUE = MATCH3SCOREVALUE * 8;
+
+    public float[] blockGravityDiffValues = new float[11];
+    public float[] playerInputTimeDiffValues = new float[11];
+    public float[] delayAfterMatchDiffValues = new float[11];
+
 
     public static Tile unpassableTile;
     public static Tile[] commonTiles;
@@ -42,8 +46,35 @@ public class DataManager : MonoBehaviour
     {
         isPaused = false;
         InitErrorStrings();
+        InitDifficultyValues();
         StartLoadingUnpassableTile();
         StartLoadingCommonTiles();
+    }
+
+    private void InitDifficultyValues()
+    {
+        blockGravityDiffValues = new float[]
+        {
+            0.8f, 0.75f, 0.67f, 0.6f,
+            0.5f, 0.4f, 0.35f, 0.3f,
+            0.27f, 0.25f, 0.2f
+        };
+
+        playerInputTimeDiffValues = new float[]
+        {
+            0.05f, 0.048f, 0.046f, 0.042f,
+            0.04f, 0.04f, 0.038f, 0.036f,
+            0.034f, 0.032f, 0.03f
+        };
+
+        delayAfterMatchDiffValues = new float[]
+        {
+            0.3f, 0.3f, 0.3f, 0.3f,
+            0.3f, 0.27f, 0.27f, 0,27f,
+            0.27f, 0.27f, 0.25f
+        };
+
+
     }
 
     private void InitErrorStrings()
