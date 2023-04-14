@@ -144,10 +144,10 @@ public class GameManager : MonoBehaviour
         if (!DataManager.isPaused)
         {
             float deltaTime = Time.deltaTime * 1f;
-            dataManager.timePassedWithoutHorizontalBlockMovementCheck += deltaTime;
-            if (dataManager.timePassedWithoutHorizontalBlockMovementCheck >= dataManager.currentAmountOfSecondsToCheckPlayerInput)
+            dataManager.timePassedWithoutPlayerInputCheck += deltaTime;
+            if (dataManager.timePassedWithoutPlayerInputCheck >= dataManager.currentAmountOfSecondsToCheckPlayerInput)
             {
-                dataManager.timePassedWithoutHorizontalBlockMovementCheck %= dataManager.currentAmountOfSecondsToCheckPlayerInput;
+                dataManager.timePassedWithoutPlayerInputCheck %= dataManager.currentAmountOfSecondsToCheckPlayerInput;
 
                 if (inputManager.pauseIsCurrentlyPressed)
                 {
