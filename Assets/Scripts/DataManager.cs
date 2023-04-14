@@ -17,7 +17,7 @@ public class DataManager : MonoBehaviour
     public float secondsOfDelayAfterAllMatchChecks;
     public float timeWithoutInputCheck;
     public float timeForDelayAfterAllMatchChecks;
-    public bool timeOfDelayAfterAllMatchChecks;
+    public bool timeToDelayAfterAllMatchChecks;
 
     public float timeWithoutPBlockGravityBeingApplied;
 
