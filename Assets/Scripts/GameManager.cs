@@ -55,8 +55,9 @@ public class GameManager : MonoBehaviour
     {
         dataManager.secondsToApplyBlockGravity = 0.8f;
         dataManager.secondsToCheckPlayerInput = 0.05f;
+        dataManager.secondsOfDelayAfterAllMatchChecks = 0.3f;
         dataManager.timeWithoutPBlockGravityBeingApplied = 0;
-        dataManager.timeForDelayAfterAllMatchChecks = 0.3f;
+        
         dataManager.isDelayingAfterAllMatchChecks = false;
 }
 
@@ -149,10 +150,12 @@ public class GameManager : MonoBehaviour
 
             if (dataManager.isDelayingAfterAllMatchChecks)
             {
-                dataManager.secondsOfDelayAfterAllMatchChecks += deltaTime;
-                if (dataManager.secondsOfDelayAfterAllMatchChecks >= dataManager.timeForDelayAfterAllMatchChecks)
+                dataManager.timeForDelayAfterAllMatchChecks += deltaTime;
+                if (dataManager.timeForDelayAfterAllMatchChecks >= dataManager.secondsOfDelayAfterAllMatchChecks)
                 {
-                    dataManager.secondsOfDelayAfterAllMatchChecks = 0.0f;
+                    dataManager.timeForDelayAfterAllMatchChecks = 0.0f;
+                    dataManager.timeWithoutInputCheck = 0.0f;
+                    dataManager.timeWithoutPBlockGravityBeingApplied = 0.0f;
                     dataManager.isDelayingAfterAllMatchChecks = false;
                 }
                 else
