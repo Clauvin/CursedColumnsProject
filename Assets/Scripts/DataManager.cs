@@ -14,8 +14,10 @@ public class DataManager : MonoBehaviour
     public int upperLimit;
     public float secondsToApplyBlockGravity;
     public float secondsToCheckPlayerInput;
+    public float secondsOfDelayAfterAllMatchChecks;
     public float timeWithoutInputCheck;
     public float timeForDelayAfterAllMatchChecks;
+    public bool timeToAddDelayAfterMatchCheck;
 
     public float timeWithoutPBlockGravityBeingApplied;
 
