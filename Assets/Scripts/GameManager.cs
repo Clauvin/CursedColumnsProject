@@ -364,10 +364,6 @@ public class GameManager : MonoBehaviour
                 UIManager.UpdateDifficultyLevelUI();
             }
         }
-
-
-
-
     }
 
     private void RemoveMatchBlocks(List<MatchSet> matches)
