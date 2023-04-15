@@ -75,18 +75,12 @@ public class DataManager : MonoBehaviour
             0.034f, 0.032f, 0.03f
         };
 
-        Debug.Log(delayAfterMatchDiffValues.Length);
-
-        //for some weird reason, making a new float array here creates one with 12 slots instead of 11. -_-
-
         delayAfterMatchDiffValues = new float[]
         {
             0.3f, 0.3f, 0.3f, 0.3f,
             0.3f, 0.27f, 0.27f, 0.27f,
             0.27f, 0.27f, 0.25f
         };
-
-        Debug.Log(delayAfterMatchDiffValues.Length);
     }
 
     private void InitErrorStrings()
