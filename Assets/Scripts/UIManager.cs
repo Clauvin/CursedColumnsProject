@@ -14,6 +14,12 @@ public class UIManager : MonoBehaviour
     public static Text scoreValueText;
     public Text scoreValueTextToLoad;
 
+    public static Text diffText;
+    public Text diffTextToLoad;
+
+    public static Text diffValueText;
+    public Text diffValueTextToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +31,9 @@ public class UIManager : MonoBehaviour
 
         scoreText = scoreTextToLoad;
         scoreValueText = scoreValueTextToLoad;
+
+        diffText = diffTextToLoad;
+        diffValueText = diffValueTextToLoad;
     }
 
     public static void Pause()
@@ -40,6 +49,11 @@ public class UIManager : MonoBehaviour
     public static void UpdateScoreUI()
     {
         scoreValueText.text = DataManager.currentScore.ToString();
+    }
+
+    public static void UpdateDifficultyLevelUI()
+    {
+        diffValueText.text = DataManager.currentDifficultyLevel.ToString();
     }
 
     // Update is called once per frame
