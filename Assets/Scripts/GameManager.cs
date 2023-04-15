@@ -171,41 +171,42 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            dataManager.timeWithoutInputCheck += deltaTime;
-            if (dataManager.timeWithoutInputCheck >= dataManager.secondsToCheckPlayerInput)
+            //dataManager.timeWithoutInputCheck += deltaTime;
+            //if (dataManager.timeWithoutInputCheck >= dataManager.secondsToCheckPlayerInput)
+            //{
+            //    dataManager.timeWithoutInputCheck %= dataManager.secondsToCheckPlayerInput;
+
+            if (inputManager.pauseIsCurrentlyPressed)
             {
-                dataManager.timeWithoutInputCheck %= dataManager.secondsToCheckPlayerInput;
-
-                if (inputManager.pauseIsCurrentlyPressed)
+                inputManager.OnPause();
+            }
+            else
+            {
+                if (inputManager.moveAmount.y <= 0 && inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
                 {
-                    inputManager.OnPause();
+                    inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
                 }
-                else
-                {
-                    if (inputManager.moveAmount.y <= 0 && inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
-                    {
-                        inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
-                    }
 
-                    if (inputManager.moveAmount.x < 0)
-                    {
-                        MoveBlockSetToTheLeft();
-                    }
-                    else if (inputManager.moveAmount.x > 0)
-                    {
-                        MoveBlockSetToTheRight();
-                    }
-                    else if (inputManager.moveAmount.y > 0 && !inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
-                    {
-                        CycleCurrentBlockSet();
-                        inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = true;
-                    }
-                    else if (inputManager.moveAmount.y < 0)
-                    {
-                        MoveBlockSetStraightDown();
-                    }
+                if (inputManager.moveAmount.x < 0)
+                {
+                    MoveBlockSetToTheLeft();
+                }
+                else if (inputManager.moveAmount.x > 0)
+                {
+                    MoveBlockSetToTheRight();
+                }
+                else if (inputManager.moveAmount.y > 0 && !inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
+                {
+                    CycleCurrentBlockSet();
+                    inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = true;
+                }
+                else if (inputManager.moveAmount.y < 0)
+                {
+                    MoveBlockSetStraightDown();
                 }
             }
+
+
 
             dataManager.timeWithoutPBlockGravityBeingApplied += deltaTime;
             if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.secondsToApplyBlockGravity)
