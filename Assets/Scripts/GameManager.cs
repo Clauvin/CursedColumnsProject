@@ -55,7 +55,9 @@ public class GameManager : MonoBehaviour
     {
         dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[DataManager.currentDifficultyLevel];
         dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[DataManager.currentDifficultyLevel];
+        Debug.Log(dataManager.delayAfterMatchDiffValues.Length);
         dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[DataManager.currentDifficultyLevel];
+        Debug.Log(dataManager.delayAfterMatchDiffValues.Length);
         dataManager.timeWithoutPBlockGravityBeingApplied = 0;
         
         dataManager.isDelayingAfterAllMatchChecks = false;
@@ -63,9 +65,11 @@ public class GameManager : MonoBehaviour
 
     public void UpdateDifficultyValues()
     {
+        Debug.Log(dataManager.delayAfterMatchDiffValues.Length);
         dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[DataManager.currentDifficultyLevel];
         dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[DataManager.currentDifficultyLevel];
         dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[DataManager.currentDifficultyLevel];
+        Debug.Log(dataManager.delayAfterMatchDiffValues.Length);
     }
 
     public void CreateStartingGameSpace()
