@@ -82,7 +82,7 @@ public class DataManager : MonoBehaviour
         delayAfterMatchDiffValues = new float[]
         {
             0.3f, 0.3f, 0.3f, 0.3f,
-            0.3f, 0.27f, 0.27f, 0,27f,
+            0.3f, 0.27f, 0.27f, 0.27f,
             0.27f, 0.27f, 0.25f
         };
 
