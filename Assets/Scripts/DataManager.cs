@@ -81,8 +81,6 @@ public class DataManager : MonoBehaviour
             0.3f, 0.27f, 0.27f, 0,27f,
             0.27f, 0.27f, 0.25f
         };
-
-
     }
 
     private void InitErrorStrings()
