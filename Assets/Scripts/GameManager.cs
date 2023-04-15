@@ -53,13 +53,20 @@ public class GameManager : MonoBehaviour
 
     public void StartDataManagerVariables()
     {
-        dataManager.secondsToApplyBlockGravity = 0.8f;
-        dataManager.secondsToCheckPlayerInput = 0.05f;
-        dataManager.secondsOfDelayAfterAllMatchChecks = 0.3f;
+        dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[DataManager.currentDifficultyLevel];
+        dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[DataManager.currentDifficultyLevel];
+        dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[DataManager.currentDifficultyLevel];
         dataManager.timeWithoutPBlockGravityBeingApplied = 0;
         
         dataManager.isDelayingAfterAllMatchChecks = false;
-}
+    }
+
+    public void UpdateDifficultyValues()
+    {
+        dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[DataManager.currentDifficultyLevel];
+        dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[DataManager.currentDifficultyLevel];
+        dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[DataManager.currentDifficultyLevel];
+    }
 
     public void CreateStartingGameSpace()
     {
@@ -223,6 +230,7 @@ public class GameManager : MonoBehaviour
                         UIManager.UpdateScoreUI();
                         RemoveMatches();
                         ApplyGravity();
+                        ApplyDifficultyCheck();
                     } while (haveAMatchBeenFound);
                     CurrentBlockSetReceivesNextBlockSet();
                     CreateNextBlockSet();
@@ -343,6 +351,22 @@ public class GameManager : MonoBehaviour
                 
             }
         }
+    }
+
+    public void ApplyDifficultyCheck()
+    {
+        if (DataManager.currentDifficultyLevel < dataManager.difficultyScoreValues.Count)
+        {
+            if (dataManager.difficultyScoreValues[DataManager.currentDifficultyLevel] >= DataManager.currentScore)
+            {
+                DataManager.currentDifficultyLevel += 1;
+                UpdateDifficultyValues();
+            }
+        }
+
+
+
+
     }
 
     private void RemoveMatchBlocks(List<MatchSet> matches)
