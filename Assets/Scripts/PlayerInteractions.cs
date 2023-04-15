@@ -12,6 +12,8 @@ public class PlayerInteractions : MonoBehaviour
 
     public bool cycleButtonIsCurrentlyPressedAfterApplyingItsEffect;
 
+    public bool moveButtonIsCurrentlyPressed;
+
     public bool pauseIsCurrentlyPressed;
     public bool pauseJustPressed;
     public bool pausePressReleaseHappened;
@@ -21,6 +23,9 @@ public class PlayerInteractions : MonoBehaviour
         moveAction = actions.FindActionMap("player").FindAction("move");
         pauseAction = actions.FindActionMap("player").FindAction("pause");
         cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
+
+        moveButtonIsCurrentlyPressed = false;
+
         pauseIsCurrentlyPressed = false;
         pauseJustPressed = false;
         pausePressReleaseHappened = true;
