@@ -27,6 +27,7 @@ public class DataManager : MonoBehaviour
     public const int MATCH5SCOREVALUE = MATCH3SCOREVALUE * 4;
     public const int MATCH6SCOREVALUE = MATCH3SCOREVALUE * 8;
 
+    public List<int> difficultyScoreValues = new List<int>();
     public float[] blockGravityDiffValues = new float[11];
     public float[] playerInputTimeDiffValues = new float[11];
     public float[] delayAfterMatchDiffValues = new float[11];
@@ -54,6 +55,12 @@ public class DataManager : MonoBehaviour
 
     private void InitDifficultyValues()
     {
+        difficultyScoreValues = new List<int>() {
+            2000, 4500, 7000, 10000,
+            13000, 16000, 20000, 24000,
+            30000, 40000
+        };
+
         blockGravityDiffValues = new float[]
         {
             0.8f, 0.75f, 0.67f, 0.6f,
