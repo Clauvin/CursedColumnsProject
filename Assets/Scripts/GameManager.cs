@@ -361,6 +361,7 @@ public class GameManager : MonoBehaviour
             {
                 DataManager.currentDifficultyLevel += 1;
                 UpdateDifficultyValues();
+                UIManager.UpdateDifficultyLevelUI();
             }
         }
 
