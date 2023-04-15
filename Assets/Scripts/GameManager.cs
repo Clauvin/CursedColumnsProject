@@ -357,7 +357,7 @@ public class GameManager : MonoBehaviour
     {
         if (DataManager.currentDifficultyLevel < dataManager.difficultyScoreValues.Count)
         {
-            if (dataManager.difficultyScoreValues[DataManager.currentDifficultyLevel] >= DataManager.currentScore)
+            if (dataManager.difficultyScoreValues[DataManager.currentDifficultyLevel] <= DataManager.currentScore)
             {
                 DataManager.currentDifficultyLevel += 1;
                 UpdateDifficultyValues();
