@@ -182,26 +182,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    if (inputManager.moveAmount.x < 0)
-                    {
-                        MoveBlockSetToTheLeft();
-                        inputManager.moveButtonIsCurrentlyPressed = true;
-                    }
-                    else if (inputManager.moveAmount.x > 0)
-                    {
-                        MoveBlockSetToTheRight();
-                        inputManager.moveButtonIsCurrentlyPressed = true;
-                    }
-                    else if (inputManager.moveAmount.y > 0 && !inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
-                    {
-                        CycleCurrentBlockSet();
-                        inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = true;
-                    }
-                    else if (inputManager.moveAmount.y < 0)
-                    {
-                        MoveBlockSetStraightDown();
-                        inputManager.moveButtonIsCurrentlyPressed = true;
-                    }
+                    ApplyDirectionalInputEffects();
                 }
             }
 
@@ -222,20 +203,9 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    bool haveAMatchBeenFound = false;
-                    do
-                    {
-                        haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
-                        CalculateScorePointsFromAllMatches();
-                        UIManager.UpdateScoreUI(dataManager.currentScore);
-                        RemoveMatches();
-                        ApplyGravity();
-                        ApplyDifficultyCheck();
-                    } while (haveAMatchBeenFound);
-                    CurrentBlockSetReceivesNextBlockSet();
-                    CreateNextBlockSet();
-                    PlaceCurrentBlockSetAtGameArea();
-                    dataManager.isDelayingAfterAllMatchChecks = true;
+                    ApplyMatchChecksAndGravity();
+
+                    SetUpNextBlockSetAndDelay();
                 }
             }
         }
@@ -268,6 +238,52 @@ public class GameManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void ApplyDirectionalInputEffects()
+    {
+        if (inputManager.moveAmount.x < 0)
+        {
+            MoveBlockSetToTheLeft();
+            inputManager.moveButtonIsCurrentlyPressed = true;
+        }
+        else if (inputManager.moveAmount.x > 0)
+        {
+            MoveBlockSetToTheRight();
+            inputManager.moveButtonIsCurrentlyPressed = true;
+        }
+        else if (inputManager.moveAmount.y > 0 && !inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
+        {
+            CycleCurrentBlockSet();
+            inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = true;
+        }
+        else if (inputManager.moveAmount.y < 0)
+        {
+            MoveBlockSetStraightDown();
+            inputManager.moveButtonIsCurrentlyPressed = true;
+        }
+    }
+
+    private void ApplyMatchChecksAndGravity()
+    {
+        bool haveAMatchBeenFound = false;
+        do
+        {
+            haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
+            CalculateScorePointsFromAllMatches();
+            UIManager.UpdateScoreUI(dataManager.currentScore);
+            RemoveMatches();
+            ApplyGravity();
+            ApplyDifficultyCheck();
+        } while (haveAMatchBeenFound);
+    }
+
+    private void SetUpNextBlockSetAndDelay()
+    {
+        CurrentBlockSetReceivesNextBlockSet();
+        CreateNextBlockSet();
+        PlaceCurrentBlockSetAtGameArea();
+        dataManager.isDelayingAfterAllMatchChecks = true;
     }
 
     private bool MoveBlockSetToTheLeft()
