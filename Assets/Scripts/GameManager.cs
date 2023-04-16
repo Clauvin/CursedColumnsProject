@@ -171,22 +171,11 @@ public class GameManager : MonoBehaviour
                     inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
                 }
 
-                if (inputManager.moveButtonIsCurrentlyPressed)
-                {
-                    dataManager.timeWithoutInputCheck += deltaTime;
-                    if (dataManager.timeWithoutInputCheck >= dataManager.secondsToCheckPlayerInput)
-                    {
-                        dataManager.timeWithoutInputCheck = 0.0f;
-                        inputManager.moveButtonIsCurrentlyPressed = false;
-                    }
-                }
-                else
+                if (!ApplyDirectionalButtonsDelay(deltaTime))
                 {
                     ApplyDirectionalInputEffects();
                 }
             }
-
-
 
             dataManager.timeWithoutPBlockGravityBeingApplied += deltaTime;
             if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.secondsToApplyBlockGravity)
@@ -217,6 +206,21 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+
+    private bool ApplyDirectionalButtonsDelay(float deltaTime)
+    {
+        if (inputManager.moveButtonIsCurrentlyPressed)
+        {
+            dataManager.timeWithoutInputCheck += deltaTime;
+            if (dataManager.timeWithoutInputCheck >= dataManager.secondsToCheckPlayerInput)
+            {
+                dataManager.timeWithoutInputCheck = 0.0f;
+                inputManager.moveButtonIsCurrentlyPressed = false;
+            }
+            return true;
+        }
+        return false;
     }
 
     private bool ApplyInputDelay(float deltaTime)
