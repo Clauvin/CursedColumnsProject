@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
             }
 
 
-            if (inputManager.pauseIsCurrentlyPressed)
+            if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
             {
                 inputManager.OnPause();
             }
