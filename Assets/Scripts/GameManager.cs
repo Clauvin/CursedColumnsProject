@@ -155,22 +155,10 @@ public class GameManager : MonoBehaviour
         {
             float deltaTime = Time.deltaTime * 1f;
 
-            if (dataManager.isDelayingAfterAllMatchChecks)
+            if (ApplyInputDelay(deltaTime))
             {
-                dataManager.timeForDelayAfterAllMatchChecks += deltaTime;
-                if (dataManager.timeForDelayAfterAllMatchChecks >= dataManager.secondsOfDelayAfterAllMatchChecks)
-                {
-                    dataManager.timeForDelayAfterAllMatchChecks = 0.0f;
-                    dataManager.timeWithoutInputCheck = 0.0f;
-                    dataManager.timeWithoutPBlockGravityBeingApplied = 0.0f;
-                    dataManager.isDelayingAfterAllMatchChecks = false;
-                }
-                else
-                {
-                    return;
-                }
+                return;
             }
-
 
             if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
             {
@@ -259,6 +247,27 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+
+    private bool ApplyInputDelay(float deltaTime)
+    {
+        if (dataManager.isDelayingAfterAllMatchChecks)
+        {
+            dataManager.timeForDelayAfterAllMatchChecks += deltaTime;
+            if (dataManager.timeForDelayAfterAllMatchChecks >= dataManager.secondsOfDelayAfterAllMatchChecks)
+            {
+                dataManager.timeForDelayAfterAllMatchChecks = 0.0f;
+                dataManager.timeWithoutInputCheck = 0.0f;
+                dataManager.timeWithoutPBlockGravityBeingApplied = 0.0f;
+                dataManager.isDelayingAfterAllMatchChecks = false;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private bool MoveBlockSetToTheLeft()
