@@ -46,14 +46,14 @@ public class UIManager : MonoBehaviour
         pauseText.enabled = false;
     }
 
-    public static void UpdateScoreUI()
+    public static void UpdateScoreUI(int value)
     {
-        scoreValueText.text = DataManager.currentScore.ToString();
+        scoreValueText.text = value.ToString();
     }
 
-    public static void UpdateDifficultyLevelUI()
+    public static void UpdateDifficultyLevelUI(int value)
     {
-        diffValueText.text = DataManager.currentDifficultyLevel.ToString();
+        diffValueText.text = value.ToString();
     }
 
     // Update is called once per frame

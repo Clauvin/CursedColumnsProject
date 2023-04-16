@@ -391,7 +391,7 @@ public class TestGameManager : MonoBehaviour
         blockMatchChecker.FullMatchCheck();
         gameManager.CalculateScorePointsFromAllMatches();
 
-        if (DataManager.currentScore != valueToValidate)
+        if (GameManager.dataManager.currentScore != valueToValidate)
         {
             return false;
         }
@@ -406,7 +406,7 @@ public class TestGameManager : MonoBehaviour
         gameManagerPrefab = null;
         gameManager = null;
 
-        DataManager.currentScore = 0;
+        GameManager.dataManager.currentScore = 0;
 
         yield return new WaitForFixedUpdate();
     }

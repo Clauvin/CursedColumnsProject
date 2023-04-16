@@ -53,9 +53,9 @@ public class GameManager : MonoBehaviour
 
     public void StartDataManagerVariables()
     {
-        dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[DataManager.currentDifficultyLevel];
-        dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[DataManager.currentDifficultyLevel];
-        dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[DataManager.currentDifficultyLevel];
+        dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[dataManager.currentDifficultyLevel];
+        dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[dataManager.currentDifficultyLevel];
+        dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[dataManager.currentDifficultyLevel];
         dataManager.timeWithoutPBlockGravityBeingApplied = 0;
         
         dataManager.isDelayingAfterAllMatchChecks = false;
@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdateDifficultyValues()
     {
-        dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[DataManager.currentDifficultyLevel];
-        dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[DataManager.currentDifficultyLevel];
-        dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[DataManager.currentDifficultyLevel];
+        dataManager.secondsToApplyBlockGravity = dataManager.blockGravityDiffValues[dataManager.currentDifficultyLevel];
+        dataManager.secondsToCheckPlayerInput = dataManager.playerInputTimeDiffValues[dataManager.currentDifficultyLevel];
+        dataManager.secondsOfDelayAfterAllMatchChecks = dataManager.delayAfterMatchDiffValues[dataManager.currentDifficultyLevel];
     }
 
     public void CreateStartingGameSpace()
@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
                     {
                         haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
                         CalculateScorePointsFromAllMatches();
-                        UIManager.UpdateScoreUI();
+                        UIManager.UpdateScoreUI(dataManager.currentScore);
                         RemoveMatches();
                         ApplyGravity();
                         ApplyDifficultyCheck();
@@ -320,7 +320,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-            DataManager.currentScore += matchPointValue;
+            dataManager.currentScore += matchPointValue;
         }
     }
 
@@ -367,13 +367,13 @@ public class GameManager : MonoBehaviour
 
     public void ApplyDifficultyCheck()
     {
-        if (DataManager.currentDifficultyLevel < dataManager.difficultyScoreValues.Count)
+        if (dataManager.currentDifficultyLevel < dataManager.difficultyScoreValues.Count)
         {
-            if (dataManager.difficultyScoreValues[DataManager.currentDifficultyLevel] <= DataManager.currentScore)
+            if (dataManager.difficultyScoreValues[dataManager.currentDifficultyLevel] <= dataManager.currentScore)
             {
-                DataManager.currentDifficultyLevel += 1;
+                dataManager.currentDifficultyLevel += 1;
                 UpdateDifficultyValues();
-                UIManager.UpdateDifficultyLevelUI();
+                UIManager.UpdateDifficultyLevelUI(dataManager.currentDifficultyLevel);
             }
         }
     }

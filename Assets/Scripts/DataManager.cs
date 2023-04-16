@@ -20,8 +20,8 @@ public class DataManager : MonoBehaviour
     public bool isDelayingAfterAllMatchChecks;
     public float timeWithoutPBlockGravityBeingApplied;
 
-    public static int currentDifficultyLevel = 0;
-    public static int currentScore = 0;
+    public int currentDifficultyLevel = 0;
+    public int currentScore = 0;
     public const int MATCH3SCOREVALUE = 100;
     public const int MATCH4SCOREVALUE = MATCH3SCOREVALUE * 2;
     public const int MATCH5SCOREVALUE = MATCH3SCOREVALUE * 4;
