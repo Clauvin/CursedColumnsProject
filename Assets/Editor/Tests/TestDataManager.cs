@@ -10,7 +10,7 @@ using UnityEngine.Tilemaps;
 public class TestDataManager : MonoBehaviour
 {
     DataManager dataManager;
-
+ 
     [UnitySetUp]
     public IEnumerator SetUp()
     {
@@ -82,6 +82,78 @@ public class TestDataManager : MonoBehaviour
         for (int i = 0; i < DataManager.commonTiles.Length; i++)
         {
             if (DataManager.commonTiles[i] != commonTiles[i])
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestDifficultyScoreValuesInitialization()
+    {
+        dataManager.StartManager();
+
+        for (int i = 0; i < dataManager.difficultyScoreValues.Count; i++)
+        {
+            if (dataManager.difficultyScoreValues[i] == 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestBlockGravityDiffValuesInitialization()
+    {
+        dataManager.StartManager();
+
+        for (int i = 0; i < dataManager.blockGravityDiffValues.Length; i++)
+        {
+            if (dataManager.blockGravityDiffValues[i] == 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestPlayerInputTimeDiffValuesInitialization()
+    {
+        dataManager.StartManager();
+
+        for (int i = 0; i < dataManager.playerInputTimeDiffValues.Length; i++)
+        {
+            if (dataManager.playerInputTimeDiffValues[i] == 0)
+            {
+                Assert.Fail();
+            }
+        }
+
+        Assert.Pass();
+
+        yield return new WaitForFixedUpdate();
+    }
+
+    [UnityTest]
+    public IEnumerator TestDelayAfterMatchDiffValuesInitialization()
+    {
+        dataManager.StartManager();
+
+        for (int i = 0; i < dataManager.delayAfterMatchDiffValues.Length; i++)
+        {
+            if (dataManager.delayAfterMatchDiffValues[i] == 0)
             {
                 Assert.Fail();
             }
