@@ -151,6 +151,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (inputManager.closeJustPressed)
+        {
+            inputManager.OnCloseGame();
+        }
+
         if (!DataManager.isPaused)
         {
             float deltaTime = Time.deltaTime * 1f;

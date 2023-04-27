@@ -7,6 +7,7 @@ public class PlayerInteractions : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction pauseAction;
+    private InputAction closeGameAction;
 
     public Vector2 moveAmount;
 
@@ -18,10 +19,14 @@ public class PlayerInteractions : MonoBehaviour
     public bool pauseJustPressed;
     public bool pausePressReleaseHappened;
 
+    public bool closeJustPressed;
+
     void Awake()
     {
         moveAction = actions.FindActionMap("player").FindAction("move");
         pauseAction = actions.FindActionMap("player").FindAction("pause");
+        closeGameAction = actions.FindActionMap("player").FindAction("close");
+
         cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
 
         moveButtonIsCurrentlyPressed = false;
@@ -29,6 +34,9 @@ public class PlayerInteractions : MonoBehaviour
         pauseIsCurrentlyPressed = false;
         pauseJustPressed = false;
         pausePressReleaseHappened = true;
+
+        closeGameAction.Enable();
+        closeJustPressed = false;
     }
 
     public void StartManager()
@@ -66,9 +74,14 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    public void OnCloseGame()
+    {
+        ExitGame();
+    }
+
     private void ExitGame()
     {
-
+        Application.Quit();
     }
 
     public void OnEnable()
@@ -86,6 +99,7 @@ public class PlayerInteractions : MonoBehaviour
     public void Update()
     {
         moveAmount = moveAction.ReadValue<Vector2>();
+
         float pauseValue = pauseAction.ReadValue<float>();
         if (pauseValue > 0.7f && pausePressReleaseHappened)
         {
@@ -104,9 +118,10 @@ public class PlayerInteractions : MonoBehaviour
             pauseJustPressed = false;
         }
 
-
-   
+        float closeValue = closeGameAction.ReadValue<float>();
+        if (closeGameAction.ReadValue<float>() > 0.7f)
+        {
+            closeJustPressed = true;
+        }
     }
-
-
 }
