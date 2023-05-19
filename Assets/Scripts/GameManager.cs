@@ -276,14 +276,16 @@ public class GameManager : MonoBehaviour
     private void ApplyMatchChecksAndGravity()
     {
         bool haveAMatchBeenFound = false;
+        int chainMultiplier = 1;
         do
         {
             haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
-            CalculateScorePointsFromAllMatches();
+            CalculateScorePointsFromAllMatches(chainMultiplier);
             UIManager.UpdateScoreUI(dataManager.currentScore);
             RemoveMatches();
             ApplyGravity();
             ApplyDifficultyCheck();
+            chainMultiplier += 1;
         } while (haveAMatchBeenFound);
     }
 
@@ -323,16 +325,16 @@ public class GameManager : MonoBehaviour
         return blocksWentRight;
     }
 
-    public void CalculateScorePointsFromAllMatches()
+    public void CalculateScorePointsFromAllMatches(int chainMultiplier)
     {
-        CalculateScorePointsFromMatches(blockMatchChecker.HorizontalMatchSetsFound);
-        CalculateScorePointsFromMatches(blockMatchChecker.VerticalMatchSetsFound);
-        CalculateScorePointsFromMatches(blockMatchChecker.LeftDownMatchSetsFound);
-        CalculateScorePointsFromMatches(blockMatchChecker.RightDownMatchSetsFound);
+        CalculateScorePointsFromMatches(blockMatchChecker.HorizontalMatchSetsFound, chainMultiplier);
+        CalculateScorePointsFromMatches(blockMatchChecker.VerticalMatchSetsFound, chainMultiplier);
+        CalculateScorePointsFromMatches(blockMatchChecker.LeftDownMatchSetsFound, chainMultiplier);
+        CalculateScorePointsFromMatches(blockMatchChecker.RightDownMatchSetsFound, chainMultiplier);
     }
 
 
-    public void CalculateScorePointsFromMatches(List<MatchSet> matches)
+    public void CalculateScorePointsFromMatches(List<MatchSet> matches, int chainMultiplier)
     {
         for (int i = 0; i < matches.Count; i++)
         {
@@ -354,7 +356,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-            dataManager.currentScore += matchPointValue;
+            dataManager.currentScore += matchPointValue * chainMultiplier;
         }
     }
 
