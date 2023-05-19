@@ -76,7 +76,13 @@ public class PlayerInteractions : MonoBehaviour
 
     public void OnCloseGame()
     {
+        #if UNITY_STANDALONE
         ExitGame();
+        #endif
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
     private void ExitGame()
