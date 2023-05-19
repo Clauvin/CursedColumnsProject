@@ -373,6 +373,24 @@ public class TestGameManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    [UnityTest]
+    public IEnumerator TestMatch3ScoreValuationWithChainMultiplierEqualsTwo()
+    {
+        List<Vector3Int> positionsList = new List<Vector3Int>();
+        positionsList.Add(new Vector3Int(-1, 0, 0));
+        positionsList.Add(new Vector3Int(0, 0, 0));
+        positionsList.Add(new Vector3Int(1, 0, 0));
+
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH3SCOREVALUE * 2, chainMultiplier: 2))
+        {
+            Assert.Pass();
+        }
+
+        Assert.Fail();
+
+        yield return new WaitForFixedUpdate();
+    }
+
     bool TestMatchScoreValidation(List<Vector3Int> positionsList, int valueToValidate, int chainMultiplier)
     {
         gameManager.StartManagers();
