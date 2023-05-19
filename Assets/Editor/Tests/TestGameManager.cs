@@ -303,7 +303,7 @@ public class TestGameManager : MonoBehaviour
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(1, 0, 0));
 
-        if (TestMatchScoreValidation(positionsList, DataManager.MATCH3SCOREVALUE))
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH3SCOREVALUE, chainMultiplier: 1))
         {
             Assert.Pass();
         }
@@ -322,7 +322,7 @@ public class TestGameManager : MonoBehaviour
         positionsList.Add(new Vector3Int(0, 0, 0));
         positionsList.Add(new Vector3Int(1, 0, 0));
 
-        if (TestMatchScoreValidation(positionsList, DataManager.MATCH4SCOREVALUE))
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH4SCOREVALUE, chainMultiplier: 1))
         {
             Assert.Pass();
         }
@@ -342,7 +342,7 @@ public class TestGameManager : MonoBehaviour
         positionsList.Add(new Vector3Int(1, 0, 0));
         positionsList.Add(new Vector3Int(2, 0, 0));
 
-        if (TestMatchScoreValidation(positionsList, DataManager.MATCH5SCOREVALUE))
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH5SCOREVALUE, chainMultiplier: 1))
         {
             Assert.Pass();
         }
@@ -363,7 +363,7 @@ public class TestGameManager : MonoBehaviour
         positionsList.Add(new Vector3Int(2, 0, 0));
         positionsList.Add(new Vector3Int(3, 0, 0));
 
-        if (TestMatchScoreValidation(positionsList, DataManager.MATCH6SCOREVALUE))
+        if (TestMatchScoreValidation(positionsList, DataManager.MATCH6SCOREVALUE, chainMultiplier: 1))
         {
             Assert.Pass(); 
         }
@@ -373,7 +373,7 @@ public class TestGameManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
-    bool TestMatchScoreValidation(List<Vector3Int> positionsList, int valueToValidate)
+    bool TestMatchScoreValidation(List<Vector3Int> positionsList, int valueToValidate, int chainMultiplier)
     {
         gameManager.StartManagers();
 
@@ -389,7 +389,7 @@ public class TestGameManager : MonoBehaviour
         BlockPlacer.AddSameBlockMultiplesTimesInATilemap(positionsList.ToArray(), tile, blockMatchChecker.tileMap);
 
         blockMatchChecker.FullMatchCheck();
-        gameManager.CalculateScorePointsFromAllMatches();
+        gameManager.CalculateScorePointsFromAllMatches(chainMultiplier);
 
         if (GameManager.dataManager.currentScore != valueToValidate)
         {
