@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class NavigationAtScenes : MonoBehaviour
 {
+    public static void ToMainScene()
+    {
+        SceneManager.LoadScene("MainScreenScene");
+    }
+
     public static void ToGameScene()
     {
         SceneManager.LoadScene("GameScene");
