@@ -17,7 +17,7 @@ public class NavigationAtScenes : MonoBehaviour
 
     public static void ToOptionsScene()
     {
-        Debug.Log("Options Scene Haven't Been Added Yet");
+        SceneManager.LoadScene("OptionsScene");
     }
 
     public static void CloseGame()
