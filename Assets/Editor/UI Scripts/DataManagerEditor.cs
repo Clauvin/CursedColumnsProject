@@ -25,6 +25,7 @@ public class DataManagerEditor : Editor
 
         EditorGUILayout.Vector3IntField("Block Set Spawn Point", targetDataManager.blockSetSpawnPoint);
         EditorGUILayout.Vector2IntField("Game Space", targetDataManager.gameSpace);
+        EditorGUILayout.Toggle("On Game Over", targetDataManager.onGameOver);
 
         #region GAMESPACELIMITS
 
@@ -78,7 +79,8 @@ public class DataManagerEditor : Editor
             EditorGUILayout.FloatField("Time For Delay After All Match Checks", targetDataManager.timeForDelayAfterAllMatchChecks);
             EditorGUILayout.Toggle("Is Delaying After All Match Checks", targetDataManager.isDelayingAfterAllMatchChecks);
             EditorGUILayout.FloatField("Time Without PBlock Gravity", targetDataManager.timeWithoutPBlockGravityBeingApplied);
-        }
+            EditorGUILayout.Toggle("Time to Game Over", targetDataManager.timeForGameOver);
+}
 
         EditorGUILayout.EndFadeGroup();
 
