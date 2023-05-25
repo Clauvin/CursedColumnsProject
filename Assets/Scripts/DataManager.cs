@@ -20,6 +20,7 @@ public class DataManager : MonoBehaviour
     public bool isDelayingAfterAllMatchChecks;
     public float timeWithoutPBlockGravityBeingApplied;
     public bool timeForGameOver;
+    public bool onGameOver;
 
     public int currentDifficultyLevel = 0;
     public int currentScore = 0;
@@ -49,6 +50,7 @@ public class DataManager : MonoBehaviour
     {
         isPaused = false;
         timeForGameOver = false;
+        onGameOver = false;
         InitErrorStrings();
         InitDifficultyValues();
         StartLoadingUnpassableTile();
