@@ -32,6 +32,12 @@ namespace BlockSets
             this.positions = positions;
         }
 
+        public BlockSet(BlockSet originalSet)
+        {
+            this.tiles = originalSet.tiles;
+            this.positions = originalSet.positions;
+        }
+
         public Tile[] GetTilesArray()
         {
             return tiles.ToArray();
