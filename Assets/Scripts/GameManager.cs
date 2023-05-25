@@ -151,65 +151,76 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inputManager.closeJustPressed)
+        if (dataManager.timeForGameOver && !dataManager.onGameOver)
         {
-            inputManager.OnCloseGame();
+            dataManager.onGameOver = true;
+            blockMatchChecker.tileMapGameObject.SetActive(false);
         }
 
-        if (!DataManager.isPaused)
+        if (!dataManager.onGameOver)
         {
-            float deltaTime = Time.deltaTime * 1f;
-
-            if (ApplyInputDelay(deltaTime))
+            if (inputManager.closeJustPressed)
             {
-                return;
+                inputManager.OnCloseGame();
             }
 
-            if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
+            if (!DataManager.isPaused)
             {
-                inputManager.OnPause();
-            }
-            else
-            {
-                if (inputManager.moveAmount.y <= 0 && inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
+                float deltaTime = Time.deltaTime * 1f;
+
+                if (ApplyInputDelay(deltaTime))
                 {
-                    inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
+                    return;
                 }
 
-                if (!ApplyDirectionalButtonsDelay(deltaTime))
+                if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
                 {
-                    ApplyDirectionalInputEffects();
-                }
-            }
-
-            dataManager.timeWithoutPBlockGravityBeingApplied += deltaTime;
-            if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.secondsToApplyBlockGravity)
-            {
-                dataManager.timeWithoutPBlockGravityBeingApplied %= dataManager.secondsToApplyBlockGravity;
-
-                bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
-                if (blockWentDown)
-                {
-                    for (int i = 0; i < currentBlockSet.positions.Count; i++)
-                    {
-                        currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
-                    }
+                    inputManager.OnPause();
                 }
                 else
                 {
-                    ApplyMatchChecksAndGravity();
+                    if (inputManager.moveAmount.y <= 0 && inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect)
+                    {
+                        inputManager.cycleButtonIsCurrentlyPressedAfterApplyingItsEffect = false;
+                    }
 
-                    SetUpNextBlockSetAndCheckForGameOverAndDelay();
+                    if (!ApplyDirectionalButtonsDelay(deltaTime))
+                    {
+                        ApplyDirectionalInputEffects();
+                    }
+                }
+
+                dataManager.timeWithoutPBlockGravityBeingApplied += deltaTime;
+                if (dataManager.timeWithoutPBlockGravityBeingApplied >= dataManager.secondsToApplyBlockGravity)
+                {
+                    dataManager.timeWithoutPBlockGravityBeingApplied %= dataManager.secondsToApplyBlockGravity;
+
+                    bool blockWentDown = blockManipulator.MoveBlocksDownwards(currentBlockSet.GetPositionsArray(), 1);
+                    if (blockWentDown)
+                    {
+                        for (int i = 0; i < currentBlockSet.positions.Count; i++)
+                        {
+                            currentBlockSet.positions[i] += new Vector3Int(0, -1, 0);
+                        }
+                    }
+                    else
+                    {
+                        ApplyMatchChecksAndGravity();
+
+                        SetUpNextBlockSetAndCheckForGameOverAndDelay();
+                    }
+                }
+            }
+            else
+            {
+                if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
+                {
+                    inputManager.OnPause();
                 }
             }
         }
-        else
-        {
-            if (inputManager.pauseIsCurrentlyPressed && inputManager.pauseJustPressed)
-            {
-                inputManager.OnPause();
-            }
-        }
+
+        
         
     }
 
