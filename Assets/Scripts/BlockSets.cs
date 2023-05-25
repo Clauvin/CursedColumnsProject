@@ -34,8 +34,13 @@ namespace BlockSets
 
         public BlockSet(BlockSet originalSet)
         {
-            this.tiles = originalSet.tiles;
-            this.positions = originalSet.positions;
+            this.tiles = new List<Tile>();
+            this.positions = new List<Vector3Int>();
+            for (int i = 0; i < originalSet.positions.Count; i++)
+            {
+                tiles.Add(originalSet.tiles[i]);
+                positions.Add(originalSet.positions[i]);
+            }
         }
 
         public Tile[] GetTilesArray()
