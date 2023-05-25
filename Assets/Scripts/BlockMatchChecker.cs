@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class BlockMatchChecker : MonoBehaviour
 {
+    public GameObject tileMapGameObject;
     public Tilemap tileMap;
     public int matchSize = 3;
     public Tilemap horizontalCheckTilemap;
