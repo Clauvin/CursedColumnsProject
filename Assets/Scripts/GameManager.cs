@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
                 {
                     ApplyMatchChecksAndGravity();
 
-                    SetUpNextBlockSetAndDelay();
+                    SetUpNextBlockSetAndCheckForGameOverAndDelay();
                 }
             }
         }
@@ -289,10 +289,11 @@ public class GameManager : MonoBehaviour
         } while (haveAMatchBeenFound);
     }
 
-    private void SetUpNextBlockSetAndDelay()
+    private void SetUpNextBlockSetAndCheckForGameOverAndDelay()
     {
         CurrentBlockSetReceivesNextBlockSet();
         CreateNextBlockSet();
+        CheckForGameOver();
         PlaceCurrentBlockSetAtGameArea();
         dataManager.isDelayingAfterAllMatchChecks = true;
     }
@@ -461,5 +462,24 @@ public class GameManager : MonoBehaviour
     private void CurrentBlockSetReceivesNextBlockSet()
     {
         currentBlockSet = nextBlockSet;
+    }
+
+    private void CheckForGameOver()
+    {
+        bool isTimeForGameOver = false;
+        BlockSet setToTest = new BlockSet(currentBlockSet);
+        for (int i = 0; i < setToTest.positions.Count; i++)
+        {
+            setToTest.positions[i] += dataManager.blockSetSpawnPoint;
+            if (blockMatchChecker.tileMap.HasTile(setToTest.positions[i])) {
+                isTimeForGameOver = true;
+                break;
+            }
+        }
+
+        if (isTimeForGameOver)
+        {
+            dataManager.timeForGameOver = true;
+        }
     }
 }
