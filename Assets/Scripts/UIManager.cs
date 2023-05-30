@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     public static Text diffValueText;
     public Text diffValueTextToLoad;
 
+    public static Text gameOverText;
+    public Text gameOverTextToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,8 @@ public class UIManager : MonoBehaviour
 
         diffText = diffTextToLoad;
         diffValueText = diffValueTextToLoad;
+
+        gameOverText = gameOverTextToLoad;
     }
 
     public static void Pause()
