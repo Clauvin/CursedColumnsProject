@@ -23,6 +23,12 @@ public class GameSceneUIManager : MonoBehaviour
     public static Text gameOverText;
     public Text gameOverTextToLoad;
 
+    public static GameObject resetGameSceneButtonGameObject;
+    public GameObject resetGameSceneButtonGameObjectToLoad;
+
+    public static GameObject backToMainScreenButtonGameObject;
+    public GameObject backToMainScreenButtonGameObjectToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +45,10 @@ public class GameSceneUIManager : MonoBehaviour
         diffValueText = diffValueTextToLoad;
 
         gameOverText = gameOverTextToLoad;
-    }
+
+        resetGameSceneButtonGameObject = resetGameSceneButtonGameObjectToLoad;
+        backToMainScreenButtonGameObject = backToMainScreenButtonGameObjectToLoad;
+}
 
     public static void Pause()
     {
