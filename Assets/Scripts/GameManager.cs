@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
         {
             haveAMatchBeenFound = blockMatchChecker.FullMatchCheck();
             CalculateScorePointsFromAllMatches(chainMultiplier);
-            UIManager.UpdateScoreUI(dataManager.currentScore);
+            GameSceneUIManager.UpdateScoreUI(dataManager.currentScore);
             RemoveMatches();
             ApplyGravity();
             ApplyDifficultyCheck();
@@ -421,7 +421,7 @@ public class GameManager : MonoBehaviour
             {
                 dataManager.currentDifficultyLevel += 1;
                 UpdateDifficultyValues();
-                UIManager.UpdateDifficultyLevelUI(dataManager.currentDifficultyLevel);
+                GameSceneUIManager.UpdateDifficultyLevelUI(dataManager.currentDifficultyLevel);
             }
         }
     }
