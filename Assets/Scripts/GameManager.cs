@@ -155,6 +155,9 @@ public class GameManager : MonoBehaviour
         {
             dataManager.onGameOver = true;
             blockMatchChecker.tileMapGameObject.SetActive(false);
+            GameSceneUIManager.gameOverText.gameObject.SetActive(true);
+            GameSceneUIManager.backToMainScreenButtonGameObject.SetActive(true);
+            GameSceneUIManager.resetGameSceneButtonGameObject.SetActive(true);
         }
 
         if (!dataManager.onGameOver)
