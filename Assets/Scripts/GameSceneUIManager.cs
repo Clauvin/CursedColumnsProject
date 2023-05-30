@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class GameSceneUIManager : MonoBehaviour
 {
     public static Text pauseText;
     public Text pauseTextToLoad;

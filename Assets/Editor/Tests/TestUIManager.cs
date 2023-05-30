@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 public class TestUIManager : MonoBehaviour
 {
     GameObject gameManager;
-    UIManager uiManager;
+    GameSceneUIManager uiManager;
 
     [OneTimeSetUp]
     public void NewTestSetUp()
@@ -45,11 +45,11 @@ public class TestUIManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestPause()
     {
-        uiManager = gameManager.GetComponent<UIManager>();
+        uiManager = gameManager.GetComponent<GameSceneUIManager>();
 
-        UIManager.Pause();
+        GameSceneUIManager.Pause();
 
-        if (!UIManager.pauseText.enabled)
+        if (!GameSceneUIManager.pauseText.enabled)
         {
             Assert.Fail();
         }
@@ -64,12 +64,12 @@ public class TestUIManager : MonoBehaviour
     [UnityTest]
     public IEnumerator TestUnpause()
     {
-        uiManager = gameManager.GetComponent<UIManager>();
+        uiManager = gameManager.GetComponent<GameSceneUIManager>();
 
-        UIManager.Pause();
-        UIManager.Unpause();
+        GameSceneUIManager.Pause();
+        GameSceneUIManager.Unpause();
 
-        if (UIManager.pauseText.enabled)
+        if (GameSceneUIManager.pauseText.enabled)
         {
             Assert.Fail();
         }

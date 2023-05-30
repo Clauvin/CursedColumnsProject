@@ -65,12 +65,12 @@ public class PlayerInteractions : MonoBehaviour
         if (DataManager.isPaused)
         {
             DataManager.Unpause();
-            UIManager.Unpause();
+            GameSceneUIManager.Unpause();
         }
         else
         {
             DataManager.Pause();
-            UIManager.Pause();
+            GameSceneUIManager.Pause();
         }
     }
 
