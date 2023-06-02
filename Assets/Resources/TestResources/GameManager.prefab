@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 8769006880440509322}
   - component: {fileID: 4430679402125005502}
   - component: {fileID: 574235557491335728}
+  - component: {fileID: 5547874897202936143}
   - component: {fileID: 8769006880440509328}
   - component: {fileID: 4250984635020809537}
   m_Layer: 0
@@ -468,9 +469,54 @@ MonoBehaviour:
   rightLimit: 4
   lowerLimit: -1
   upperLimit: 15
-  currentBlockSpeedPerSecond: 1
-  timePassedWithoutBlockMovement: 0
+  secondsToApplyBlockGravity: 0
+  secondsToCheckPlayerInput: 0
+  secondsOfDelayAfterAllMatchChecks: 0
+  timeWithoutInputCheck: 0
+  timeForDelayAfterAllMatchChecks: 0
+  isDelayingAfterAllMatchChecks: 0
+  timeWithoutPBlockGravityBeingApplied: 0
+  timeForGameOver: 0
+  onGameOver: 0
+  currentDifficultyLevel: 0
   currentScore: 0
+  difficultyScoreValues: 
+  blockGravityDiffValues:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  playerInputTimeDiffValues:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  delayAfterMatchDiffValues:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!114 &8769006880440509332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,9 +531,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 1c30cad4ddf38a641b43890b3fdf4731, type: 3}
   moveAmount: {x: 0, y: 0}
+  cycleButtonIsCurrentlyPressedAfterApplyingItsEffect: 0
+  moveButtonIsCurrentlyPressed: 0
   pauseIsCurrentlyPressed: 0
   pauseJustPressed: 0
   pausePressReleaseHappened: 0
+  closeJustPressed: 0
 --- !u!114 &8769006880440509333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c563a01d79b92b4db5992475c8ef5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileMapGameObject: {fileID: 0}
   tileMap: {fileID: 8769006880439785881}
   matchSize: 3
   horizontalCheckTilemap: {fileID: 1246385874650094215}
@@ -544,6 +594,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseTextToLoad: {fileID: 0}
+  scoreTextToLoad: {fileID: 0}
+  scoreValueTextToLoad: {fileID: 0}
+  diffTextToLoad: {fileID: 0}
+  diffValueTextToLoad: {fileID: 0}
+  gameOverTextToLoad: {fileID: 0}
+  resetGameSceneButtonGameObjectToLoad: {fileID: 0}
+  backToMainScreenButtonGameObjectToLoad: {fileID: 0}
+--- !u!114 &5547874897202936143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769006880440509323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e81b8b8f8d23a4a91d166b7799ed1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!156049354 &8769006880440509328
 Grid:
   m_ObjectHideFlags: 0
