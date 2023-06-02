@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameTimer gameTimer;
     public static BlockManipulator blockManipulator;
     public static BlockMatchChecker blockMatchChecker;
+    public static GameSceneSFXManager gameSceneSFXManager;
 
     public static BlockSet currentBlockSet;
     public static BlockSet nextBlockSet;
