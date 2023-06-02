@@ -322,6 +322,7 @@ public class GameManager : MonoBehaviour
             {
                 currentBlockSet.positions[i] += new Vector3Int(-1, 0, 0);
             }
+            gameSceneSFXManager.PlayMoveBlockLeftWithCollisionSound();
         }
 
         return blocksWentLeft;
@@ -336,6 +337,7 @@ public class GameManager : MonoBehaviour
             {
                 currentBlockSet.positions[i] += new Vector3Int(1, 0, 0);
             }
+            gameSceneSFXManager.PlayMoveBlockRightWithCollisionSound();
         }
 
         return blocksWentRight;
