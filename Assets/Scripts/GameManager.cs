@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         gameTimer = GetComponent<GameTimer>();
         blockManipulator = GetComponent<BlockManipulator>();
         blockMatchChecker = GetComponent<BlockMatchChecker>();
+        gameSceneSFXManager = GetComponent<GameSceneSFXManager>();
     }
 
     // Start is called before the first frame update
