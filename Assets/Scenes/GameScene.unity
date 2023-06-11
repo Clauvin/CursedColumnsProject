@@ -2219,13 +2219,33 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
+      propertyPath: dropDownBlockSound
+      value: 
+      objectReference: {fileID: 972349962}
+    - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
+      propertyPath: reachGameOverSound
+      value: 
+      objectReference: {fileID: 972349961}
+    - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
+      propertyPath: fallNaturallyBlockSound
+      value: 
+      objectReference: {fileID: 972349960}
+    - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
+      propertyPath: moveBlockLeftWithCollisionSound
+      value: 
+      objectReference: {fileID: 972349959}
+    - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
+      propertyPath: moveBlockRightWithCollisionSound
+      value: 
+      objectReference: {fileID: 972349957}
+    - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
       propertyPath: moveBlockLeftWithoutCollisionSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 972349958}
     - target: {fileID: 5547874897202936143, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
       propertyPath: moveBlockRightWithoutCollisionSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 972349956}
     - target: {fileID: 8079690522777431640, guid: d4b17ad7d8745de40a5ee96d98d2700e, type: 3}
       propertyPath: m_RootOrder
       value: 2

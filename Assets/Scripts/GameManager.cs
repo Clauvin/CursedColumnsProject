@@ -325,6 +325,7 @@ public class GameManager : MonoBehaviour
             }
             gameSceneSFXManager.PlayMoveBlockLeftWithoutCollisionSound();
         }
+        else gameSceneSFXManager.PlayMoveBlockLeftWithCollisionSound();
 
         return blocksWentLeft;
     }
@@ -340,6 +341,8 @@ public class GameManager : MonoBehaviour
             }
             gameSceneSFXManager.PlayMoveBlockRightWithoutCollisionSound();
         }
+        else gameSceneSFXManager.PlayMoveBlockRightWithCollisionSound();
+
 
         return blocksWentRight;
     }
@@ -475,6 +478,7 @@ public class GameManager : MonoBehaviour
             }
             blocksCanStillGoDown = blockWentDown;
         }
+        gameSceneSFXManager.PlayDropDownBlockSound();
     }
 
     private void CurrentBlockSetReceivesNextBlockSet()
@@ -498,6 +502,7 @@ public class GameManager : MonoBehaviour
         if (isTimeForGameOver)
         {
             dataManager.timeForGameOver = true;
+            gameSceneSFXManager.PlayReachGameOverSound();
         }
     }
 }
